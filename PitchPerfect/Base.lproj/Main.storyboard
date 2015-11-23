@@ -151,10 +151,10 @@
             </objects>
             <point key="canvasLocation" x="1887" y="1022"/>
         </scene>
-        <!--View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="CGt-fg-4RJ">
             <objects>
-                <viewController id="Gj2-g3-VIl" sceneMemberID="viewController">
+                <viewController id="Gj2-g3-VIl" customClass="GameViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Aw-AA-63P"/>
                         <viewControllerLayoutGuide type="bottom" id="5iG-4D-5s9"/>

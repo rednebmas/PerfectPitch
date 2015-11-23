@@ -12,6 +12,9 @@
 		228EFEEF1C03BB45006A6291 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228EFEED1C03BB45006A6291 /* Main.storyboard */; };
 		228EFEF11C03BB45006A6291 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228EFEF01C03BB45006A6291 /* Assets.xcassets */; };
 		228EFEF41C03BB45006A6291 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228EFEF21C03BB45006A6291 /* LaunchScreen.storyboard */; };
+		228EFF1A1C03CB57006A6291 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFF191C03CB57006A6291 /* Note.swift */; };
+		228EFF1C1C03CB73006A6291 /* PitchEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFF1B1C03CB73006A6291 /* PitchEstimator.swift */; };
+		228EFF1E1C03CC41006A6291 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFF1D1C03CC41006A6291 /* GameViewController.swift */; };
 		585C57BFD47E1B58540FA371 /* Pods_PitchPerfect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 803179D3AC76F040D9FA8B80 /* Pods_PitchPerfect.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +26,9 @@
 		228EFEF01C03BB45006A6291 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		228EFEF31C03BB45006A6291 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		228EFEF51C03BB45006A6291 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		228EFF191C03CB57006A6291 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		228EFF1B1C03CB73006A6291 /* PitchEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchEstimator.swift; sourceTree = "<group>"; };
+		228EFF1D1C03CC41006A6291 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		4DC8930C50EC74742AEF00E2 /* Pods-PitchPerfect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PitchPerfect.release.xcconfig"; path = "Pods/Target Support Files/Pods-PitchPerfect/Pods-PitchPerfect.release.xcconfig"; sourceTree = "<group>"; };
 		71BCE173BF0FCFFB94445F37 /* Pods-PitchPerfect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PitchPerfect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PitchPerfect/Pods-PitchPerfect.debug.xcconfig"; sourceTree = "<group>"; };
 		803179D3AC76F040D9FA8B80 /* Pods_PitchPerfect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PitchPerfect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,14 +75,41 @@
 		228EFEE81C03BB45006A6291 /* PitchPerfect */ = {
 			isa = PBXGroup;
 			children = (
+				228EFF211C03CC56006A6291 /* Model */,
+				228EFF1F1C03CC47006A6291 /* View */,
+				228EFF201C03CC4C006A6291 /* Controller */,
 				228EFEE91C03BB45006A6291 /* AppDelegate.swift */,
-				228EFEEB1C03BB45006A6291 /* ViewController.swift */,
-				228EFEED1C03BB45006A6291 /* Main.storyboard */,
 				228EFEF01C03BB45006A6291 /* Assets.xcassets */,
-				228EFEF21C03BB45006A6291 /* LaunchScreen.storyboard */,
 				228EFEF51C03BB45006A6291 /* Info.plist */,
 			);
 			path = PitchPerfect;
+			sourceTree = "<group>";
+		};
+		228EFF1F1C03CC47006A6291 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				228EFEED1C03BB45006A6291 /* Main.storyboard */,
+				228EFEF21C03BB45006A6291 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		228EFF201C03CC4C006A6291 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				228EFF1D1C03CC41006A6291 /* GameViewController.swift */,
+				228EFEEB1C03BB45006A6291 /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		228EFF211C03CC56006A6291 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				228EFF191C03CB57006A6291 /* Note.swift */,
+				228EFF1B1C03CB73006A6291 /* PitchEstimator.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		519AC4F31B1390CD4A53B9A7 /* Pods */ = {
@@ -210,8 +243,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228EFF1E1C03CC41006A6291 /* GameViewController.swift in Sources */,
 				228EFEEC1C03BB45006A6291 /* ViewController.swift in Sources */,
 				228EFEEA1C03BB45006A6291 /* AppDelegate.swift in Sources */,
+				228EFF1A1C03CB57006A6291 /* Note.swift in Sources */,
+				228EFF1C1C03CB73006A6291 /* PitchEstimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
