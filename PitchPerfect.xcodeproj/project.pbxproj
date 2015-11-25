@@ -17,6 +17,7 @@
 		228EFF1E1C03CC41006A6291 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFF1D1C03CC41006A6291 /* GameViewController.swift */; };
 		585C57BFD47E1B58540FA371 /* Pods_PitchPerfect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 803179D3AC76F040D9FA8B80 /* Pods_PitchPerfect.framework */; };
 		9D6E18981C056218002CA262 /* SongListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E18971C056218002CA262 /* SongListTableViewController.swift */; };
+		9D6E189A1C0568CE002CA262 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E18991C0568CE002CA262 /* Song.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		71BCE173BF0FCFFB94445F37 /* Pods-PitchPerfect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PitchPerfect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PitchPerfect/Pods-PitchPerfect.debug.xcconfig"; sourceTree = "<group>"; };
 		803179D3AC76F040D9FA8B80 /* Pods_PitchPerfect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PitchPerfect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D6E18971C056218002CA262 /* SongListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongListTableViewController.swift; sourceTree = "<group>"; };
+		9D6E18991C0568CE002CA262 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			children = (
 				228EFF191C03CB57006A6291 /* Note.swift */,
 				228EFF1B1C03CB73006A6291 /* PitchEstimator.swift */,
+				9D6E18991C0568CE002CA262 /* Song.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D6E189A1C0568CE002CA262 /* Song.swift in Sources */,
 				9D6E18981C056218002CA262 /* SongListTableViewController.swift in Sources */,
 				228EFF1E1C03CC41006A6291 /* GameViewController.swift in Sources */,
 				228EFEEC1C03BB45006A6291 /* ViewController.swift in Sources */,

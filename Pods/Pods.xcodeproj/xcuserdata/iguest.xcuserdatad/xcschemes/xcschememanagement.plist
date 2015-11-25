@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>EZAudio.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -19,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>TPCircularBuffer.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -28,6 +38,26 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>001DFDFFBDE1DAFDF55B9CFE184B2781</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>432ECC54282C84882B482CCB4CF227FC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7D1D293D06A2FE40A7B43C2B2DEF0834</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8395E87B522BD3B2BD98E04D953EAB2D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>84BF62C2FCDA5B2CB74089620B8E3667</key>
 		<dict>
 			<key>primary</key>
 			<true/>

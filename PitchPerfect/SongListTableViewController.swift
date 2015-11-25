@@ -11,10 +11,12 @@ import Alamofire
 import SwiftyJSON
 
 class SongListTableViewController: UITableViewController {
-    //https://dl.dropboxusercontent.com/u/5301042/songs.json
+    
+    var songList : [Song] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.fetchData("https://dl.dropboxusercontent.com/u/5301042/songs.json")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -27,6 +29,33 @@ class SongListTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func fetchData(url: String) {
+        Alamofire.request(.GET, url).responseString() { response in
+            switch response.result {
+            case .Success:
+                if let value = response.result.value {
+                    self.parseData(value)
+                }
+            case .Failure(let error):
+                print(error)
+            }
+            self.tableView.reloadData()
+        }
+    }
+    
+    func parseData(data: AnyObject) {
+        if let dataFromString = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+            let json = JSON(data: dataFromString) //cast into SwiftyJSON
+            let songs = json.array
+            for songData in songs! {
+                let songTitle = songData["title"].stringValue
+                let songData = songData["data"].stringValue
+                songList.append(Song(title: songTitle, data: songData))
+            }
+        }
+    }
+
 
     // MARK: - Table view data source
 
@@ -35,16 +64,16 @@ class SongListTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 //songList.count - assuming it's an array
+        return songList.count // - assuming it's an array
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         // Pull in song names from Data
-        cell.textLabel!.text = "Sabrina"
         // Configure the cell...
-
+        let song = songList[indexPath.row]
+        cell.textLabel!.text = song.title
         return cell
     }
     
@@ -93,5 +122,6 @@ class SongListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-}
+    
+    
+    }
