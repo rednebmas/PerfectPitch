@@ -16,6 +16,7 @@
 		228EFF1C1C03CB73006A6291 /* PitchEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFF1B1C03CB73006A6291 /* PitchEstimator.swift */; };
 		228EFF1E1C03CC41006A6291 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFF1D1C03CC41006A6291 /* GameViewController.swift */; };
 		585C57BFD47E1B58540FA371 /* Pods_PitchPerfect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 803179D3AC76F040D9FA8B80 /* Pods_PitchPerfect.framework */; };
+		9D6E18981C056218002CA262 /* SongListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E18971C056218002CA262 /* SongListTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		4DC8930C50EC74742AEF00E2 /* Pods-PitchPerfect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PitchPerfect.release.xcconfig"; path = "Pods/Target Support Files/Pods-PitchPerfect/Pods-PitchPerfect.release.xcconfig"; sourceTree = "<group>"; };
 		71BCE173BF0FCFFB94445F37 /* Pods-PitchPerfect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PitchPerfect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PitchPerfect/Pods-PitchPerfect.debug.xcconfig"; sourceTree = "<group>"; };
 		803179D3AC76F040D9FA8B80 /* Pods_PitchPerfect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PitchPerfect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D6E18971C056218002CA262 /* SongListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		228EFF201C03CC4C006A6291 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9D6E18971C056218002CA262 /* SongListTableViewController.swift */,
 				228EFF1D1C03CC41006A6291 /* GameViewController.swift */,
 				228EFEEB1C03BB45006A6291 /* ViewController.swift */,
 			);
@@ -243,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D6E18981C056218002CA262 /* SongListTableViewController.swift in Sources */,
 				228EFF1E1C03CC41006A6291 /* GameViewController.swift in Sources */,
 				228EFEEC1C03BB45006A6291 /* ViewController.swift in Sources */,
 				228EFEEA1C03BB45006A6291 /* AppDelegate.swift in Sources */,
