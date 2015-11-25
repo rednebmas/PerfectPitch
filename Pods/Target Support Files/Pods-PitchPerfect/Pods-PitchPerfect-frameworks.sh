@@ -84,12 +84,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-PitchPerfect/Alamofire.framework"
   install_framework "Pods-PitchPerfect/EZAudio.framework"
   install_framework "Pods-PitchPerfect/Spring.framework"
+  install_framework "Pods-PitchPerfect/SwiftyJSON.framework"
   install_framework "Pods-PitchPerfect/TPCircularBuffer.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-PitchPerfect/Alamofire.framework"
   install_framework "Pods-PitchPerfect/EZAudio.framework"
   install_framework "Pods-PitchPerfect/Spring.framework"
+  install_framework "Pods-PitchPerfect/SwiftyJSON.framework"
   install_framework "Pods-PitchPerfect/TPCircularBuffer.framework"
 fi
