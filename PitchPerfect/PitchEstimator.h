@@ -9,10 +9,26 @@
 #import <Foundation/Foundation.h>
 #import <EZAudio/EZAudio.h>
 
+typedef NS_ENUM(NSInteger, PitchEstimatorWindowingMethod) {
+    PitchEstimatorWindowingMethodHanning,
+    PitchEstimatorWindowingMethodBlackmanHarris,
+    PitchEstimatorWindowingMethodGaussian,
+    PitchEstimatorWindowingMethodNone
+};
+
+typedef NS_ENUM(NSInteger, PitchEstimatorBinInterpolationMethod) {
+    PitchEstimatorBinInterpolationMethodQuadratic,
+    PitchEstimatorBinInterpolationMethodGaussian,
+    PitchEstimatorBinInterpolationMethodNone
+};
+
 @interface PitchEstimator : NSObject
 
+@property (nonatomic) PitchEstimatorBinInterpolationMethod binInterpolationMethod;
+@property (nonatomic) PitchEstimatorWindowingMethod windowingMethod;
 @property (nonatomic, readonly) float loudness;
 @property (nonatomic, readonly) float fundamentalFrequency;
+@property (nonatomic, readonly) vDSP_Length fundamentalFrequencyIndex;
 // delta frequency between bins
 @property (nonatomic, readonly) float binSize;
 

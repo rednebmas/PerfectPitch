@@ -23,7 +23,7 @@ class Note : NSObject {
     static let TUNER_CALIBRATION: Double = 440.0 // frequency of A4
     static let TWO_TO_THE_ONE_OVER_TWELVE: Double =  1.05946309435
     static let A_CHAR_CODE: UInt32 = ("A" as Character).unicodeScalarCodePoint()
-    static let SAMPLE_RATE: Float = 44100.0
+    static let SAMPLE_RATE: Double = 44100.0
     
     //
     // MARK: Public properties
@@ -39,9 +39,9 @@ class Note : NSObject {
     
     // The following properties are for playing the note
     var isPlaying: Bool = false
-    var positionInSineWave: Float = 0
+    var positionInSineWave: Double = 0
     var toneStart: NSDate = NSDate() // can't be an optional, this is used by AudioPlayer
-    let thetaIncrement: Float
+    let thetaIncrement: Double
     
     override var description: String {
         return self.fullNameWithOctave
@@ -166,8 +166,8 @@ class Note : NSObject {
         }
     }
     
-    private static func calculateThetaIncrement(frequency: Double) -> Float {
-        return 2.0 * 3.14159265359 * Float(frequency) / SAMPLE_RATE;
+    private static func calculateThetaIncrement(frequency: Double) -> Double {
+        return 2.0 * M_PI * Double(frequency) / SAMPLE_RATE;
     }
 }
 
