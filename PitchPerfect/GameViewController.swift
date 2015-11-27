@@ -26,6 +26,11 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
         super.viewDidLoad()
         
         setupAudio()
+        
+        let note = Note(noteName: "A4", duration: 1.0)
+        note.play()
+        // or
+        // note.playForDuration()
     }
     
     // MARK: Audio

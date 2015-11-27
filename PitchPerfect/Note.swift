@@ -9,20 +9,25 @@
 import Foundation
 import EZAudio
 
-//
-// Note: note name is not completely implemented! Should work for notes in C major
-// All properties on this class are immutable
-//
-class Note : CustomStringConvertible {
+/*
+ * Note: note name is not completely implemented! Should work for notes in C major
+ * All properties on this class are immutable
+ */
+class Note : NSObject {
     
+    //
     // MARK: Constants
+    //
     
     static let HALF_STEPS_AWAY_FROM_A4_TO_NOTE_IN_4TH_OCTAVE: [Int] = [0, 2, -9, -7, -5, -4, -2]
     static let TUNER_CALIBRATION: Double = 440.0 // frequency of A4
     static let TWO_TO_THE_ONE_OVER_TWELVE: Double =  1.05946309435
     static let A_CHAR_CODE: UInt32 = ("A" as Character).unicodeScalarCodePoint()
+    static let SAMPLE_RATE: Float = 44100.0
     
+    //
     // MARK: Public properties
+    //
     
     let fullNameWithOctave: String // e.g. C#4
     let fullNameWithoutOctave: String // e.g. C#
@@ -32,13 +37,20 @@ class Note : CustomStringConvertible {
     let accidental: Int
     let differenceInCentsToNote: Double
     
-    var description: String {
+    // The following properties are for playing the note
+    var isPlaying: Bool = false
+    var positionInSineWave: Float = 0
+    var toneStart: NSDate = NSDate() // can't be an optional, this is used by AudioPlayer
+    let thetaIncrement: Float
+    
+    override var description: String {
         return self.fullNameWithOctave
     }
     
+    //
     // MARK: Initializers
+    //
     
-    // not finished
     init(frequency: Double) {
         self.frequency = frequency
         self.duration = 1.0
@@ -58,6 +70,14 @@ class Note : CustomStringConvertible {
         // calculate frequency of pure note, then find difference in cents
         let pureNoteFrequency = Note.calculateFrequency(fullNameWithOctave[0], accidental: accidental, octave: self.octave)
         self.differenceInCentsToNote = 1200 * log2( self.frequency / pureNoteFrequency )
+        
+        // for playing pure tone
+        self.thetaIncrement = Note.calculateThetaIncrement(self.frequency)
+    }
+    
+    convenience init(noteName: String) {
+        let accidental = Note.parseAccidental(noteName)
+        self.init(noteName: noteName[0], accidental: accidental, octave: 4, duration: 0)
     }
     
     convenience init(noteName: String, duration: Double) {
@@ -80,7 +100,48 @@ class Note : CustomStringConvertible {
         let accidentalString = Note.accidentalIntToString(accidental)
         self.fullNameWithOctave = String(noteName) + accidentalString + octave.description
         self.fullNameWithoutOctave = String(noteName) + accidentalString
+        
+        // for playing pure tone
+        self.thetaIncrement = Note.calculateThetaIncrement(self.frequency)
     }
+    
+    //
+    // MARK: Misc
+    //
+    
+    static func calculateFrequency(letter: Character, accidental: Int, octave: Int) -> Double {
+        let characterDiff = Int(letter.unicodeScalarCodePoint() - A_CHAR_CODE)
+        var halfStepsFromA4 = HALF_STEPS_AWAY_FROM_A4_TO_NOTE_IN_4TH_OCTAVE[characterDiff] + 12 * (octave - 4)
+        halfStepsFromA4 += accidental
+        let halfStepsFromA4Double = Double(halfStepsFromA4)
+        
+        let frequency = TUNER_CALIBRATION * pow(TWO_TO_THE_ONE_OVER_TWELVE, halfStepsFromA4Double)
+        return frequency
+    }
+    
+    /**
+     * Plays tone until stop is called
+     */
+    func play() {
+        // Pretty much impossible to write to a low level audio buffer in Swift
+        let audioPlayer: AudioPlayer = AudioPlayer.sharedInstance()
+        audioPlayer.play(self)
+    }
+    
+    func playForDuration() {
+        // Pretty much impossible to write to a low level audio buffer in Swift
+        let audioPlayer: AudioPlayer = AudioPlayer.sharedInstance()
+        audioPlayer.playForDuration(self)
+    }
+    
+    func stop() {
+        let audioPlayer: AudioPlayer = AudioPlayer.sharedInstance()
+        audioPlayer.stop()
+    }
+
+    //
+    // MARK: Private
+    //
     
     private static func parseAccidental(noteName: String) -> Int {
         var accidental = 0
@@ -105,16 +166,8 @@ class Note : CustomStringConvertible {
         }
     }
     
-    // MARK: Misc
-    
-    static func calculateFrequency(letter: Character, accidental: Int, octave: Int) -> Double {
-        let characterDiff = Int(letter.unicodeScalarCodePoint() - A_CHAR_CODE)
-        var halfStepsFromA4 = HALF_STEPS_AWAY_FROM_A4_TO_NOTE_IN_4TH_OCTAVE[characterDiff] + 12 * (octave - 4)
-        halfStepsFromA4 += accidental
-        let halfStepsFromA4Double = Double(halfStepsFromA4)
-        
-        let frequency = TUNER_CALIBRATION * pow(TWO_TO_THE_ONE_OVER_TWELVE, halfStepsFromA4Double)
-        return frequency
+    private static func calculateThetaIncrement(frequency: Double) -> Float {
+        return 2.0 * 3.14159265359 * Float(frequency) / SAMPLE_RATE;
     }
 }
 

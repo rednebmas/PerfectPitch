@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2215A92D1C090CF500CD7C5E /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2215A92C1C090CF500CD7C5E /* AudioPlayer.m */; };
 		228EFEEA1C03BB45006A6291 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFEE91C03BB45006A6291 /* AppDelegate.swift */; };
 		228EFEEC1C03BB45006A6291 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFEEB1C03BB45006A6291 /* ViewController.swift */; };
 		228EFEEF1C03BB45006A6291 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228EFEED1C03BB45006A6291 /* Main.storyboard */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2215A92B1C090CF500CD7C5E /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		2215A92C1C090CF500CD7C5E /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
 		228EFEE61C03BB45006A6291 /* PitchPerfect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PitchPerfect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228EFEE91C03BB45006A6291 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228EFEEB1C03BB45006A6291 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 			children = (
 				2295C2731C063EAB00A88A7C /* PitchEstimator.h */,
 				2295C2741C063EAB00A88A7C /* PitchEstimator.m */,
+				2215A92B1C090CF500CD7C5E /* AudioPlayer.h */,
+				2215A92C1C090CF500CD7C5E /* AudioPlayer.m */,
 			);
 			name = ObjC;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 				228EFEEC1C03BB45006A6291 /* ViewController.swift in Sources */,
 				228EFEEA1C03BB45006A6291 /* AppDelegate.swift in Sources */,
 				228EFF1A1C03CB57006A6291 /* Note.swift in Sources */,
+				2215A92D1C090CF500CD7C5E /* AudioPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
