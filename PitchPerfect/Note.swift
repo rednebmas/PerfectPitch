@@ -33,9 +33,10 @@ class Note : NSObject {
     let fullNameWithoutOctave: String // e.g. C#
     let frequency: Double // hz
     let duration: Double // seconds
+    let velocity: UInt8 // MIDI velocity
     let octave: Int
     let accidental: Int
-    let differenceInCentsToNote: Double
+    let differenceInCentsToTrueNote: Double
     
     // The following properties are for playing the note
     var isPlaying: Bool = false
@@ -44,7 +45,7 @@ class Note : NSObject {
     let thetaIncrement: Double
     
     override var description: String {
-        return self.fullNameWithOctave
+        return "\(self.fullNameWithOctave), \(self.frequency) Hz, \(self.duration)s"
     }
     
     //
@@ -54,6 +55,7 @@ class Note : NSObject {
     init(frequency: Double) {
         self.frequency = frequency
         self.duration = 1.0
+        self.velocity = 127
         
         self.fullNameWithOctave = EZAudioUtilities.noteNameStringForFrequency(Float(frequency), includeOctave: true)
         self.fullNameWithoutOctave = EZAudioUtilities.noteNameStringForFrequency(Float(frequency), includeOctave: false)
@@ -68,7 +70,12 @@ class Note : NSObject {
         
         // calculate frequency of pure note, then find difference in cents
         let pureNoteFrequency = Note.calculateFrequency(fullNameWithOctave[0], accidental: accidental, octave: self.octave)
-        self.differenceInCentsToNote = 1200 * log2( self.frequency / pureNoteFrequency )
+        let differenceInCentsToTrueNote = 1200 * log2( self.frequency / pureNoteFrequency )
+        if differenceInCentsToTrueNote.isNaN {
+            self.differenceInCentsToTrueNote = Double(INT16_MAX)
+        } else {
+            self.differenceInCentsToTrueNote = differenceInCentsToTrueNote
+        }
         
         // for playing pure tone
         self.thetaIncrement = Note.calculateThetaIncrement(self.frequency)
@@ -76,25 +83,29 @@ class Note : NSObject {
     
     convenience init(noteName: String) {
         let accidental = Note.parseAccidental(noteName)
-        self.init(noteName: noteName[0], accidental: accidental, octave: 4, duration: 0)
+        let octave = Note.parseOctave(noteName)
+        self.init(noteName: noteName[0], accidental: accidental, octave: octave, duration: 0, velocity: 127)
     }
     
     convenience init(noteName: String, duration: Double) {
         let accidental = Note.parseAccidental(noteName)
-        self.init(noteName: noteName[0], accidental: accidental, octave: 4, duration: duration)
+        let octave = Note.parseOctave(noteName)
+        self.init(noteName: noteName[0], accidental: accidental, octave: octave, duration: duration, velocity: 127)
     }
     
-    convenience init(noteName: String, octave: Int, duration: Double) {
+    convenience init(noteName: String, duration: Double, velocity: UInt8) {
         let accidental = Note.parseAccidental(noteName)
-        self.init(noteName: noteName[0], accidental: accidental, octave: octave, duration: duration)
+        let octave = Note.parseOctave(noteName)
+        self.init(noteName: noteName[0], accidental: accidental, octave: octave, duration: duration, velocity: velocity)
     }
     
-    init(noteName: Character, accidental: Int, octave: Int, duration: Double) {
+    init(noteName: Character, accidental: Int, octave: Int, duration: Double, velocity: UInt8) {
         self.octave = octave
         self.accidental = accidental
         self.duration = duration
         self.frequency = Note.calculateFrequency(noteName, accidental: accidental, octave: octave)
-        self.differenceInCentsToNote = 0.0
+        self.differenceInCentsToTrueNote = 0.0
+        self.velocity = velocity
         
         let accidentalString = Note.accidentalIntToString(accidental)
         self.fullNameWithOctave = String(noteName) + accidentalString + octave.description
@@ -163,6 +174,26 @@ class Note : NSObject {
         } else {
             return "b"
         }
+    }
+    
+    /*
+     * If there is no octave, e.g. just "C#", 4 will be returned by default
+     */
+    private static func parseOctave(noteName: String) -> Int {
+        let octave = 4
+        let length = noteName.characters.count
+        
+        if length == 1 {
+            return octave
+        } else if noteName[1] == "#" || noteName[1] == "b" {
+            if length > 2 {
+                return Int(noteName[2...length-1])!
+            }
+        } else {
+            return Int(noteName[1...length-1])!
+        }
+        
+        return octave
     }
     
     private static func calculateThetaIncrement(frequency: Double) -> Double {

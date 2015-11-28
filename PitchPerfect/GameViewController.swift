@@ -27,10 +27,24 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
         
         setupAudio()
         
+        if let path = NSBundle.mainBundle().pathForResource("c-major-scale", ofType: "mid") {
+            let url = NSURL(fileURLWithPath: path)
+            let song = Song(withMIDIFileURL: url)
+            song.play()
+        }
+
+        //
+        // Simple example of how to play just one note
+        //
+        
+        /*
+        
         let note = Note(noteName: "A4", duration: 1.0)
-        note.play()
+        note.play() // plays until stop() is called
         // or
-        // note.playForDuration()
+        note.playForDuration()
+        
+        */
     }
     
     // MARK: Audio
@@ -51,10 +65,12 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
             print("Error setting up audio session.")
         }
         
-        microphone = EZMicrophone(delegate: self, startsImmediately: true)
+        microphone = EZMicrophone(delegate: self)
         
         let sampleRate = Float(self.microphone.audioStreamBasicDescription().mSampleRate)
         fft = EZAudioFFTRolling(windowSize: FFT_WINDOW_SIZE, sampleRate: sampleRate, delegate: self)
+        
+        microphone.startFetchingAudio()
     }
     
     /**
@@ -82,8 +98,10 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
         
         let theNote = Note(frequency: Double(fundamentalFrequency))
         
+        let iCents = Int(theNote.differenceInCentsToTrueNote) // Int just to get rid of decimal
+        
         dispatch_async(dispatch_get_main_queue(), {
-            self.debugLabel.text = noteName + "\n" + fundamentalFrequency.description + "\n" + self.pitchEstimator.binSize.description + "\nCents: " + theNote.differenceInCentsToNote.description
+            self.debugLabel.text = noteName + "\n" + fundamentalFrequency.description + "\n" + self.pitchEstimator.binSize.description + "\nCents: " + iCents.description
         })
     }
 

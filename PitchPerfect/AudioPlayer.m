@@ -43,6 +43,7 @@
 - (void) playForDuration:(Note*)note
 {
     self.note = note;
+    self.note.toneStart = [NSDate date];
     self.playForDuration = YES;
     
     [self startOutput];
