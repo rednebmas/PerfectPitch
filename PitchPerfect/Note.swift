@@ -59,13 +59,12 @@ class Note : NSObject {
         self.fullNameWithoutOctave = EZAudioUtilities.noteNameStringForFrequency(Float(frequency), includeOctave: false)
         self.accidental = Note.parseAccidental(self.fullNameWithOctave)
         
-        if self.accidental != 0 {
-            // e.g. C#4
-            self.octave = Int(self.fullNameWithOctave[2])!
-        } else {
-            // e.g. C4
-            self.octave = Int(self.fullNameWithOctave[1])!
-        }
+        // Calculate octave from length difference in names
+        let fullNameWithOctaveLength = self.fullNameWithOctave.characters.count
+        // C#4 - C#
+        let lengthDifference = fullNameWithOctaveLength - self.fullNameWithoutOctave.characters.count
+        let octaveCharsRange = (fullNameWithOctaveLength - lengthDifference)...(fullNameWithOctaveLength-1)
+        self.octave = Int(self.fullNameWithOctave[octaveCharsRange])!
         
         // calculate frequency of pure note, then find difference in cents
         let pureNoteFrequency = Note.calculateFrequency(fullNameWithOctave[0], accidental: accidental, octave: self.octave)
