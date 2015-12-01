@@ -13,6 +13,7 @@ import SwiftyJSON
 class SongListTableViewController: UITableViewController {
     
     var songList : [Song] = []
+    var selectedSong : Song = Song()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,15 +114,27 @@ class SongListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        let selectedSongTitle = cell?.textLabel?.text!
+        for song in songList {
+            if song.title == selectedSongTitle {
+                selectedSong = song
+            }
+        }
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+         // Get the new view controller using segue.destinationViewController.
+         // Pass the selected object to the new view controller.
+        if let controller = segue.destinationViewController as? GameViewController {
+            controller.song = selectedSong
+        }
     }
-    */
+    
     
     
     }

@@ -19,6 +19,12 @@ struct Song {
         self.notes = Array()
     }
     
+    init () {
+        self.title = ""
+        self.data = ""
+        self.notes = []
+    }
+    
     /*
      * Parse MIDI file into Note array
      * http://ericjknapp.com/blog/2014/03/30/midi-files-and-tracks/

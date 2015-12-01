@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -142,11 +141,11 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NBt-dz-f63" id="XCL-Wr-QiF">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p1t-xK-tn0">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -197,10 +196,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T60-AP-Eco">
-                                <rect key="frame" x="104" y="365" width="391" height="2"/>
-                                <animations/>
-                            </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtI-vg-WE9">
                                 <rect key="frame" x="273" y="91" width="45" height="21"/>
                                 <animations/>
@@ -215,23 +210,88 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Debug Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrR-iQ-LTg">
-                                <rect key="frame" x="20" y="91" width="97" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foW-jK-ZKJ">
+                                <rect key="frame" x="201" y="81" width="200" height="276"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" red="0.76078431369999999" green="0.1764705882" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="190" id="5oF-Ft-sWQ"/>
+                                    <constraint firstAttribute="width" constant="190" id="dzU-mB-A9T"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="114"/>
+                                <state key="normal" title="Note">
+                                    <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideDown"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyP-bx-56A">
+                                <rect key="frame" x="242" y="423" width="116" height="46"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Current Note">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3af-na-fH5">
+                                <rect key="frame" x="87" y="421" width="125" height="46"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Previous Note">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NC6-Qm-Eew">
+                                <rect key="frame" x="424" y="421" width="90" height="49"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Next Note">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T60-AP-Eco">
+                                <rect key="frame" x="105" y="529" width="391" height="2"/>
+                                <animations/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0LB-IW-zXE">
+                                <rect key="frame" x="133" y="215" width="75" height="95"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                <state key="normal" title="↓">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKu-FC-tiV">
+                                <rect key="frame" x="409" y="215" width="75" height="95"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                <state key="normal" title="↑">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.38823529411764707" green="0.45490196078431372" blue="0.64313725490196083" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="TrR-iQ-LTg" firstAttribute="leading" secondItem="Umq-Hg-Lqq" secondAttribute="leadingMargin" id="G1E-N6-2p1"/>
-                            <constraint firstItem="TrR-iQ-LTg" firstAttribute="top" secondItem="2Aw-AA-63P" secondAttribute="bottom" constant="27" id="IPD-G3-ij2"/>
+                            <constraint firstItem="bKu-FC-tiV" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" id="3S8-zd-UWZ"/>
+                            <constraint firstItem="foW-jK-ZKJ" firstAttribute="leading" secondItem="0LB-IW-zXE" secondAttribute="trailing" constant="20" id="En3-kx-09o"/>
+                            <constraint firstItem="YyP-bx-56A" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="Ewk-cW-Xyh"/>
+                            <constraint firstItem="bKu-FC-tiV" firstAttribute="leading" secondItem="foW-jK-ZKJ" secondAttribute="trailing" constant="20" id="I4g-DY-8ad"/>
+                            <constraint firstItem="0LB-IW-zXE" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" id="MAD-cN-oqa"/>
+                            <constraint firstItem="foW-jK-ZKJ" firstAttribute="centerY" secondItem="Umq-Hg-Lqq" secondAttribute="centerY" constant="-81" id="YWX-vs-eJD"/>
+                            <constraint firstItem="NC6-Qm-Eew" firstAttribute="leading" secondItem="YyP-bx-56A" secondAttribute="trailing" constant="25" id="boL-2I-S2N"/>
+                            <constraint firstItem="foW-jK-ZKJ" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="fzI-ou-QhI"/>
+                            <constraint firstItem="YyP-bx-56A" firstAttribute="leading" secondItem="3af-na-fH5" secondAttribute="trailing" constant="25" id="rRE-X9-1dG"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="debugLabel" destination="TrR-iQ-LTg" id="bsd-34-vtn"/>
+                        <outlet property="currentButton" destination="YyP-bx-56A" id="WRB-Y8-ziX"/>
+                        <outlet property="nextButton" destination="NC6-Qm-Eew" id="4PW-JN-c2N"/>
+                        <outlet property="noteButton" destination="foW-jK-ZKJ" id="3x8-0R-cRp"/>
+                        <outlet property="previousButton" destination="3af-na-fH5" id="a93-CW-02K"/>
                         <segue destination="b1z-zB-4Ly" kind="show" identifier="GameOverSegue" id="JYf-n4-3JL"/>
                     </connections>
                 </viewController>

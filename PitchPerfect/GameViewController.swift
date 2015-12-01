@@ -13,8 +13,12 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
     
     // MARK: Properties 
     
-    @IBOutlet weak var debugLabel: UILabel!
+    @IBOutlet weak var noteButton: UIButton!
+    @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var currentButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
     
+    var song : Song = Song()
     var microphone: EZMicrophone!
     var fft: EZAudioFFTRolling!
     let FFT_WINDOW_SIZE: vDSP_Length = 4096 * 2 * 2
@@ -32,6 +36,12 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
             let song = Song(withMIDIFileURL: url)
             song.play()
         }
+        noteButton.layer.borderWidth = 2
+        noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+        
+        previousButton.setTitle("pNote", forState: .Normal)
+        currentButton.setTitle("cNote", forState: .Normal)
+        nextButton.setTitle("nNote", forState: .Normal)
 
         //
         // Simple example of how to play just one note
@@ -101,7 +111,9 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
         let iCents = Int(theNote.differenceInCentsToTrueNote) // Int just to get rid of decimal
         
         dispatch_async(dispatch_get_main_queue(), {
-            self.debugLabel.text = noteName + "\n" + fundamentalFrequency.description + "\n" + self.pitchEstimator.binSize.description + "\nCents: " + iCents.description
+//            self.debugLabel.text = noteName + "\n" + fundamentalFrequency.description + "\n" + self.pitchEstimator.binSize.description + "\nCents: " + iCents.description
+            
+            self.noteButton.setTitle(noteName, forState: .Normal)
         })
     }
 
