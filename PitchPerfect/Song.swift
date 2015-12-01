@@ -8,10 +8,12 @@
 
 import Foundation
 
-struct Song {
+class Song {
     var title : String
     var data : String
     var notes: [Note]
+    
+    private var shouldStop: Bool = false
     
     init(title: String, data: String) {
         self.title = title
@@ -52,12 +54,38 @@ struct Song {
         self.importMIDITrack(track)
     }
     
+    init(withBase64DataString: String, title: String) {
+        self.title = title
+        self.data = ""
+        self.notes = Array()
+        
+        var sequence: MusicSequence = nil
+        NewMusicSequence(&sequence);
+        
+        let decodedMIDIData = NSData(base64EncodedString: withBase64DataString, options: NSDataBase64DecodingOptions(rawValue: 0))
+        
+        MusicSequenceFileLoadData(
+            sequence,
+            decodedMIDIData!,
+            MusicSequenceFileTypeID.MIDIType,
+            MusicSequenceLoadFlags.SMF_PreserveTracks
+        );
+        
+        let track: MusicTrack = self.getTrack(sequence, index: 0)
+        self.importMIDITrack(track)
+    }
+    
     func play() {
+        self.shouldStop = false
         self.playByNoteAtIndex(0)
     }
     
+    func stopPlaying() {
+        self.shouldStop = true
+    }
+    
     private func playByNoteAtIndex(index: Int) {
-        if index == self.notes.count {
+        if index == self.notes.count || self.shouldStop {
             return
         }
         
@@ -76,7 +104,7 @@ struct Song {
      * and
      * http://ericjknapp.com/blog/2014/04/05/midi-events/
      */
-    mutating func importMIDITrack(track: MusicTrack)
+    func importMIDITrack(track: MusicTrack)
     {
         var iterator: MusicEventIterator = nil
         NewMusicEventIterator(track, &iterator)
@@ -98,7 +126,7 @@ struct Song {
                 let data = UnsafePointer<MIDINoteMessage>(eventData)
                 let midiNoteMessage = data.memory
                 // print("Note message \(note.note), vel \(note.velocity) dur \(note.duration) at time \(eventTimeStamp)")
-                print("\(midiNoteMessage.note)")
+                // print("\(midiNoteMessage.note)")
                 
                 let name = Constants.MIDI_NOTE_NUMBER_TO_NAME_STRING[Int(midiNoteMessage.note)]
                 let duration = Double(midiNoteMessage.duration)

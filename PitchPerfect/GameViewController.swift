@@ -30,12 +30,8 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
         super.viewDidLoad()
         
         setupAudio()
+        self.song.play()
         
-        if let path = NSBundle.mainBundle().pathForResource("c-major-scale", ofType: "mid") {
-            let url = NSURL(fileURLWithPath: path)
-            let song = Song(withMIDIFileURL: url)
-            song.play()
-        }
         noteButton.layer.borderWidth = 2
         noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
         
@@ -55,6 +51,11 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
         note.playForDuration()
         
         */
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.song.stopPlaying()
     }
     
     // MARK: Audio

@@ -157,7 +157,7 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <segue destination="Gj2-g3-VIl" kind="show" id="301-Me-Bha"/>
+                                    <segue destination="Gj2-g3-VIl" kind="show" identifier="SongClickedSegue" id="301-Me-Bha"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

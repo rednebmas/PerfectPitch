@@ -13,7 +13,6 @@ import SwiftyJSON
 class SongListTableViewController: UITableViewController {
     
     var songList : [Song] = []
-    var selectedSong : Song = Song()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +49,15 @@ class SongListTableViewController: UITableViewController {
             let json = JSON(data: dataFromString) //cast into SwiftyJSON
             let songs = json.array
             for songData in songs! {
-                let songTitle = songData["title"].stringValue
-                let songData = songData["data"].stringValue
-                songList.append(Song(title: songTitle, data: songData))
+                if songData["data-base-64"] != nil {
+                    let songTitle = songData["title"].stringValue
+                    let base64String = songData["data-base-64"].stringValue
+                    songList.append(Song(withBase64DataString: base64String, title: songTitle))
+                } else {
+                    let songTitle = songData["title"].stringValue
+                    let songData = songData["data"].stringValue
+                    songList.append(Song(title: songTitle, data: songData))
+                }
             }
         }
     }
@@ -75,6 +80,7 @@ class SongListTableViewController: UITableViewController {
         // Configure the cell...
         let song = songList[indexPath.row]
         cell.textLabel!.text = song.title
+        cell.tag = indexPath.row
         return cell
     }
     
@@ -115,6 +121,11 @@ class SongListTableViewController: UITableViewController {
     */
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        /*
+        
+        This wasn't working because prepareForSegue was called before this method. I fixed it by
+        setting the tag of the cell to be equal to its indexPath.row
+        
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         let selectedSongTitle = cell?.textLabel?.text!
         for song in songList {
@@ -122,6 +133,7 @@ class SongListTableViewController: UITableViewController {
                 selectedSong = song
             }
         }
+        */
     }
     
     // MARK: - Navigation
@@ -130,8 +142,13 @@ class SongListTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
          // Get the new view controller using segue.destinationViewController.
          // Pass the selected object to the new view controller.
-        if let controller = segue.destinationViewController as? GameViewController {
-            controller.song = selectedSong
+        if segue.identifier == "SongClickedSegue" {
+            let cell: UITableViewCell = sender as! UITableViewCell
+            let selectedSong = self.songList[cell.tag]
+            
+            if let controller = segue.destinationViewController as? GameViewController {
+                controller.song = selectedSong
+            }
         }
     }
     
