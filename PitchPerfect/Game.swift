@@ -10,29 +10,32 @@ import Foundation
 import EZAudio
 
 protocol GameDelegate {
-    func noteWasUpdated(note: Note)
+    func noteWasUpdated(note: Note?)
 }
 
 class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
 
     enum State {
-        case NoteDetecting
-        case NoteDetected
-        case NoteCompleted
+        case NotPlaying
+        case Waiting
+        case Detecting
+        case Completed
     }
     
-    var delegate : GameDelegate?
-    var microphone: EZMicrophone!
-    var fft: EZAudioFFTRolling!
     let FFT_WINDOW_SIZE: vDSP_Length = 4096 * 2 * 2
     let pitchEstimator : PitchEstimator = PitchEstimator()
     
+    var score = 0
+    var noteDetectedStart : NSDate?
+    var currentState: State = Game.State.NotPlaying
+    var delegate : GameDelegate?
+    var microphone: EZMicrophone!
+    var fft: EZAudioFFTRolling!
     var song : Song?
     var currentNote : Note?
-    var score = 0
+    
     
     init(song: Song) {
-        
         super.init()
         self.song = song
         setupAudio()
@@ -84,21 +87,52 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         self.pitchEstimator.processFFT(fft as! EZAudioFFTRolling, withFFTData: fftData, ofSize: bufferSize)
         
         let fundamentalFrequency = self.pitchEstimator.fundamentalFrequency
-        let noteName = EZAudioUtilities.noteNameStringForFrequency(fundamentalFrequency, includeOctave: false)
+        var note: Note? = Note(frequency: Double(fundamentalFrequency))
         
-        let theNote = Note(frequency: Double(fundamentalFrequency))
+        if self.pitchEstimator.loudness < -80 {
+            if self.currentState != Game.State.NotPlaying {
+                if self.currentState != Game.State.Waiting {
+                    print("Not loud enough \(self.pitchEstimator.loudness)")
+                    self.currentState = Game.State.Waiting
+                }
+                note = nil
+            }
+        }
+        else if self.currentState == Game.State.Waiting {
+            if note!.nameWithoutOctave == self.song!.currentNote?.nameWithoutOctave {
+                self.noteDetectedStart = NSDate()
+                self.currentState = Game.State.Detecting
+                print("Started detecting")
+            }
+        }
+        else if self.currentState == Game.State.Detecting {
+            if note!.nameWithoutOctave != self.song!.currentNote?.nameWithoutOctave {
+                print("Stopped detecting for \(note)")
+                self.currentState = Game.State.Waiting
+            }
+            else {
+                let duration = NSDate().timeIntervalSinceDate(self.noteDetectedStart!)
+                print(duration)
+                // print("Completed")
+            }
+        }
         
-        let iCents = Int(theNote.differenceInCentsToTrueNote) // Int just to get rid of decimal
+        print(self.pitchEstimator.loudness)
         
         if delegate != nil {
-            delegate!.noteWasUpdated(theNote)
+            delegate!.noteWasUpdated(note)
         } else {
             print("No Deletage")
         }
     }
     
     func start() {
-        self.song!.play()
+        self.song!.playCurrentNote()
+        self.currentState = Game.State.Waiting
     }
     
+    func stop() {
+        self.song?.currentNote?.stop()
+        self.currentState = Game.State.NotPlaying
+    }
 }

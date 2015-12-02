@@ -29,13 +29,14 @@ class Note : NSObject {
     // MARK: Public properties
     //
     
-    let fullNameWithOctave: String // e.g. C#4
-    let fullNameWithoutOctave: String // e.g. C#
+    let nameWithOctave: String // e.g. C#4
+    let nameWithoutOctave: String // e.g. C#
     let frequency: Double // hz
     let duration: Double // seconds
     let velocity: UInt8 // MIDI velocity
     let octave: Int
     let accidental: Int
+    let trueNoteFrequency: Double
     let differenceInCentsToTrueNote: Double
     
     // The following properties are for playing the note
@@ -45,7 +46,7 @@ class Note : NSObject {
     let thetaIncrement: Double
     
     override var description: String {
-        return "\(self.fullNameWithOctave), \(self.frequency) Hz, \(self.duration)s"
+        return "\(self.nameWithOctave), \(self.frequency) Hz, \(self.duration)s"
     }
     
     //
@@ -57,20 +58,20 @@ class Note : NSObject {
         self.duration = 1.0
         self.velocity = 127
         
-        self.fullNameWithOctave = EZAudioUtilities.noteNameStringForFrequency(Float(frequency), includeOctave: true)
-        self.fullNameWithoutOctave = EZAudioUtilities.noteNameStringForFrequency(Float(frequency), includeOctave: false)
-        self.accidental = Note.parseAccidental(self.fullNameWithOctave)
+        self.nameWithOctave = EZAudioUtilities.noteNameStringForFrequency(Float(frequency), includeOctave: true)
+        self.nameWithoutOctave = EZAudioUtilities.noteNameStringForFrequency(Float(frequency), includeOctave: false)
+        self.accidental = Note.parseAccidental(self.nameWithOctave)
         
         // Calculate octave from length difference in names
-        let fullNameWithOctaveLength = self.fullNameWithOctave.characters.count
+        let nameWithOctaveLength = self.nameWithOctave.characters.count
         // C#4 - C#
-        let lengthDifference = fullNameWithOctaveLength - self.fullNameWithoutOctave.characters.count
-        let octaveCharsRange = (fullNameWithOctaveLength - lengthDifference)...(fullNameWithOctaveLength-1)
-        self.octave = Int(self.fullNameWithOctave[octaveCharsRange])!
+        let lengthDifference = nameWithOctaveLength - self.nameWithoutOctave.characters.count
+        let octaveCharsRange = (nameWithOctaveLength - lengthDifference)...(nameWithOctaveLength-1)
+        self.octave = Int(self.nameWithOctave[octaveCharsRange])!
         
         // calculate frequency of pure note, then find difference in cents
-        let pureNoteFrequency = Note.calculateFrequency(fullNameWithOctave[0], accidental: accidental, octave: self.octave)
-        let differenceInCentsToTrueNote = 1200 * log2( self.frequency / pureNoteFrequency )
+        self.trueNoteFrequency = Note.calculateFrequency(nameWithOctave[0], accidental: accidental, octave: self.octave)
+        let differenceInCentsToTrueNote = 1200 * log2( self.frequency / self.trueNoteFrequency )
         if differenceInCentsToTrueNote.isNaN {
             self.differenceInCentsToTrueNote = Double(INT16_MAX)
         } else {
@@ -104,12 +105,13 @@ class Note : NSObject {
         self.accidental = accidental
         self.duration = duration
         self.frequency = Note.calculateFrequency(noteName, accidental: accidental, octave: octave)
+        self.trueNoteFrequency = self.frequency
         self.differenceInCentsToTrueNote = 0.0
         self.velocity = velocity
         
         let accidentalString = Note.accidentalIntToString(accidental)
-        self.fullNameWithOctave = String(noteName) + accidentalString + octave.description
-        self.fullNameWithoutOctave = String(noteName) + accidentalString
+        self.nameWithOctave = String(noteName) + accidentalString + octave.description
+        self.nameWithoutOctave = String(noteName) + accidentalString
         
         // for playing pure tone
         self.thetaIncrement = Note.calculateThetaIncrement(self.frequency)

@@ -9,7 +9,6 @@
 import Foundation
 
 class Constants {
-    
     //
     // http://www.skytopia.com/project/articles/midi.html
     //

@@ -34,6 +34,11 @@
 
 - (void) play:(Note*)note
 {
+    if (self.note != nil && self.note.isPlaying)
+    {
+        [self.note stop];
+    }
+    
     self.note = note;
     self.playForDuration = NO;
     

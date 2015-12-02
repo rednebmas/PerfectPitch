@@ -11,9 +11,14 @@ import Foundation
 class Song {
     var title : String
     var data : String
-    var notes: [Note]
     
+    internal private(set) var currentNote: Note?
+    
+    private var notes: [Note]
+    private var currentNoteIndex: Int = 0
     private var shouldStop: Bool = false
+    
+    // MARK: Init methods
     
     init(title: String, data: String) {
         self.title = title
@@ -48,10 +53,7 @@ class Song {
             MusicSequenceLoadFlags.SMF_PreserveTracks
         );
         
-        // self.parseTempoTrack(sequence)
-        // let trackCount = self.getTrackCount(sequence)
-        let track: MusicTrack = self.getTrack(sequence, index: 0)
-        self.importMIDITrack(track)
+        self.initMIDICommon(sequence)
     }
     
     init(withBase64DataString: String, title: String) {
@@ -75,8 +77,36 @@ class Song {
             MusicSequenceLoadFlags.SMF_PreserveTracks
         );
         
+        self.initMIDICommon(sequence)
+    }
+    
+    func initMIDICommon(sequence: MusicSequence) {
         let track: MusicTrack = self.getTrack(sequence, index: 0)
         self.importMIDITrack(track)
+        
+        if self.hasNextNote() {
+            self.currentNote = self.notes[0]
+        }
+    }
+    
+    // MARK: Playing notes
+    
+    /**
+    * Advances to the next note.
+    *
+    * @returns TRUE if the song has another note, otherwise FALSE
+    */
+    func hasNextNote() -> Bool {
+        return self.notes.count > self.currentNoteIndex
+    }
+    
+    func moveToNextNote() {
+        self.currentNoteIndex++
+        self.currentNote = self.notes[self.currentNoteIndex]
+    }
+    
+    func playCurrentNote() {
+        self.currentNote!.play()
     }
     
     func play() {
@@ -101,6 +131,9 @@ class Song {
             self.playByNoteAtIndex(index+1)
         }
     }
+    
+    
+    // MARK: MIDI processing
     
     /**
      * Thanks to:

@@ -19,11 +19,12 @@ class GameViewController: UIViewController, GameDelegate {
     
     var song : Song = Song()
     lazy var game: Game = Game(song: Song())
+    
     // MARK: View controller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.song.play()
+        
         self.game = Game(song: song)
         self.game.delegate = self
         
@@ -51,15 +52,19 @@ class GameViewController: UIViewController, GameDelegate {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.game.song!.stopPlaying() //ToDo: create Game stop Playing Method
+        self.game.stop()
     }
     
-    
-    //
-    func noteWasUpdated(note: Note) {
+    func noteWasUpdated(note: Note?) {
         dispatch_async(dispatch_get_main_queue(), {
-            self.noteButton.setTitle(note.fullNameWithoutOctave, forState: .Normal)
+            UIView.setAnimationsEnabled(false)
+            if note != nil {
+                self.noteButton.setTitle(note!.nameWithoutOctave, forState: .Normal)
+            } else {
+                self.noteButton.setTitle("--", forState: .Normal)
+            }
+            UIView.setAnimationsEnabled(true)
         })
     }
-
+    
 }
