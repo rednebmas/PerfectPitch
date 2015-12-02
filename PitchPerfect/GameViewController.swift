@@ -113,7 +113,6 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
         
         dispatch_async(dispatch_get_main_queue(), {
 //            self.debugLabel.text = noteName + "\n" + fundamentalFrequency.description + "\n" + self.pitchEstimator.binSize.description + "\nCents: " + iCents.description
-            
             self.noteButton.setTitle(noteName, forState: .Normal)
         })
     }
