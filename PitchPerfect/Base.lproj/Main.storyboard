@@ -183,10 +183,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUt-iX-O4J" customClass="DesignableButton" customModule="Spring">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUt-iX-O4J" customClass="DesignableButton" customModule="Spring">
                                 <rect key="frame" x="479" y="547" width="101" height="33"/>
                                 <animations/>
-                                <state key="normal" title="Next Note"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="XXY-DM-C5P"/>
+                                </constraints>
+                                <state key="normal" title="Skip Note"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="1"/>
@@ -210,24 +213,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foW-jK-ZKJ" customClass="DesignableButton" customModule="Spring">
-                                <rect key="frame" x="201" y="81" width="200" height="276"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="190" id="5oF-Ft-sWQ"/>
-                                    <constraint firstAttribute="width" constant="190" id="dzU-mB-A9T"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="114"/>
-                                <state key="normal" title="Note">
-                                    <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideDown"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="7"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyP-bx-56A">
                                 <rect key="frame" x="242" y="423" width="116" height="46"/>
                                 <animations/>
@@ -252,8 +237,8 @@
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T60-AP-Eco">
-                                <rect key="frame" x="105" y="529" width="391" height="2"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T60-AP-Eco">
+                                <rect key="frame" x="40" y="532" width="520" height="2"/>
                                 <animations/>
                             </progressView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0LB-IW-zXE">
@@ -272,17 +257,40 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foW-jK-ZKJ" customClass="DesignableButton" customModule="Spring">
+                                <rect key="frame" x="201" y="81" width="200" height="276"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="190" id="5oF-Ft-sWQ"/>
+                                    <constraint firstAttribute="width" constant="190" id="dzU-mB-A9T"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="114"/>
+                                <state key="normal" title="Note">
+                                    <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideDown"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.38823529411764707" green="0.45490196078431372" blue="0.64313725490196083" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bKu-FC-tiV" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" id="3S8-zd-UWZ"/>
+                            <constraint firstItem="xUt-iX-O4J" firstAttribute="top" secondItem="T60-AP-Eco" secondAttribute="bottom" constant="16" id="9p1-Zk-3Nv"/>
+                            <constraint firstItem="T60-AP-Eco" firstAttribute="leading" secondItem="Umq-Hg-Lqq" secondAttribute="leading" constant="40" id="Cdw-0C-Api"/>
+                            <constraint firstItem="5iG-4D-5s9" firstAttribute="top" secondItem="xUt-iX-O4J" secondAttribute="bottom" constant="20" id="ELm-DR-aVB"/>
                             <constraint firstItem="foW-jK-ZKJ" firstAttribute="leading" secondItem="0LB-IW-zXE" secondAttribute="trailing" constant="20" id="En3-kx-09o"/>
                             <constraint firstItem="YyP-bx-56A" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="Ewk-cW-Xyh"/>
                             <constraint firstItem="bKu-FC-tiV" firstAttribute="leading" secondItem="foW-jK-ZKJ" secondAttribute="trailing" constant="20" id="I4g-DY-8ad"/>
                             <constraint firstItem="0LB-IW-zXE" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" id="MAD-cN-oqa"/>
+                            <constraint firstAttribute="trailing" secondItem="xUt-iX-O4J" secondAttribute="trailing" constant="20" id="U54-xy-zfp"/>
                             <constraint firstItem="foW-jK-ZKJ" firstAttribute="centerY" secondItem="Umq-Hg-Lqq" secondAttribute="centerY" constant="-81" id="YWX-vs-eJD"/>
                             <constraint firstItem="NC6-Qm-Eew" firstAttribute="leading" secondItem="YyP-bx-56A" secondAttribute="trailing" constant="25" id="boL-2I-S2N"/>
+                            <constraint firstAttribute="trailing" secondItem="T60-AP-Eco" secondAttribute="trailing" constant="40" id="fBl-qB-GXN"/>
                             <constraint firstItem="foW-jK-ZKJ" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="fzI-ou-QhI"/>
                             <constraint firstItem="YyP-bx-56A" firstAttribute="leading" secondItem="3af-na-fH5" secondAttribute="trailing" constant="25" id="rRE-X9-1dG"/>
                         </constraints>

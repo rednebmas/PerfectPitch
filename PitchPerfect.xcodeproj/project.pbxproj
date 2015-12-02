@@ -21,6 +21,7 @@
 		585C57BFD47E1B58540FA371 /* Pods_PitchPerfect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 803179D3AC76F040D9FA8B80 /* Pods_PitchPerfect.framework */; };
 		9D6E18981C056218002CA262 /* SongListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E18971C056218002CA262 /* SongListTableViewController.swift */; };
 		9D6E189A1C0568CE002CA262 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E18991C0568CE002CA262 /* Song.swift */; };
+		9DCD71D31C0E9812006BAD6F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCD71D21C0E9812006BAD6F /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		803179D3AC76F040D9FA8B80 /* Pods_PitchPerfect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PitchPerfect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D6E18971C056218002CA262 /* SongListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongListTableViewController.swift; sourceTree = "<group>"; };
 		9D6E18991C0568CE002CA262 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		9DCD71D21C0E9812006BAD6F /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			children = (
 				9D6E18971C056218002CA262 /* SongListTableViewController.swift */,
 				228EFF1D1C03CC41006A6291 /* GameViewController.swift */,
+				9DCD71D21C0E9812006BAD6F /* Game.swift */,
 				228EFEEB1C03BB45006A6291 /* ViewController.swift */,
 			);
 			name = Controller;
@@ -282,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D6E189A1C0568CE002CA262 /* Song.swift in Sources */,
+				9DCD71D31C0E9812006BAD6F /* Game.swift in Sources */,
 				9D6E18981C056218002CA262 /* SongListTableViewController.swift in Sources */,
 				228EFF1E1C03CC41006A6291 /* GameViewController.swift in Sources */,
 				2295C2751C063EAB00A88A7C /* PitchEstimator.m in Sources */,
