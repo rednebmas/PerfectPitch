@@ -63,6 +63,10 @@ class Song {
         NewMusicSequence(&sequence);
         
         let decodedMIDIData = NSData(base64EncodedString: withBase64DataString, options: NSDataBase64DecodingOptions(rawValue: 0))
+        if decodedMIDIData == nil {
+            print("MIDI data for song \(title) was nil")
+            return
+        }
         
         MusicSequenceFileLoadData(
             sequence,
@@ -113,6 +117,7 @@ class Song {
         MusicEventIteratorHasCurrentEvent(iterator, hasNext)
         var eventType:MusicEventType = 0
         var eventTimeStamp:MusicTimeStamp = -1
+        var previousEventTimeStamp:MusicTimeStamp = -1
         var eventData: UnsafePointer<()> = nil
         var eventDataSize:UInt32 = 0
         
@@ -125,14 +130,27 @@ class Song {
             {
                 let data = UnsafePointer<MIDINoteMessage>(eventData)
                 let midiNoteMessage = data.memory
-                // print("Note message \(note.note), vel \(note.velocity) dur \(note.duration) at time \(eventTimeStamp)")
-                // print("\(midiNoteMessage.note)")
+                // print("Note message \(midiNoteMessage.note), vel \(midiNoteMessage.velocity) dur \(midiNoteMessage.duration) at time \(eventTimeStamp)")
                 
                 let name = Constants.MIDI_NOTE_NUMBER_TO_NAME_STRING[Int(midiNoteMessage.note)]
                 let duration = Double(midiNoteMessage.duration)
                 if name != nil {
                     let note = Note(noteName: name!, duration: duration, velocity: midiNoteMessage.velocity)
-                    self.notes.append(note)
+                    
+                    // the note we just read is in harmony (played at the same time) as the last note
+                    if previousEventTimeStamp == eventTimeStamp {
+                        // the melody of a song is usually the highest note, so if two notes are
+                        // played harmonically, we will just choose the highest note by default
+                        let previousNote = self.notes[self.notes.count-1]
+                        if previousNote.frequency < note.frequency {
+                            self.notes[self.notes.count-1] = note
+                        }
+                    } else {
+                        // otherwise just add to the note array
+                        self.notes.append(note)
+                    }
+                    
+                    previousEventTimeStamp = eventTimeStamp
                     // print(note)
                 } else {
                     print("Can not find note")
