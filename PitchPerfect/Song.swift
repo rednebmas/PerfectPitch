@@ -106,7 +106,7 @@ class Song {
     }
     
     func playCurrentNote() {
-        self.currentNote!.play()
+        self.currentNote!.playForDuration()
     }
     
     func play() {

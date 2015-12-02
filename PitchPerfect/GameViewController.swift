@@ -63,6 +63,8 @@ class GameViewController: UIViewController, GameDelegate {
             } else {
                 self.noteButton.setTitle("--", forState: .Normal)
             }
+            
+            self.currentButton.setTitle(self.game.song?.currentNote?.nameWithoutOctave, forState: .Normal)
             UIView.setAnimationsEnabled(true)
         })
     }

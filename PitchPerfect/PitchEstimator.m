@@ -220,8 +220,6 @@
     double rms = sumSquared/(double)bufferSize;
     double dBvalue = 20*log10(rms);
     
-    printf("%f %u\n", dBvalue, (unsigned int)bufferSize);
-    
     return dBvalue;
 }
 

@@ -34,7 +34,6 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     var song : Song?
     var currentNote : Note?
     
-    
     init(song: Song) {
         super.init()
         self.song = song
@@ -92,7 +91,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         if self.pitchEstimator.loudness < -80 {
             if self.currentState != Game.State.NotPlaying {
                 if self.currentState != Game.State.Waiting {
-                    print("Not loud enough \(self.pitchEstimator.loudness)")
+                    // print("Not loud enough \(self.pitchEstimator.loudness)")
                     self.currentState = Game.State.Waiting
                 }
                 note = nil
@@ -112,12 +111,20 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
             }
             else {
                 let duration = NSDate().timeIntervalSinceDate(self.noteDetectedStart!)
-                print(duration)
+                // print(duration)
                 // print("Completed")
+                if duration > note?.duration {
+                    if self.song!.hasNextNote() {
+                        self.song!.moveToNextNote()
+                        self.song!.playCurrentNote()
+                        self.currentState = Game.State.Waiting
+                    }
+                    else {
+                        self.song?.stopPlaying()
+                    }
+                }
             }
         }
-        
-        print(self.pitchEstimator.loudness)
         
         if delegate != nil {
             delegate!.noteWasUpdated(note)
