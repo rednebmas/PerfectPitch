@@ -14,9 +14,9 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
     // MARK: Properties 
     
     @IBOutlet weak var noteButton: UIButton!
-    @IBOutlet weak var previousButton: UIButton!
-    @IBOutlet weak var currentButton: UIButton!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextNoteLabel: UILabel!
+    @IBOutlet weak var currentNoteLabel: UILabel!
+    @IBOutlet weak var previousNoteLabel: UILabel!
     
     var song : Song = Song()
     var microphone: EZMicrophone!
@@ -25,6 +25,12 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
     let pitchEstimator : PitchEstimator = PitchEstimator()
     
     // MARK: View controller lifecycle
+    
+    struct defaultKeys {
+        static let localStorageKey = "LocalStorageKey"
+    }
+    
+    var songArray : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +41,10 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
         noteButton.layer.borderWidth = 2
         noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
         
-        previousButton.setTitle("pNote", forState: .Normal)
-        currentButton.setTitle("cNote", forState: .Normal)
-        nextButton.setTitle("nNote", forState: .Normal)
+        previousNoteLabel.text = "pNote"
+        currentNoteLabel.text = "cNote"
+        nextNoteLabel.text = "nNote"
+
 
         //
         // Simple example of how to play just one note
@@ -51,6 +58,12 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
         note.playForDuration()
         
         */
+        songArray.append(song.title)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setValue(songArray, forKey: defaultKeys.localStorageKey) //storing the content
+        defaults.synchronize()
+        print("localStorage woohoo")
+        print(defaults.valueForKey(defaultKeys.localStorageKey))
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -116,6 +129,16 @@ class GameViewController: UIViewController, EZMicrophoneDelegate, EZAudioFFTDele
             
             self.noteButton.setTitle(noteName, forState: .Normal)
         })
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "GameOverSegue" {
+            if let controller = segue.destinationViewController as? GameOverViewController {
+                controller.songTitle = song.title
+            }
+        }
     }
 
 }
