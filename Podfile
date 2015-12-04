@@ -5,7 +5,7 @@ use_frameworks!
 
 target 'PitchPerfect' do
 	pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
-	pod 'EZAudio'
+	pod 'EZAudio', :git => 'https://github.com/rednebmas/EZAudio.git'
 	pod 'Alamofire', '~> 3.0'
 	pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 end
