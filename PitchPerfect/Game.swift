@@ -110,7 +110,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
                 self.currentState = Game.State.Waiting
             }
             else {
-                let duration = NSDate().timeIntervalSinceDate(self.noteDetectedStart!)
+                let duration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.noteDetectedStart!)
                 // print(duration)
                 // print("Completed")
                 if duration > note?.duration {
@@ -122,6 +122,8 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
                     else {
                         self.song?.stopPlaying()
                     }
+                } else {
+                    note?.percentCompleted = Double(duration) / (note?.duration)!
                 }
             }
         }
@@ -134,6 +136,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     }
     
     func start() {
+        self.song!.restart()
         self.song!.playCurrentNote()
         self.currentState = Game.State.Waiting
     }

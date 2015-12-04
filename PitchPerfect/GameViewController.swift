@@ -16,6 +16,7 @@ class GameViewController: UIViewController, GameDelegate {
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var currentButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var progressView: UIProgressView!
     
     var song : Song = Song()
     lazy var game: Game = Game(song: Song())
@@ -36,6 +37,8 @@ class GameViewController: UIViewController, GameDelegate {
         nextButton.setTitle("nNote", forState: .Normal)
         game.start()
         
+        self.noteButton.addTarget(self, action: "replay", forControlEvents: .TouchUpInside)
+        
         //
         // Simple example of how to play just one note
         //
@@ -50,6 +53,10 @@ class GameViewController: UIViewController, GameDelegate {
         */
     }
     
+    func replay() {
+        self.game.song?.playCurrentNote()
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.game.stop()
@@ -60,8 +67,10 @@ class GameViewController: UIViewController, GameDelegate {
             UIView.setAnimationsEnabled(false)
             if note != nil {
                 self.noteButton.setTitle(note!.nameWithoutOctave, forState: .Normal)
+                self.progressView.setProgress(Float((note?.percentCompleted)!), animated: true)
             } else {
                 self.noteButton.setTitle("--", forState: .Normal)
+                self.progressView.setProgress(0.0, animated: false)
             }
             
             self.currentButton.setTitle(self.game.song?.currentNote?.nameWithoutOctave, forState: .Normal)

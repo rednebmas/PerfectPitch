@@ -91,13 +91,18 @@ class Song {
     
     // MARK: Playing notes
     
+    func restart() {
+        self.currentNoteIndex == 0
+        self.currentNote = self.notes[0]
+    }
+    
     /**
     * Advances to the next note.
     *
     * @returns TRUE if the song has another note, otherwise FALSE
     */
     func hasNextNote() -> Bool {
-        return self.notes.count > self.currentNoteIndex
+        return self.notes.count > self.currentNoteIndex + 1
     }
     
     func moveToNextNote() {

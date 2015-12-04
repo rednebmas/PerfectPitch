@@ -43,6 +43,7 @@ class Note : NSObject {
     var isPlaying: Bool = false
     var positionInSineWave: Double = 0
     var toneStart: NSDate = NSDate() // can't be an optional, this is used by AudioPlayer
+    var percentCompleted: Double = 0
     let thetaIncrement: Double
     
     override var description: String {

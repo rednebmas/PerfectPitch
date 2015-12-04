@@ -300,6 +300,7 @@
                         <outlet property="nextButton" destination="NC6-Qm-Eew" id="4PW-JN-c2N"/>
                         <outlet property="noteButton" destination="foW-jK-ZKJ" id="3x8-0R-cRp"/>
                         <outlet property="previousButton" destination="3af-na-fH5" id="a93-CW-02K"/>
+                        <outlet property="progressView" destination="T60-AP-Eco" id="RsF-EU-cgc"/>
                         <segue destination="b1z-zB-4Ly" kind="show" identifier="GameOverSegue" id="JYf-n4-3JL"/>
                     </connections>
                 </viewController>
