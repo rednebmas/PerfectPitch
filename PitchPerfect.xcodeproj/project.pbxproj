@@ -19,6 +19,8 @@
 		228EFF1E1C03CC41006A6291 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFF1D1C03CC41006A6291 /* GameViewController.swift */; };
 		22E0730C1C09422C00D0682F /* c-major-scale.mid in Resources */ = {isa = PBXBuildFile; fileRef = 22E0730B1C09422C00D0682F /* c-major-scale.mid */; };
 		22E0730F1C099EAB00D0682F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E0730E1C099EAB00D0682F /* Constants.swift */; };
+		3CBFA1D81C1146DF0007A551 /* pacifico in Resources */ = {isa = PBXBuildFile; fileRef = 3CBFA1D71C1146DF0007A551 /* pacifico */; settings = {ASSET_TAGS = (); }; };
+		3CBFA1DA1C11478D0007A551 /* pacifico in Copy Files */ = {isa = PBXBuildFile; fileRef = 3CBFA1D71C1146DF0007A551 /* pacifico */; };
 		5779802C1C111B2300B50005 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5779802B1C111B2300B50005 /* Game.swift */; };
 		57D0E69E1C0E92780059B89A /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D0E69D1C0E92780059B89A /* GameOverViewController.swift */; };
 		57D0E6A01C0E97EB0059B89A /* ScoresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D0E69F1C0E97EB0059B89A /* ScoresTableViewController.swift */; };
@@ -26,6 +28,20 @@
 		9D6E18981C056218002CA262 /* SongListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E18971C056218002CA262 /* SongListTableViewController.swift */; };
 		9D6E189A1C0568CE002CA262 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E18991C0568CE002CA262 /* Song.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3CBFA1D91C11477C0007A551 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				3CBFA1DA1C11478D0007A551 /* pacifico in Copy Files */,
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2215A92B1C090CF500CD7C5E /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
@@ -46,6 +62,7 @@
 		2295C2721C063EAB00A88A7C /* PitchPerfect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PitchPerfect-Bridging-Header.h"; sourceTree = "<group>"; };
 		22E0730B1C09422C00D0682F /* c-major-scale.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = "c-major-scale.mid"; sourceTree = "<group>"; };
 		22E0730E1C099EAB00D0682F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3CBFA1D71C1146DF0007A551 /* pacifico */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pacifico; sourceTree = "<group>"; };
 		4DC8930C50EC74742AEF00E2 /* Pods-PitchPerfect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PitchPerfect.release.xcconfig"; path = "Pods/Target Support Files/Pods-PitchPerfect/Pods-PitchPerfect.release.xcconfig"; sourceTree = "<group>"; };
 		5779802B1C111B2300B50005 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		57D0E69D1C0E92780059B89A /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +114,7 @@
 		228EFEE81C03BB45006A6291 /* PitchPerfect */ = {
 			isa = PBXGroup;
 			children = (
+				3CBFA1D71C1146DF0007A551 /* pacifico */,
 				228EFF211C03CC56006A6291 /* Model */,
 				228EFF1F1C03CC47006A6291 /* View */,
 				228EFF201C03CC4C006A6291 /* Controller */,
@@ -185,6 +203,7 @@
 				228EFEE41C03BB45006A6291 /* Resources */,
 				B3FF8F80511AE661BA016920 /* Embed Pods Frameworks */,
 				C150A08D41A35AA53FC996B4 /* Copy Pods Resources */,
+				3CBFA1D91C11477C0007A551 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -236,6 +255,7 @@
 				228EFEF41C03BB45006A6291 /* LaunchScreen.storyboard in Resources */,
 				228EFEF11C03BB45006A6291 /* Assets.xcassets in Resources */,
 				228EFEEF1C03BB45006A6291 /* Main.storyboard in Resources */,
+				3CBFA1D81C1146DF0007A551 /* pacifico in Resources */,
 				22E0730C1C09422C00D0682F /* c-major-scale.mid in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,6 +443,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PitchPerfect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sambender.PitchPerfect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -438,6 +459,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PitchPerfect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sambender.PitchPerfect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
