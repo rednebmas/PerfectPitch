@@ -234,6 +234,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -279,6 +280,7 @@
                             <outlet property="delegate" destination="nos-7h-PVe" id="rnI-ls-xbn"/>
                         </connections>
                     </tableView>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VrK-28-tHm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -431,6 +433,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="currentNoteLabel" destination="OFP-UE-EHa" id="fJZ-Gu-kvt"/>
                         <outlet property="nextNoteLabel" destination="Ggt-4m-NLV" id="WTh-LA-Oat"/>

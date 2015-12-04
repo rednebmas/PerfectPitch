@@ -13,7 +13,7 @@ import EZAudio
  * Note: note name is not completely implemented! Should work for notes in C major
  * All properties on this class are immutable
  */
-class Note : NSObject {
+class Note : NSObject, NSCoding {
     
     //
     // MARK: Constants
@@ -116,6 +116,25 @@ class Note : NSObject {
         
         // for playing pure tone
         self.thetaIncrement = Note.calculateThetaIncrement(self.frequency)
+    }
+    
+    //
+    // MARK: NSCoding
+    //
+    
+    required convenience init?(coder decoder: NSCoder) {
+        let frequency = decoder.decodeDoubleForKey("frequency") as? Double
+        if frequency == nil {
+            return nil
+        }
+        
+        self.init(
+            frequency: frequency!
+        )
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeDouble(self.frequency, forKey: "frequency")
     }
     
     //

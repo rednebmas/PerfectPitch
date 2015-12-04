@@ -17,8 +17,8 @@ class GameViewController: UIViewController, GameDelegate {
     @IBOutlet weak var currentNoteLabel: UILabel!
     @IBOutlet weak var previousNoteLabel: UILabel!
     
-    var song : Song = Song()
-    lazy var game: Game = Game(song: Song())
+    var song : Song = Song(title: "")
+    lazy var game: Game = Game(song: Song(title: ""))
     
     // MARK: View controller lifecycle
     
@@ -99,5 +99,9 @@ class GameViewController: UIViewController, GameDelegate {
                 controller.songTitle = song.title
             }
         }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
 }

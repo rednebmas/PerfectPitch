@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             forState: .Normal
         )
         
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
         return true
     }
 
