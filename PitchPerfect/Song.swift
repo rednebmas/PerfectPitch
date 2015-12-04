@@ -14,8 +14,8 @@ class Song {
     
     internal private(set) var currentNote: Note?
     
-    private var notes: [Note]
-    private var currentNoteIndex: Int = 0
+    var notes: [Note]
+    var currentNoteIndex: Int = 0
     private var shouldStop: Bool = false
     
     // MARK: Init methods
