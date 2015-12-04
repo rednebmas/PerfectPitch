@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221556331C11656B00B44C71 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 221556321C11656100B44C71 /* Pacifico.ttf */; };
 		2215A92D1C090CF500CD7C5E /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2215A92C1C090CF500CD7C5E /* AudioPlayer.m */; };
 		227C63301C112633001C4327 /* PitchEstimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 227C632F1C112633001C4327 /* PitchEstimator.m */; };
 		227C63331C112656001C4327 /* SBMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 227C63321C112656001C4327 /* SBMath.m */; };
@@ -20,8 +21,6 @@
 		228EFF1E1C03CC41006A6291 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFF1D1C03CC41006A6291 /* GameViewController.swift */; };
 		22E0730C1C09422C00D0682F /* c-major-scale.mid in Resources */ = {isa = PBXBuildFile; fileRef = 22E0730B1C09422C00D0682F /* c-major-scale.mid */; };
 		22E0730F1C099EAB00D0682F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E0730E1C099EAB00D0682F /* Constants.swift */; };
-		3CBFA1D81C1146DF0007A551 /* pacifico in Resources */ = {isa = PBXBuildFile; fileRef = 3CBFA1D71C1146DF0007A551 /* pacifico */; };
-		3CBFA1DA1C11478D0007A551 /* pacifico in Copy Files */ = {isa = PBXBuildFile; fileRef = 3CBFA1D71C1146DF0007A551 /* pacifico */; };
 		5779802C1C111B2300B50005 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5779802B1C111B2300B50005 /* Game.swift */; };
 		57D0E69E1C0E92780059B89A /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D0E69D1C0E92780059B89A /* GameOverViewController.swift */; };
 		57D0E6A01C0E97EB0059B89A /* ScoresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D0E69F1C0E97EB0059B89A /* ScoresTableViewController.swift */; };
@@ -37,7 +36,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				3CBFA1DA1C11478D0007A551 /* pacifico in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,6 +45,7 @@
 /* Begin PBXFileReference section */
 		0106FF9CD13CF2C01C60A885 /* Pods-PerfectPitch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectPitch.release.xcconfig"; path = "Pods/Target Support Files/Pods-PerfectPitch/Pods-PerfectPitch.release.xcconfig"; sourceTree = "<group>"; };
 		1A03BEC930C0B92172A54C0B /* Pods-PerfectPitch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectPitch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PerfectPitch/Pods-PerfectPitch.debug.xcconfig"; sourceTree = "<group>"; };
+		221556321C11656100B44C71 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		2215A92B1C090CF500CD7C5E /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
 		2215A92C1C090CF500CD7C5E /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
 		227C632E1C112633001C4327 /* PitchEstimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchEstimator.h; sourceTree = "<group>"; };
@@ -66,7 +65,6 @@
 		2295C2721C063EAB00A88A7C /* PitchPerfect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PitchPerfect-Bridging-Header.h"; sourceTree = "<group>"; };
 		22E0730B1C09422C00D0682F /* c-major-scale.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = "c-major-scale.mid"; sourceTree = "<group>"; };
 		22E0730E1C099EAB00D0682F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		3CBFA1D71C1146DF0007A551 /* pacifico */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pacifico; sourceTree = "<group>"; };
 		4DC15F29CF86601C6565B152 /* Pods_PerfectPitch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PerfectPitch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5779802B1C111B2300B50005 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		57D0E69D1C0E92780059B89A /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 		228EFEE81C03BB45006A6291 /* PitchPerfect */ = {
 			isa = PBXGroup;
 			children = (
-				3CBFA1D71C1146DF0007A551 /* pacifico */,
 				228EFF211C03CC56006A6291 /* Model */,
 				228EFF1F1C03CC47006A6291 /* View */,
 				228EFF201C03CC4C006A6291 /* Controller */,
@@ -171,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				22E0730B1C09422C00D0682F /* c-major-scale.mid */,
+				221556321C11656100B44C71 /* Pacifico.ttf */,
 				228EFEF51C03BB45006A6291 /* Info.plist */,
 			);
 			name = Resources;
@@ -255,10 +253,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				221556331C11656B00B44C71 /* Pacifico.ttf in Resources */,
 				228EFEF41C03BB45006A6291 /* LaunchScreen.storyboard in Resources */,
 				228EFEF11C03BB45006A6291 /* Assets.xcassets in Resources */,
 				228EFEEF1C03BB45006A6291 /* Main.storyboard in Resources */,
-				3CBFA1D81C1146DF0007A551 /* pacifico in Resources */,
 				22E0730C1C09422C00D0682F /* c-major-scale.mid in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

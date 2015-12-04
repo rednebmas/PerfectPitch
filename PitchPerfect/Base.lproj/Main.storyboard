@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vsk-Rd-Sto">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vsk-Rd-Sto">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -84,7 +84,7 @@
         <!--Perfect Pitch-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PerfectPitch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -258,7 +258,7 @@
         <!--Songs-->
         <scene sceneID="MVq-UZ-inl">
             <objects>
-                <tableViewController title="Songs" id="nos-7h-PVe" customClass="SongListTableViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Songs" id="nos-7h-PVe" customClass="SongListTableViewController" customModule="PerfectPitch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="vUN-C5-o2b">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -269,11 +269,11 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NBt-dz-f63" id="XCL-Wr-QiF">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p1t-xK-tn0">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -304,7 +304,7 @@
         <!--Game View Controller-->
         <scene sceneID="CGt-fg-4RJ">
             <objects>
-                <viewController id="Gj2-g3-VIl" customClass="GameViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Gj2-g3-VIl" customClass="GameViewController" customModule="PerfectPitch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Aw-AA-63P"/>
                         <viewControllerLayoutGuide type="bottom" id="5iG-4D-5s9"/>
@@ -440,8 +440,8 @@
                                 <exclude reference="sK2-iV-Bbp"/>
                                 <exclude reference="xKQ-Ar-N1M"/>
                                 <exclude reference="yvN-yq-6nB"/>
-                                <exclude reference="akc-7d-eq5"/>
                                 <exclude reference="vXO-cf-Ie4"/>
+                                <exclude reference="akc-7d-eq5"/>
                                 <exclude reference="PQh-6U-uUH"/>
                                 <exclude reference="juM-2v-Y8c"/>
                             </mask>
@@ -462,7 +462,7 @@
         <!--Scores Table View Controller-->
         <scene sceneID="xk5-sn-OwQ">
             <objects>
-                <tableViewController id="3xr-6t-Hh2" customClass="ScoresTableViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="3xr-6t-Hh2" customClass="ScoresTableViewController" customModule="PerfectPitch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ulw-Vh-dTO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -473,7 +473,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4pE-dY-ZGj" id="TX2-HT-vUC">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -493,7 +493,7 @@
         <!--Game Over View Controller-->
         <scene sceneID="wuv-1j-kf2">
             <objects>
-                <viewController id="b1z-zB-4Ly" customClass="GameOverViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="b1z-zB-4Ly" customClass="GameOverViewController" customModule="PerfectPitch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oRH-9o-gLk"/>
                         <viewControllerLayoutGuide type="bottom" id="9lh-fz-yOQ"/>
