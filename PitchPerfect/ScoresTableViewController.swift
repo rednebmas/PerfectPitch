@@ -53,10 +53,6 @@ class ScoresTableViewController: UITableViewController {
                     let songTitle = songData["title"].stringValue
                     let base64String = songData["data-base-64"].stringValue
                     songList.append(Song(withBase64DataString: base64String, title: songTitle))
-                } else {
-                    let songTitle = songData["title"].stringValue
-                    let songData = songData["data"].stringValue
-                    songList.append(Song(title: songTitle, data: songData))
                 }
             }
         }

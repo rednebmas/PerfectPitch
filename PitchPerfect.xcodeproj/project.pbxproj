@@ -10,6 +10,7 @@
 		2215A92D1C090CF500CD7C5E /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2215A92C1C090CF500CD7C5E /* AudioPlayer.m */; };
 		227C63301C112633001C4327 /* PitchEstimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 227C632F1C112633001C4327 /* PitchEstimator.m */; };
 		227C63331C112656001C4327 /* SBMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 227C63321C112656001C4327 /* SBMath.m */; };
+		227C63351C113720001C4327 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227C63341C113720001C4327 /* Songs.swift */; };
 		228EFEEA1C03BB45006A6291 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFEE91C03BB45006A6291 /* AppDelegate.swift */; };
 		228EFEEC1C03BB45006A6291 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFEEB1C03BB45006A6291 /* ViewController.swift */; };
 		228EFEEF1C03BB45006A6291 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228EFEED1C03BB45006A6291 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 		227C632F1C112633001C4327 /* PitchEstimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PitchEstimator.m; sourceTree = "<group>"; };
 		227C63311C112656001C4327 /* SBMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMath.h; sourceTree = "<group>"; };
 		227C63321C112656001C4327 /* SBMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMath.m; sourceTree = "<group>"; };
+		227C63341C113720001C4327 /* Songs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Songs.swift; sourceTree = "<group>"; };
 		228EFEE61C03BB45006A6291 /* PitchPerfect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PitchPerfect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228EFEE91C03BB45006A6291 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228EFEEB1C03BB45006A6291 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				228EFF191C03CB57006A6291 /* Note.swift */,
 				5779802B1C111B2300B50005 /* Game.swift */,
 				9D6E18991C0568CE002CA262 /* Song.swift */,
+				227C63341C113720001C4327 /* Songs.swift */,
 				22E0730E1C099EAB00D0682F /* Constants.swift */,
 			);
 			name = Model;
@@ -305,6 +308,7 @@
 				227C63301C112633001C4327 /* PitchEstimator.m in Sources */,
 				228EFF1A1C03CB57006A6291 /* Note.swift in Sources */,
 				57D0E6A01C0E97EB0059B89A /* ScoresTableViewController.swift in Sources */,
+				227C63351C113720001C4327 /* Songs.swift in Sources */,
 				227C63331C112656001C4327 /* SBMath.m in Sources */,
 				2215A92D1C090CF500CD7C5E /* AudioPlayer.m in Sources */,
 				22E0730F1C099EAB00D0682F /* Constants.swift in Sources */,

@@ -44,8 +44,8 @@ class GameViewController: UIViewController, GameDelegate {
         let songNotes = song.notes
         
         previousNoteLabel.text = ""
-        currentNoteLabel.text = songNotes[0].nameWithoutOctave
-        nextNoteLabel.text = songNotes[1].nameWithoutOctave
+        currentNoteLabel.text = songNotes![0].nameWithoutOctave
+        nextNoteLabel.text = songNotes![1].nameWithoutOctave
         //
         // Simple example of how to play just one note
         //

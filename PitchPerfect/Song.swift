@@ -10,26 +10,22 @@ import Foundation
 
 class Song {
     var title : String
-    var data : String
     
     internal private(set) var currentNote: Note?
     
-    var notes: [Note]
+    var notes: [Note]?
     var currentNoteIndex: Int = 0
     private var shouldStop: Bool = false
     
     // MARK: Init methods
     
-    init(title: String, data: String) {
+    init(title: String) {
         self.title = title
-        self.data = data
         self.notes = Array()
     }
     
     init () {
         self.title = ""
-        self.data = ""
-        self.notes = []
     }
     
     /*
@@ -38,8 +34,6 @@ class Song {
      */
     init(withMIDIFileURL: NSURL) {
         self.title = ""
-        self.data = ""
-        self.notes = Array()
         
         var sequence: MusicSequence = nil
         NewMusicSequence(&sequence);
@@ -58,7 +52,6 @@ class Song {
     
     init(withBase64DataString: String, title: String) {
         self.title = title
-        self.data = ""
         self.notes = Array()
         
         var sequence: MusicSequence = nil
@@ -85,7 +78,7 @@ class Song {
         self.importMIDITrack(track)
         
         if self.hasNextNote() {
-            self.currentNote = self.notes[0]
+            self.currentNote = self.notes![0]
         }
     }
     
@@ -93,7 +86,7 @@ class Song {
     
     func restart() {
         self.currentNoteIndex == 0
-        self.currentNote = self.notes[0]
+        self.currentNote = self.notes![0]
     }
     
     /**
@@ -102,12 +95,12 @@ class Song {
     * @returns TRUE if the song has another note, otherwise FALSE
     */
     func hasNextNote() -> Bool {
-        return self.notes.count > self.currentNoteIndex + 1
+        return self.notes!.count > self.currentNoteIndex + 1
     }
     
     func moveToNextNote() {
         self.currentNoteIndex++
-        self.currentNote = self.notes[self.currentNoteIndex]
+        self.currentNote = self.notes![self.currentNoteIndex]
     }
     
     func playCurrentNote() {
@@ -124,11 +117,11 @@ class Song {
     }
     
     private func playByNoteAtIndex(index: Int) {
-        if index == self.notes.count || self.shouldStop {
+        if index == self.notes!.count || self.shouldStop {
             return
         }
         
-        let note = self.notes[index]
+        let note = self.notes![index]
         note.playForDuration()
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(note.duration * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
@@ -179,13 +172,13 @@ class Song {
                     if previousEventTimeStamp == eventTimeStamp {
                         // the melody of a song is usually the highest note, so if two notes are
                         // played harmonically, we will just choose the highest note by default
-                        let previousNote = self.notes[self.notes.count-1]
+                        let previousNote = self.notes![self.notes!.count-1]
                         if previousNote.frequency < note.frequency {
-                            self.notes[self.notes.count-1] = note
+                            self.notes![self.notes!.count-1] = note
                         }
                     } else {
                         // otherwise just add to the note array
-                        self.notes.append(note)
+                        self.notes!.append(note)
                     }
                     
                     previousEventTimeStamp = eventTimeStamp

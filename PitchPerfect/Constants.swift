@@ -9,6 +9,9 @@
 import Foundation
 
 class Constants {
+    
+    static let REMOTE_SONGS_URL = "https://dl.dropboxusercontent.com/u/5301042/songs.json"
+    
     //
     // http://www.skytopia.com/project/articles/midi.html
     //

@@ -55,10 +55,6 @@ class SongListTableViewController: UITableViewController {
                     print("song data in parse data    ")
                     print(songData)
                     songList.append(Song(withBase64DataString: base64String, title: songTitle))
-                } else {
-                    let songTitle = songData["title"].stringValue
-                    let songData = songData["data"].stringValue
-                    songList.append(Song(title: songTitle, data: songData))
                 }
             }
         }
