@@ -24,7 +24,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     var delegate : GameDelegate?
     var microphone: EZMicrophone!
     var fft: EZAudioFFTRolling!
-    let FFT_WINDOW_SIZE: vDSP_Length = 4096 * 2 * 2
+    let FFT_WINDOW_SIZE: vDSP_Length = 4096
     let pitchEstimator : PitchEstimator = PitchEstimator()
     
     var song : Song?
