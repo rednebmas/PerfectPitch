@@ -40,9 +40,12 @@ class GameViewController: UIViewController, GameDelegate {
         game.start()
         
         self.noteButton.addTarget(self, action: "replay", forControlEvents: .TouchUpInside)
-        previousNoteLabel.text = "pNote"
-        currentNoteLabel.text = "cNote"
-        nextNoteLabel.text = "nNote"
+        
+        let songNotes = song.notes
+        
+        previousNoteLabel.text = ""
+        currentNoteLabel.text = songNotes[0].nameWithoutOctave
+        nextNoteLabel.text = songNotes[1].nameWithoutOctave
         //
         // Simple example of how to play just one note
         //
@@ -55,12 +58,12 @@ class GameViewController: UIViewController, GameDelegate {
         note.playForDuration()
         
         */
-        songArray.append(song.title)
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setValue(songArray, forKey: defaultKeys.localStorageKey) //storing the content
-        defaults.synchronize()
-        print("localStorage woohoo")
-        print(defaults.valueForKey(defaultKeys.localStorageKey))
+//        songArray.append(song.title)
+//        let defaults = NSUserDefaults.standardUserDefaults()
+//        defaults.setValue(songArray, forKey: defaultKeys.localStorageKey) //storing the content
+//        defaults.synchronize()
+//        print("localStorage woohoo")
+//        print(defaults.valueForKey(defaultKeys.localStorageKey))
     }
     
     func replay() {
