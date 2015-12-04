@@ -82,6 +82,10 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
      * EZAudioFFT delegate
      */
     func fft(fft: EZAudioFFT!, updatedWithFFTData fftData: UnsafeMutablePointer<Float>, bufferSize: vDSP_Length) {
+        if self.currentState == Game.State.NotPlaying {
+            return
+        }
+        
         // process results
         self.pitchEstimator.processFFT(fft as! EZAudioFFTRolling, withFFTData: fftData, ofSize: bufferSize)
         
@@ -89,18 +93,16 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         var note: Note? = Note(frequency: Double(fundamentalFrequency))
         
         if self.pitchEstimator.loudness < -80 {
-            if self.currentState != Game.State.NotPlaying {
-                if self.currentState != Game.State.Waiting {
-                    // print("Not loud enough \(self.pitchEstimator.loudness)")
-                    self.currentState = Game.State.Waiting
-                }
-                note = nil
+            if self.currentState != Game.State.Waiting {
+                // print("Not loud enough \(self.pitchEstimator.loudness)")
+                self.currentState = Game.State.Waiting
             }
+            note = nil
         }
         else if self.currentState == Game.State.Waiting {
             if note!.nameWithoutOctave == self.song!.currentNote?.nameWithoutOctave {
-                self.noteDetectedStart = NSDate()
                 self.currentState = Game.State.Detecting
+                self.noteDetectedStart = NSDate()
                 print("Started detecting")
             }
         }
@@ -113,7 +115,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
                 let duration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.noteDetectedStart!)
                 // print(duration)
                 // print("Completed")
-                if duration > note?.duration {
+                if duration >= note?.duration {
                     if self.song!.hasNextNote() {
                         self.song!.moveToNextNote()
                         self.song!.playCurrentNote()
