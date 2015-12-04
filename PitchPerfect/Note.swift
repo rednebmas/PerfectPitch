@@ -13,7 +13,7 @@ import EZAudio
  * Note: note name is not completely implemented! Should work for notes in C major
  * All properties on this class are immutable
  */
-class Note : NSObject {
+class Note : NSObject, NSCoding {
     
     //
     // MARK: Constants
@@ -119,11 +119,34 @@ class Note : NSObject {
     }
     
     //
+    // MARK: NSCoding
+    //
+    
+    required convenience init?(coder decoder: NSCoder) {
+        let frequency = decoder.decodeDoubleForKey("frequency") as? Double
+        if frequency == nil {
+            return nil
+        }
+        
+        self.init(
+            frequency: frequency!
+        )
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeDouble(self.frequency, forKey: "frequency")
+    }
+    
+    //
     // MARK: Misc
     //
     
     static func calculateFrequency(letter: Character, accidental: Int, octave: Int) -> Double {
         let characterDiff = Int(letter.unicodeScalarCodePoint() - A_CHAR_CODE)
+        if (octave < -2) {
+            print("Invalid octave");
+            return 440;
+        }
         var halfStepsFromA4 = HALF_STEPS_AWAY_FROM_A4_TO_NOTE_IN_4TH_OCTAVE[characterDiff] + 12 * (octave - 4)
         halfStepsFromA4 += accidental
         let halfStepsFromA4Double = Double(halfStepsFromA4)

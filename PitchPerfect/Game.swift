@@ -120,6 +120,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
                         self.song!.moveToNextNote()
                         self.song!.playCurrentNote()
                         self.currentState = Game.State.Waiting
+                        print(self.song!.currentNote?.frequency)
                     }
                     else {
                         self.song?.stopPlaying()

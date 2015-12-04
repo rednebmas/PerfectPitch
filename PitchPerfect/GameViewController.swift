@@ -16,9 +16,10 @@ class GameViewController: UIViewController, GameDelegate {
     @IBOutlet weak var nextNoteLabel: UILabel!
     @IBOutlet weak var currentNoteLabel: UILabel!
     @IBOutlet weak var previousNoteLabel: UILabel!
+    @IBOutlet weak var noteProgressView: UIProgressView!
     
-    var song : Song = Song()
-    lazy var game: Game = Game(song: Song())
+    var song : Song = Song(title: "")
+    lazy var game: Game = Game(song: Song(title: ""))
     
     // MARK: View controller lifecycle
     
@@ -77,17 +78,24 @@ class GameViewController: UIViewController, GameDelegate {
     
     func noteWasUpdated(note: Note?) {
         dispatch_async(dispatch_get_main_queue(), {
-            // UIView.setAnimationsEnabled(false)
+            
+            UIView.setAnimationsEnabled(false)
             if note != nil {
                 self.noteButton.setTitle(note!.nameWithoutOctave, forState: .Normal)
-                // self.progressView.setProgress(Float((note?.percentCompleted)!), animated: true)
+                self.noteProgressView.setProgress(Float((note?.percentCompleted)!), animated: true)
             } else {
                 self.noteButton.setTitle("--", forState: .Normal)
-                // self.progressView.setProgress(0.0, animated: false)
+                self.noteProgressView.setProgress(0.0, animated: false)
+            }
+            
+            if self.game.song != nil {
+                if self.game.song?.currentNote != nil {
+                    self.currentNoteLabel.text = self.game.song?.currentNote?.nameWithoutOctave
+                }
             }
             
             // self.currentButton.setTitle(self.game.song?.currentNote?.nameWithoutOctave, forState: .Normal)
-            // UIView.setAnimationsEnabled(true)
+            UIView.setAnimationsEnabled(true)
         })
     }
     
@@ -99,5 +107,9 @@ class GameViewController: UIViewController, GameDelegate {
                 controller.songTitle = song.title
             }
         }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
 }

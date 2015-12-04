@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Song {
+class Song : NSObject, NSCoding {
     var title : String
     
     internal private(set) var currentNote: Note?
@@ -22,18 +22,22 @@ class Song {
     init(title: String) {
         self.title = title
         self.notes = Array()
+        super.init()
     }
     
-    init () {
-        self.title = ""
+    init(withNotes: [Note], title: String) {
+        self.title = title
+        self.notes = withNotes
+        super.init()
     }
     
     /*
      * Parse MIDI file into Note array
      * http://ericjknapp.com/blog/2014/03/30/midi-files-and-tracks/
      */
-    init(withMIDIFileURL: NSURL) {
-        self.title = ""
+    init(withMIDIFileURL: NSURL, title: String) {
+        self.title = title
+        super.init()
         
         var sequence: MusicSequence = nil
         NewMusicSequence(&sequence);
@@ -53,6 +57,7 @@ class Song {
     init(withBase64DataString: String, title: String) {
         self.title = title
         self.notes = Array()
+        super.init()
         
         var sequence: MusicSequence = nil
         NewMusicSequence(&sequence);
@@ -80,6 +85,27 @@ class Song {
         if self.hasNextNote() {
             self.currentNote = self.notes![0]
         }
+    }
+    
+    // MARK: NSCoding
+    
+    required convenience init?(coder decoder: NSCoder) {
+        let notes = decoder.decodeObjectForKey("notes") as? [Note]
+        let title = decoder.decodeObjectForKey("title") as? String
+        
+        if title == nil {
+            return nil
+        }
+        
+        self.init(
+            withNotes: notes!,
+            title: title!
+        )
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(self.notes, forKey: "notes")
+        coder.encodeObject(self.title, forKey: "title")
     }
     
     // MARK: Playing notes
