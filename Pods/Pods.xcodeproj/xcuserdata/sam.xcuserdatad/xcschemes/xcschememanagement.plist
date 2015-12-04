@@ -14,7 +14,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-PitchPerfect.xcscheme</key>
+		<key>Pods-PerfectPitch.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,17 +37,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>001DFDFFBDE1DAFDF55B9CFE184B2781</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>432ECC54282C84882B482CCB4CF227FC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7D1D293D06A2FE40A7B43C2B2DEF0834</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,17 +47,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8395E87B522BD3B2BD98E04D953EAB2D</key>
+		<key>9AEA77550ADDAA63C021D44D251AC274</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>84BF62C2FCDA5B2CB74089620B8E3667</key>
+		<key>A83D92B3F1FAB8E45A30DFE1488D2CDC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A065AE49C9E63F308170DB1B8FA6DC6C</key>
+		<key>B70B828E06C2F4B234BF1680D73562BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

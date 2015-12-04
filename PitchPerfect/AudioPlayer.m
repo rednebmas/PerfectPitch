@@ -7,7 +7,7 @@
 //
 
 #import "AudioPlayer.h"
-#import "PitchPerfect-Swift.h"
+#import "PerfectPitch-Swift.h"
 
 @interface AudioPlayer()
 

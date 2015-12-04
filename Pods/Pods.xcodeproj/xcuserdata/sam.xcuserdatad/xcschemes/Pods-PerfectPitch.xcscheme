@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AC60BC59CA1745DB20025152'
-               BlueprintName = 'Spring'
+               BlueprintIdentifier = 'D42AE301FA44694FD25483E3'
+               BlueprintName = 'Pods-PerfectPitch'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Spring.framework'>
+               BuildableName = 'Pods_PerfectPitch.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
