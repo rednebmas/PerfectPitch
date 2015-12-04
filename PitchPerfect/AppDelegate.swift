@@ -14,15 +14,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
+        UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-        UINavigationBar.appearance().barTintColor = UIColor.redColor()
+        UINavigationBar.appearance().barTintColor = Constants.PITCH_PERFECT_COLOR
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "Pacifico", size: 22)!
+        ]
         
-//        NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor darkGrayColor], UITextAttributeTextColor, [UIColor whiteColor], UITextAttributeTextShadowColor, nil];
-//        [[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
-
-        // Override point for customization after application launch.
+        UIBarButtonItem.appearance().setTitleTextAttributes(
+            [NSFontAttributeName : UIFont(name: "Pacifico", size: 16)!],
+            forState: .Normal
+        )
+        
         return true
     }
 

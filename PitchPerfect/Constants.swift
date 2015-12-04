@@ -8,9 +8,19 @@
 
 import Foundation
 
+extension UIColor {
+    convenience init(hex : Int) {
+        let blue = CGFloat(hex & 0xFF)
+        let green = CGFloat((hex >> 8) & 0xFF)
+        let red = CGFloat((hex >> 16) & 0xFF)
+        self.init(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: 1)
+    }
+}
+
 class Constants {
     
     static let REMOTE_SONGS_URL = "https://dl.dropboxusercontent.com/u/5301042/songs.json"
+    static let PITCH_PERFECT_COLOR = UIColor(hex: 0x3e9ec1)
     
     //
     // http://www.skytopia.com/project/articles/midi.html

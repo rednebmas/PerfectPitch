@@ -18,9 +18,9 @@ class SongListTableViewController: UITableViewController {
         super.viewDidLoad()
         self.fetchData("https://dl.dropboxusercontent.com/u/5301042/songs.json")
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        // hides empty cells
+        self.tableView.tableFooterView = UIView();
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
