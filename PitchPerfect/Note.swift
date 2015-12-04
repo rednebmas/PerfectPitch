@@ -143,6 +143,10 @@ class Note : NSObject, NSCoding {
     
     static func calculateFrequency(letter: Character, accidental: Int, octave: Int) -> Double {
         let characterDiff = Int(letter.unicodeScalarCodePoint() - A_CHAR_CODE)
+        if (octave < -2) {
+            print("Invalid octave");
+            return 440;
+        }
         var halfStepsFromA4 = HALF_STEPS_AWAY_FROM_A4_TO_NOTE_IN_4TH_OCTAVE[characterDiff] + 12 * (octave - 4)
         halfStepsFromA4 += accidental
         let halfStepsFromA4Double = Double(halfStepsFromA4)

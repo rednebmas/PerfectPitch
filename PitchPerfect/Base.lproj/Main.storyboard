@@ -382,17 +382,22 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T60-AP-Eco">
-                                <rect key="frame" x="248" y="464" width="104" height="2"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T60-AP-Eco">
+                                <rect key="frame" x="170" y="433" width="261" height="2"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="261" id="C1S-cj-PLL"/>
+                                </constraints>
                                 <color key="progressTintColor" red="0.88926405682318299" green="1" blue="0.99815486418867216" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.24313725489999999" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="T60-AP-Eco" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="4f5-e9-j2n"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerY" secondItem="bu5-Fi-ww6" secondAttribute="centerY" id="5AC-Wn-AO9"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="Aft-BS-fl7"/>
+                            <constraint firstItem="T60-AP-Eco" firstAttribute="top" secondItem="Ggt-4m-NLV" secondAttribute="bottom" constant="38.5" id="BMe-Sj-rnw"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="top" secondItem="foW-jK-ZKJ" secondAttribute="bottom" constant="60" id="Dlz-fv-Krk"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="leading" secondItem="bu5-Fi-ww6" secondAttribute="trailing" constant="25" id="ODh-mB-sbX"/>
                             <constraint firstItem="T60-AP-Eco" firstAttribute="top" secondItem="Umq-Hg-Lqq" secondAttribute="topMargin" constant="200" id="PQh-6U-uUH"/>
@@ -421,14 +426,14 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="PQh-6U-uUH"/>
                                 <exclude reference="Aft-BS-fl7"/>
                                 <exclude reference="idt-YZ-ypx"/>
                                 <exclude reference="sK2-iV-Bbp"/>
                                 <exclude reference="xKQ-Ar-N1M"/>
                                 <exclude reference="yvN-yq-6nB"/>
-                                <exclude reference="vXO-cf-Ie4"/>
                                 <exclude reference="akc-7d-eq5"/>
-                                <exclude reference="PQh-6U-uUH"/>
+                                <exclude reference="vXO-cf-Ie4"/>
                                 <exclude reference="juM-2v-Y8c"/>
                             </mask>
                         </variation>
@@ -438,6 +443,7 @@
                         <outlet property="currentNoteLabel" destination="OFP-UE-EHa" id="fJZ-Gu-kvt"/>
                         <outlet property="nextNoteLabel" destination="Ggt-4m-NLV" id="WTh-LA-Oat"/>
                         <outlet property="noteButton" destination="foW-jK-ZKJ" id="3x8-0R-cRp"/>
+                        <outlet property="noteProgressView" destination="T60-AP-Eco" id="mT4-Dp-Qdy"/>
                         <outlet property="previousNoteLabel" destination="bu5-Fi-ww6" id="A3T-PB-rhZ"/>
                         <segue destination="b1z-zB-4Ly" kind="show" identifier="GameOverSegue" id="JYf-n4-3JL"/>
                     </connections>

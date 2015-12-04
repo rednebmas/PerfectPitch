@@ -138,25 +138,43 @@
     return fundamentalIndex;
 }
 
+// e.g. octave
++ (BOOL) isFirstOvertonePresent:(EZAudioFFT*)fft atIndex:(UInt32)index
+{
+    float freqPower = [fft frequencyMagnitudeAtIndex:index];
+    float firstOvertonePower = [fft frequencyMagnitudeAtIndex:index*2];
+    float ratio = firstOvertonePower / freqPower;
+    BOOL result = ratio > .2 && firstOvertonePower > .0001;
+    return result;
+}
+
 + (BOOL) isSecondOvertonePresent:(EZAudioFFT*)fft atIndex:(UInt32)index
 {
     float freqPower = [fft frequencyMagnitudeAtIndex:index];
     float secondOvertonePower = [fft frequencyMagnitudeAtIndex:index*3];
     float ratio = secondOvertonePower / freqPower;
-    BOOL result = ratio > .1 && secondOvertonePower > .001;
+    BOOL result = ratio > .1 && secondOvertonePower > .0001;
     return result;
 }
 
 - (UInt32) findFundamental:(EZAudioFFT*)fft atIndex:(UInt32)index
 {
     UInt32 foundAt = index;
+    
+    // I need to look more into whether this should be index over two or not
     BOOL secondOvertoneIsPresentAtIndexOverTwo = [PitchEstimator isSecondOvertonePresent:fft
-                                                                                 atIndex:index];
+                                                                                 atIndex:index/2];
+    
+    
+    BOOL firstOvertoneIsPresentAtFifthBelow = [PitchEstimator isFirstOvertonePresent:fft
+                                                                             atIndex:index*2/3];
+    
+    float cutoffFreq = 77.78;
     if (secondOvertoneIsPresentAtIndexOverTwo)
     {
         // cut out very low frequencies
         float freqAtLowerBin = [fft frequencyAtIndex:round(index/2)];
-        if (freqAtLowerBin < 77.78)
+        if (freqAtLowerBin < cutoffFreq)
         {
             foundAt = index;
         }
@@ -164,6 +182,22 @@
         {
             // recursion!
             foundAt = [self findFundamental:fft atIndex:round(index / 2)];
+        }
+    }
+    else if (firstOvertoneIsPresentAtFifthBelow)
+    {
+        // cut out very low frequencies
+        float freqAtLowerBin = [fft frequencyAtIndex:round(index * 2 / 3)];
+        if (freqAtLowerBin < cutoffFreq)
+        {
+            printf("octave is present at fifth below -  cutoff\n");
+            foundAt = index;
+        }
+        else
+        {
+            // recursion!
+            NSLog(@"octave is present at fifth below - %f -  recursive\n", [fft frequencyAtIndex:index*2/3]);
+            foundAt = [self findFundamental:fft atIndex:round(index * 2 / 3)];
         }
     }
     
@@ -192,36 +226,36 @@
  * Hanning window function which improves results of FFT
  */
 /*
-+ (void) hann:(float**)buffer length:(UInt32)length
-{
-    float factor = 0;
-    for (float i = 0; i < length; i++)
-    {
-        factor = .5 * (1 - cosf((2*M_PI*i)/(length-1)));
-        buffer[0][(int)i] = buffer[0][(int)i] * factor;
-    }
-}
-
-+ (void) blackmanHarris:(float**)buffer length:(UInt32)length
-{
-    float factor = 0;
-    float a0 = 0.355768;
-    float a1 = 0.487396;
-    float a2 = 0.144232;
-    float a3 = 0.012604;
-    float lMinusOne = (float)length;
-    
-    for (float i = 0; i < length; i++)
-    {
-        factor = a0
-                 - a1 * cosf(2 * M_PI * i / lMinusOne)
-                 + a2 * cosf(4 * M_PI * i / lMinusOne)
-                 - a3 * cosf(6 * M_PI * i / lMinusOne);
-        
-        int intI = (int)i;
-        buffer[0][intI] = buffer[0][intI] * factor;
-    }
-}
-*/
+ + (void) hann:(float**)buffer length:(UInt32)length
+ {
+ float factor = 0;
+ for (float i = 0; i < length; i++)
+ {
+ factor = .5 * (1 - cosf((2*M_PI*i)/(length-1)));
+ buffer[0][(int)i] = buffer[0][(int)i] * factor;
+ }
+ }
+ 
+ + (void) blackmanHarris:(float**)buffer length:(UInt32)length
+ {
+ float factor = 0;
+ float a0 = 0.355768;
+ float a1 = 0.487396;
+ float a2 = 0.144232;
+ float a3 = 0.012604;
+ float lMinusOne = (float)length;
+ 
+ for (float i = 0; i < length; i++)
+ {
+ factor = a0
+ - a1 * cosf(2 * M_PI * i / lMinusOne)
+ + a2 * cosf(4 * M_PI * i / lMinusOne)
+ - a3 * cosf(6 * M_PI * i / lMinusOne);
+ 
+ int intI = (int)i;
+ buffer[0][intI] = buffer[0][intI] * factor;
+ }
+ }
+ */
 
 @end
