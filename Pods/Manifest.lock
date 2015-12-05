@@ -7,7 +7,7 @@ PODS:
     - EZAudio/Core
     - TPCircularBuffer (~> 1.1)
   - Spring (1.0.3)
-  - SwiftyJSON (2.3.1)
+  - SwiftyJSON (2.3.2)
   - TPCircularBuffer (1.3)
 
 DEPENDENCIES:
@@ -27,20 +27,20 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   EZAudio:
-    :commit: 6d1dc20908c5648fa8a8d27379ad629d811b32ab
+    :commit: 49a6c8751a6cdb81e0acdd1af95d1070d226b615
     :git: https://github.com/rednebmas/EZAudio.git
   Spring:
     :commit: 18d5c7b74489de8044e34767f856d1e574f0820e
     :git: https://github.com/MengTo/Spring.git
   SwiftyJSON:
-    :commit: 5ccffc14df519cf29b8dfbc7c1698373f2a6da40
+    :commit: 8e618c8baf6323a5079c6549bb38d48357b31630
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
   EZAudio: 9d03bc21577de307de51b9a6f40d7129353d218f
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
-  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TPCircularBuffer: d2f604324ce1d293175046db3f67420be1091994
 
 COCOAPODS: 0.39.0

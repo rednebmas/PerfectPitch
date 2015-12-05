@@ -226,6 +226,8 @@ typedef struct EZAudioWindowFunctionInfo
                 bufferSize:nOver2];
     }
     
+    free(windowedBuffer);
+    
     //
     // Return the FFT
     //
