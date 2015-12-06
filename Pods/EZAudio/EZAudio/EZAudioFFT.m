@@ -226,7 +226,9 @@ typedef struct EZAudioWindowFunctionInfo
                 bufferSize:nOver2];
     }
     
-    free(windowedBuffer);
+    if (self.shouldApplyGaussianWindow) {
+        free(windowedBuffer);
+    }
     
     //
     // Return the FFT

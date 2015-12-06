@@ -144,7 +144,7 @@
     float freqPower = [fft frequencyMagnitudeAtIndex:index];
     float firstOvertonePower = [fft frequencyMagnitudeAtIndex:index*2];
     float ratio = firstOvertonePower / freqPower;
-    BOOL result = ratio > .2 && firstOvertonePower > .0001;
+    BOOL result = ratio > .1 && firstOvertonePower > .0001;
     return result;
 }
 

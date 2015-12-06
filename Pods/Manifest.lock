@@ -27,7 +27,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   EZAudio:
-    :commit: 49a6c8751a6cdb81e0acdd1af95d1070d226b615
+    :commit: 15d70748655b12c382f18af5739b43ec97f31f36
     :git: https://github.com/rednebmas/EZAudio.git
   Spring:
     :commit: 18d5c7b74489de8044e34767f856d1e574f0820e

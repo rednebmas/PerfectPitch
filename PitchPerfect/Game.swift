@@ -62,6 +62,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         
         let sampleRate = Float(self.microphone.audioStreamBasicDescription().mSampleRate)
         fft = EZAudioFFTRolling(windowSize: FFT_WINDOW_SIZE, sampleRate: sampleRate, delegate: self)
+        fft.shouldApplyGaussianWindow = true
         
         microphone.startFetchingAudio()
     }

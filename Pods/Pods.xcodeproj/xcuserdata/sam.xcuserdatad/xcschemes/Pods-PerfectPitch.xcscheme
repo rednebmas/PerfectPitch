@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '967999CB7043047106A7B54C'
+               BlueprintIdentifier = '3D3F0295F1F9D4559DA75749'
                BlueprintName = 'Pods-PerfectPitch'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_PerfectPitch.framework'>
