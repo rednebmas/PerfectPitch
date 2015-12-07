@@ -128,11 +128,11 @@
 		228EFF201C03CC4C006A6291 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				228EFEEB1C03BB45006A6291 /* ViewController.swift */,
 				9D6E18971C056218002CA262 /* SongListTableViewController.swift */,
 				228EFF1D1C03CC41006A6291 /* GameViewController.swift */,
 				57D0E69D1C0E92780059B89A /* GameOverViewController.swift */,
 				57D0E69F1C0E97EB0059B89A /* ScoresTableViewController.swift */,
-				228EFEEB1C03BB45006A6291 /* ViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
