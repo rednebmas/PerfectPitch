@@ -11,6 +11,7 @@ import EZAudio
 
 protocol GameDelegate {
     func noteWasUpdated(note: Note?)
+    func pitchWasUpdated(note: Note?)
 }
 
 class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
@@ -117,15 +118,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
                 // print(duration)
                 // print("Completed")
                 if duration >= note?.duration {
-                    if self.song!.hasNextNote() {
-                        self.song!.moveToNextNote()
-                        self.song!.playCurrentNote()
-                        self.currentState = Game.State.Waiting
-                        print(self.song!.currentNote?.frequency)
-                    }
-                    else {
-                        self.song?.stopPlaying()
-                    }
+                    nextNote(false)
                 } else {
                     note?.percentCompleted = Double(duration) / (note?.duration)!
                 }
@@ -133,10 +126,29 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         }
         
         if delegate != nil {
-            delegate!.noteWasUpdated(note)
+            delegate!.pitchWasUpdated(note)
         } else {
             print("No Deletage")
         }
+    }
+    
+    func nextNote(skipNote: Bool) {
+        if self.song!.hasNextNote() {
+            self.song!.moveToNextNote()
+            if self.delegate != nil {
+                self.delegate?.noteWasUpdated(self.song!.currentNote)
+            }
+            self.song!.playCurrentNote()
+            self.currentState = Game.State.Waiting
+            print(self.song!.currentNote?.frequency)
+        }
+        else {
+            self.song?.stopPlaying()
+        }
+        if !skipNote {
+//            self.score += self.
+        }
+
     }
     
     func start() {

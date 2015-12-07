@@ -7,17 +7,20 @@
 //
 
 import UIKit
+import Spring
 
 class GameViewController: UIViewController, GameDelegate {
     
     // MARK: Properties 
     
     @IBOutlet weak var noteButton: UIButton!
-    @IBOutlet weak var nextNoteLabel: UILabel!
-    @IBOutlet weak var currentNoteLabel: UILabel!
-    @IBOutlet weak var previousNoteLabel: UILabel!
+    @IBOutlet weak var nextNoteLabel: DesignableLabel!
+    @IBOutlet weak var currentNoteLabel: DesignableLabel!
+    @IBOutlet weak var previousNoteLabel: DesignableLabel!
     @IBOutlet weak var noteProgressView: UIProgressView!
+    @IBOutlet weak var noteHigherLabel: UILabel!
     
+    @IBOutlet weak var noteLowerLabel: UILabel!
     var song : Song = Song(title: "")
     lazy var game: Game = Game(song: Song(title: ""))
     
@@ -76,26 +79,86 @@ class GameViewController: UIViewController, GameDelegate {
         self.game.stop()
     }
     
+    
+    @IBAction func skipNotePressed(sender: AnyObject) {
+        self.game.nextNote(true)
+    }
+    
+    @IBAction func endGamePressed(sender: AnyObject) {
+    
+    }
+    
+    func pitchWasUpdated(note: Note?) {
+        dispatch_async(dispatch_get_main_queue(), {
+            UIView.setAnimationsEnabled(false)
+            if note != nil {
+                if self.game.currentState == Game.State.Waiting {
+                    self.noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+
+                    //frequency will never be = when the game state is in waiting
+                    if note!.frequency > self.game.song!.currentNote!.frequency {
+                        self.noteHigherLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
+                        self.noteLowerLabel.textColor = UIColor.whiteColor()
+                    } else {
+                        self.noteHigherLabel.textColor = UIColor.whiteColor()
+                        self.noteLowerLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
+                    }
+                    
+                } else if self.game.currentState == Game.State.Detecting {
+                    self.noteButton.layer.borderColor = UIColor.greenColor().CGColor
+                    self.noteHigherLabel.textColor = UIColor.whiteColor()
+                    self.noteLowerLabel.textColor = UIColor.whiteColor()
+                    
+                }
+                self.noteButton.setTitle(note!.nameWithoutOctave, forState: .Normal)
+                self.noteProgressView.setProgress(Float((note?.percentCompleted)!), animated: true)
+                
+                
+                
+            } else {
+                self.noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+                self.noteButton.setTitle("--", forState: .Normal)
+                self.noteProgressView.setProgress(0.0, animated: false)
+            }
+            // self.currentButton.setTitle(self.game.song?.currentNote?.nameWithoutOctave, forState: .Normal)
+            UIView.setAnimationsEnabled(true)
+        })
+        
+    }
+    
     func noteWasUpdated(note: Note?) {
         dispatch_async(dispatch_get_main_queue(), {
             
             UIView.setAnimationsEnabled(false)
-            if note != nil {
-                self.noteButton.setTitle(note!.nameWithoutOctave, forState: .Normal)
-                self.noteProgressView.setProgress(Float((note?.percentCompleted)!), animated: true)
-            } else {
-                self.noteButton.setTitle("--", forState: .Normal)
-                self.noteProgressView.setProgress(0.0, animated: false)
-            }
-            
             if self.game.song != nil {
-                if self.game.song?.currentNote != nil {
-                    self.currentNoteLabel.text = self.game.song?.currentNote?.nameWithoutOctave
+
+                let updateNoteUI = {
+                    (note: Note?, label: DesignableLabel) in
+                    if note != nil {
+                        label.text = note!.nameWithoutOctave
+                    } else {
+                        label.text = "-"
+                    }
+                    label.animation = "slideLeft"
+                    label.curve = "easeIn"
+                    label.duration = 1.0
                 }
+                updateNoteUI(self.game.song!.previousNote, self.previousNoteLabel)
+//                updateNoteUI(self.game.song!.currentNote, self.currentNoteLabel)
+                updateNoteUI(self.game.song!.nextNote, self.nextNoteLabel)
             }
-            
-            // self.currentButton.setTitle(self.game.song?.currentNote?.nameWithoutOctave, forState: .Normal)
             UIView.setAnimationsEnabled(true)
+            self.nextNoteLabel.animation = "slideLeft"
+            self.nextNoteLabel.animate()
+            
+            self.currentNoteLabel.animation = "pop"
+//            self.currentNoteLabel.delay = 0
+            self.currentNoteLabel.animateToNext({ () -> () in
+                self.currentNoteLabel.text = self.game.song!.currentNote?.nameWithoutOctave
+            })
+            self.previousNoteLabel.animation = "fadeInLeft"
+            self.previousNoteLabel.duration = 1.5
+            self.previousNoteLabel.animate()
         })
     }
     

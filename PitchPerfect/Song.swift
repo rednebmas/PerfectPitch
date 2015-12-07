@@ -12,6 +12,8 @@ class Song : NSObject, NSCoding {
     var title : String
     
     internal private(set) var currentNote: Note?
+    internal private(set) var previousNote: Note?
+    internal private(set) var nextNote: Note?
     
     var notes: [Note]?
     var currentNoteIndex: Int = 0
@@ -113,6 +115,10 @@ class Song : NSObject, NSCoding {
     func restart() {
         self.currentNoteIndex == 0
         self.currentNote = self.notes![0]
+        if hasNextNote() {
+            self.nextNote = self.notes![1]
+        }
+        self.previousNote = nil
     }
     
     /**
@@ -126,7 +132,13 @@ class Song : NSObject, NSCoding {
     
     func moveToNextNote() {
         self.currentNoteIndex++
+        self.previousNote = self.currentNote
         self.currentNote = self.notes![self.currentNoteIndex]
+        if hasNextNote() {
+            self.nextNote = self.notes![self.currentNoteIndex + 1]
+        } else {
+            self.nextNote = nil
+        }
     }
     
     func playCurrentNote() {

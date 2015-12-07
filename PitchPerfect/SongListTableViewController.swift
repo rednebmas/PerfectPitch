@@ -84,12 +84,14 @@ class SongListTableViewController: UITableViewController, SongsDelegate {
          // Get the new view controller using segue.destinationViewController.
          // Pass the selected object to the new view controller.
         if segue.identifier == "SongClickedSegue" {
+            print("Song CLicked Segue")
             let cell: UITableViewCell = sender as! UITableViewCell
             let selectedSong = self.songs.readSong(cell.tag)
             
             if let controller = segue.destinationViewController as? GameViewController {
                 controller.song = selectedSong!
             }
+            print("Completed Prepeare for segue")
         }
     }
     
