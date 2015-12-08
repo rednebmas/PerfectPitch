@@ -26,6 +26,7 @@
 		57D0E6A01C0E97EB0059B89A /* ScoresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D0E69F1C0E97EB0059B89A /* ScoresTableViewController.swift */; };
 		9D6E18981C056218002CA262 /* SongListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E18971C056218002CA262 /* SongListTableViewController.swift */; };
 		9D6E189A1C0568CE002CA262 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E18991C0568CE002CA262 /* Song.swift */; };
+		9DAAD8651C1783410085E8DB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAAD8641C1783410085E8DB /* SettingsViewController.swift */; };
 		C5752F300A8C45F9942C1282 /* Pods_PerfectPitch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC15F29CF86601C6565B152 /* Pods_PerfectPitch.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		57D0E69F1C0E97EB0059B89A /* ScoresTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoresTableViewController.swift; sourceTree = "<group>"; };
 		9D6E18971C056218002CA262 /* SongListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongListTableViewController.swift; sourceTree = "<group>"; };
 		9D6E18991C0568CE002CA262 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		9DAAD8641C1783410085E8DB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 		228EFF201C03CC4C006A6291 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9DAAD8641C1783410085E8DB /* SettingsViewController.swift */,
 				228EFEEB1C03BB45006A6291 /* ViewController.swift */,
 				9D6E18971C056218002CA262 /* SongListTableViewController.swift */,
 				228EFF1D1C03CC41006A6291 /* GameViewController.swift */,
@@ -324,6 +327,7 @@
 				228EFEEC1C03BB45006A6291 /* ViewController.swift in Sources */,
 				228EFEEA1C03BB45006A6291 /* AppDelegate.swift in Sources */,
 				227C63301C112633001C4327 /* PitchEstimator.m in Sources */,
+				9DAAD8651C1783410085E8DB /* SettingsViewController.swift in Sources */,
 				228EFF1A1C03CB57006A6291 /* Note.swift in Sources */,
 				57D0E6A01C0E97EB0059B89A /* ScoresTableViewController.swift in Sources */,
 				227C63351C113720001C4327 /* Songs.swift in Sources */,

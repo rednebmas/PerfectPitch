@@ -16,6 +16,15 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    @IBAction func didSelectSettings(sender: AnyObject) {
+        
+        let settingsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
+        settingsVC.modalPresentationStyle = .OverCurrentContext
+        settingsVC.modalTransitionStyle = .CrossDissolve
+//        settingsVC.delegate = self
+        self.presentViewController(settingsVC, animated: false, completion: nil)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
