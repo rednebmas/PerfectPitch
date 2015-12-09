@@ -13,9 +13,6 @@ class GameViewController: UIViewController, GameDelegate {
     
     // MARK: Properties 
     
-    @IBAction func endGameButton(sender: AnyObject) {
-        performSegueWithIdentifier("GameOverSegue", sender: sender)
-    }
     @IBOutlet weak var noteButton: UIButton!
     @IBOutlet weak var nextNoteLabel: DesignableLabel!
     @IBOutlet weak var currentNoteLabel: DesignableLabel!
