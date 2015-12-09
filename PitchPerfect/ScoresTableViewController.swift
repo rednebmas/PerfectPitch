@@ -17,7 +17,7 @@ class ScoresTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetchData("https://dl.dropboxusercontent.com/u/5301042/songs.json")
-        
+        self.title = "Scores"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
