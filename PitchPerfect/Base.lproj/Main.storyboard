@@ -361,13 +361,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azZ-Wm-EdF">
-                                <rect key="frame" x="552" y="135" width="28" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foW-jK-ZKJ" customClass="DesignableButton" customModule="Spring">
                                 <rect key="frame" x="205" y="124" width="190" height="190"/>
                                 <animations/>
@@ -415,17 +408,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nNote" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggt-4m-NLV" customClass="DesignableLabel" customModule="Spring">
-                                <rect key="frame" x="352" y="374" width="55" height="24"/>
+                                <rect key="frame" x="352" y="374" width="54.5" height="24"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtI-vg-WE9">
-                                <rect key="frame" x="487" y="135" width="45" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T60-AP-Eco">
@@ -436,30 +422,6 @@
                                 </constraints>
                                 <color key="progressTintColor" red="0.88926405682318299" green="1" blue="0.99815486418867216" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkR-kU-3rl" customClass="DesignableButton" customModule="Spring">
-                                <rect key="frame" x="20" y="82" width="100" height="30"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="DQf-jx-Ibu"/>
-                                </constraints>
-                                <state key="normal" title="End Game">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="endGamePressed:" destination="Gj2-g3-VIl" eventType="touchUpInside" id="bFT-gr-4Vx"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUt-iX-O4J" customClass="DesignableButton" customModule="Spring">
                                 <rect key="frame" x="250" y="500" width="100" height="30"/>
                                 <animations/>
@@ -484,10 +446,42 @@
                                     <action selector="skipNotePressed:" destination="Gj2-g3-VIl" eventType="touchUpInside" id="5H2-SA-oxy"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 97" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtI-vg-WE9">
+                                <rect key="frame" x="468" y="38" width="102" height="29"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkR-kU-3rl" customClass="DesignableButton" customModule="Spring">
+                                <rect key="frame" x="20" y="38" width="100" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="DQf-jx-Ibu"/>
+                                </constraints>
+                                <state key="normal" title="End Game">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="endGamePressed:" destination="Gj2-g3-VIl" eventType="touchUpInside" id="bFT-gr-4Vx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.24313725489999999" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="xtI-vg-WE9" firstAttribute="top" secondItem="2Aw-AA-63P" secondAttribute="bottom" constant="18" id="01p-Md-06x"/>
                             <constraint firstItem="T60-AP-Eco" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="4f5-e9-j2n"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerY" secondItem="bu5-Fi-ww6" secondAttribute="centerY" id="5AC-Wn-AO9"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="Aft-BS-fl7"/>
@@ -499,40 +493,35 @@
                             <constraint firstItem="Ggt-4m-NLV" firstAttribute="leading" secondItem="OFP-UE-EHa" secondAttribute="trailing" constant="25" id="PUh-JJ-Ofv"/>
                             <constraint firstItem="OZE-5G-r9q" firstAttribute="leading" secondItem="foW-jK-ZKJ" secondAttribute="trailing" constant="25" id="QIQ-7y-zVr"/>
                             <constraint firstItem="LkR-kU-3rl" firstAttribute="top" secondItem="2Aw-AA-63P" secondAttribute="bottom" constant="18" id="RBE-yc-Ojq"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="azZ-Wm-EdF" secondAttribute="trailing" id="Rlq-Ed-Klw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xUt-iX-O4J" secondAttribute="trailing" constant="1" id="VoE-eb-o9g"/>
                             <constraint firstItem="foW-jK-ZKJ" firstAttribute="centerY" secondItem="Umq-Hg-Lqq" secondAttribute="centerY" constant="-81" id="YWX-vs-eJD"/>
-                            <constraint firstItem="azZ-Wm-EdF" firstAttribute="top" secondItem="2Aw-AA-63P" secondAttribute="bottom" constant="71" id="adD-fz-XYX"/>
                             <constraint firstItem="xtI-vg-WE9" firstAttribute="top" secondItem="2Aw-AA-63P" secondAttribute="bottom" constant="100" id="akc-7d-eq5"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="csL-nM-sGV"/>
                             <constraint firstItem="foW-jK-ZKJ" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="fzI-ou-QhI"/>
-                            <constraint firstItem="azZ-Wm-EdF" firstAttribute="centerY" secondItem="xtI-vg-WE9" secondAttribute="centerY" id="haM-ir-e19"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" id="idt-YZ-ypx"/>
                             <constraint firstItem="OZE-5G-r9q" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" id="jMe-6A-m4w"/>
-                            <constraint firstItem="azZ-Wm-EdF" firstAttribute="leading" secondItem="xtI-vg-WE9" secondAttribute="trailing" id="juM-2v-Y8c"/>
                             <constraint firstItem="Ggt-4m-NLV" firstAttribute="centerY" secondItem="OFP-UE-EHa" secondAttribute="centerY" id="kPL-2y-KmO"/>
                             <constraint firstItem="ei5-7S-djW" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" id="nkD-9Y-Jwy"/>
-                            <constraint firstItem="azZ-Wm-EdF" firstAttribute="leading" secondItem="xtI-vg-WE9" secondAttribute="trailing" constant="20" id="oTS-ho-bD3"/>
                             <constraint firstItem="LkR-kU-3rl" firstAttribute="leading" secondItem="Umq-Hg-Lqq" secondAttribute="leading" constant="20" id="pB1-O0-nVI"/>
                             <constraint firstItem="5iG-4D-5s9" firstAttribute="top" secondItem="xUt-iX-O4J" secondAttribute="bottom" constant="70" id="qrZ-6F-vEO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OFP-UE-EHa" secondAttribute="trailing" constant="257" id="sK2-iV-Bbp"/>
                             <constraint firstItem="Ggt-4m-NLV" firstAttribute="leading" secondItem="OFP-UE-EHa" secondAttribute="trailing" constant="25" id="vXO-cf-Ie4"/>
+                            <constraint firstItem="xtI-vg-WE9" firstAttribute="trailing" secondItem="Umq-Hg-Lqq" secondAttribute="trailingMargin" constant="-10" id="w62-Q0-wik"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="leading" secondItem="foW-jK-ZKJ" secondAttribute="leading" id="xKQ-Ar-N1M"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="leading" secondItem="bu5-Fi-ww6" secondAttribute="trailing" constant="25" id="yvN-yq-6nB"/>
                             <constraint firstItem="foW-jK-ZKJ" firstAttribute="leading" secondItem="ei5-7S-djW" secondAttribute="trailing" constant="25" id="zZ4-F0-7eb"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="akc-7d-eq5"/>
                                 <exclude reference="Aft-BS-fl7"/>
                                 <exclude reference="idt-YZ-ypx"/>
                                 <exclude reference="sK2-iV-Bbp"/>
                                 <exclude reference="xKQ-Ar-N1M"/>
                                 <exclude reference="yvN-yq-6nB"/>
                                 <exclude reference="PQh-6U-uUH"/>
-                                <exclude reference="akc-7d-eq5"/>
                                 <exclude reference="vXO-cf-Ie4"/>
                                 <exclude reference="VoE-eb-o9g"/>
-                                <exclude reference="juM-2v-Y8c"/>
                             </mask>
                         </variation>
                     </view>

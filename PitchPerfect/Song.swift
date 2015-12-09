@@ -168,6 +168,19 @@ class Song : NSObject, NSCoding {
         }
     }
     
+    func duration() -> Double {
+        var duration: Double = 0.0
+        if self.notes == nil {
+            return duration
+        }
+        
+        for note in self.notes!
+        {
+            duration += note.duration
+        }
+        
+        return duration
+    }
     
     // MARK: MIDI processing
     

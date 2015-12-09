@@ -99,15 +99,21 @@ class GameViewController: UIViewController, GameDelegate {
                     if note!.frequency > self.game.song!.currentNote!.frequency {
                         self.noteHigherLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
                         self.noteLowerLabel.textColor = UIColor.whiteColor()
+                        self.noteLowerLabel.hidden = true
+                        self.noteHigherLabel.hidden = false
                     } else {
                         self.noteHigherLabel.textColor = UIColor.whiteColor()
+                        self.noteHigherLabel.hidden = true
+                        self.noteLowerLabel.hidden = false
                         self.noteLowerLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
                     }
                     
                 } else if self.game.currentState == Game.State.Detecting {
                     self.noteButton.layer.borderColor = UIColor.greenColor().CGColor
-                    self.noteHigherLabel.textColor = UIColor.whiteColor()
-                    self.noteLowerLabel.textColor = UIColor.whiteColor()
+                    // self.noteHigherLabel.textColor = UIColor.whiteColor()
+                    // self.noteLowerLabel.textColor = UIColor.whiteColor()
+                    self.noteHigherLabel.hidden = true
+                    self.noteLowerLabel.hidden = true
                     
                 }
                 self.noteButton.setTitle(note!.nameWithoutOctave, forState: .Normal)
@@ -124,6 +130,10 @@ class GameViewController: UIViewController, GameDelegate {
             UIView.setAnimationsEnabled(true)
         })
         
+    }
+    
+    func gameOver() {
+        print("Score \(self.game.score)")
     }
     
     func noteWasUpdated(note: Note?) {

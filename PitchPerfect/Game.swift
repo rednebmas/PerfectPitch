@@ -12,6 +12,7 @@ import EZAudio
 protocol GameDelegate {
     func noteWasUpdated(note: Note?)
     func pitchWasUpdated(note: Note?)
+    func gameOver()
 }
 
 class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
@@ -26,14 +27,17 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     let FFT_WINDOW_SIZE: vDSP_Length = 4096 * 2 * 2
     let pitchEstimator : PitchEstimator = PitchEstimator()
     
-    var score = 0
+    var score: Double = 0
     var noteDetectedStart : NSDate?
+    var gameStart : NSDate?
+    var songDuration : NSTimeInterval = 0
     var currentState: State = Game.State.NotPlaying
     var delegate : GameDelegate?
     var microphone: EZMicrophone!
     var fft: EZAudioFFTRolling!
     var song : Song?
     var currentNote : Note?
+    var previousWrongCount: Int = 0
     
     init(song: Song) {
         super.init()
@@ -105,15 +109,22 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
             if note!.nameWithoutOctave == self.song!.currentNote?.nameWithoutOctave {
                 self.currentState = Game.State.Detecting
                 self.noteDetectedStart = NSDate()
+                self.previousWrongCount = 0
                 print("Started detecting")
             }
         }
         else if self.currentState == Game.State.Detecting {
             if note!.nameWithoutOctave != self.song!.currentNote?.nameWithoutOctave {
-                print("Stopped detecting for \(note)")
-                self.currentState = Game.State.Waiting
+                self.previousWrongCount++
+                print("Wrong, but continuing")
+                
+                if self.previousWrongCount > 2 {
+                    print("Stopped detecting for \(note)")
+                    self.currentState = Game.State.Waiting
+                }
             }
             else {
+                self.previousWrongCount = 0
                 let duration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.noteDetectedStart!)
                 // print(duration)
                 // print("Completed")
@@ -144,6 +155,11 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         }
         else {
             self.song?.stopPlaying()
+            let playDuration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.gameStart!)
+            self.score = (self.song?.duration())! / playDuration
+            if self.delegate != nil {
+                delegate!.gameOver()
+            }
         }
         if !skipNote {
 //            self.score += self.
@@ -155,6 +171,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         self.song!.restart()
         self.song!.playCurrentNote()
         self.currentState = Game.State.Waiting
+        self.gameStart = NSDate()
     }
     
     func stop() {
