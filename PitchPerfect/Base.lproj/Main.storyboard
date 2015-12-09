@@ -23,6 +23,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bq4-Cj-fhd">
+                                <rect key="frame" x="0.0" y="32" width="600" height="568"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="didSelectBackground:" destination="JQr-x3-9NW" eventType="touchUpInside" id="j9Z-cX-4aV"/>
+                                </connections>
+                            </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTW-Q1-E5i" customClass="DesignableView" customModule="Spring">
                                 <rect key="frame" x="160" y="160" width="280" height="280"/>
                                 <subviews>
@@ -46,6 +54,9 @@
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9ID-GP-xg1">
                                         <rect key="frame" x="153" y="55" width="110" height="31"/>
                                         <animations/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" adjustable="YES"/>
+                                        </accessibility>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spring" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOa-gq-o8s">
                                         <rect key="frame" x="17" y="175" width="50" height="21"/>
@@ -116,23 +127,15 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bq4-Cj-fhd">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <animations/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="didSelectBackground:" destination="JQr-x3-9NW" eventType="touchUpInside" id="j9Z-cX-4aV"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
                         <constraints>
-                            <constraint firstItem="xR3-bx-4U3" firstAttribute="top" secondItem="Bq4-Cj-fhd" secondAttribute="bottom" id="EQ0-LD-rFT"/>
+                            <constraint firstAttribute="trailing" secondItem="Bq4-Cj-fhd" secondAttribute="trailing" id="5aC-Wh-Tjf"/>
                             <constraint firstItem="BTW-Q1-E5i" firstAttribute="centerY" secondItem="dxG-jD-is5" secondAttribute="centerY" id="RZo-4L-k4W"/>
-                            <constraint firstItem="Bq4-Cj-fhd" firstAttribute="top" secondItem="vIs-mR-Qp1" secondAttribute="bottom" id="ZVz-Zj-g0b"/>
-                            <constraint firstAttribute="trailing" secondItem="Bq4-Cj-fhd" secondAttribute="trailing" id="a7L-Is-ttE"/>
                             <constraint firstItem="BTW-Q1-E5i" firstAttribute="centerX" secondItem="dxG-jD-is5" secondAttribute="centerX" id="hqB-mL-qyt"/>
-                            <constraint firstItem="Bq4-Cj-fhd" firstAttribute="leading" secondItem="dxG-jD-is5" secondAttribute="leading" id="tWF-kn-VPZ"/>
+                            <constraint firstItem="Bq4-Cj-fhd" firstAttribute="leading" secondItem="dxG-jD-is5" secondAttribute="leading" id="pGS-6M-CoB"/>
+                            <constraint firstItem="xR3-bx-4U3" firstAttribute="top" secondItem="Bq4-Cj-fhd" secondAttribute="bottom" id="sZt-Ry-hDU"/>
+                            <constraint firstItem="Bq4-Cj-fhd" firstAttribute="top" secondItem="dxG-jD-is5" secondAttribute="top" constant="32" id="zeK-Mh-RyY"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -317,11 +320,11 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NBt-dz-f63" id="XCL-Wr-QiF">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p1t-xK-tn0">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -422,8 +425,8 @@
                                 </constraints>
                                 <color key="progressTintColor" red="0.88926405682318299" green="1" blue="0.99815486418867216" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUt-iX-O4J" customClass="DesignableButton" customModule="Spring">
-                                <rect key="frame" x="250" y="500" width="100" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkR-kU-3rl" customClass="DesignableButton" customModule="Spring">
+                                <rect key="frame" x="20" y="82" width="100" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="XXY-DM-C5P"/>
@@ -555,7 +558,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4pE-dY-ZGj" id="TX2-HT-vUC">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -684,6 +687,6 @@
         <image name="Settings" width="36" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BbS-ZM-hRk"/>
+        <segue reference="SGS-ib-JDO"/>
     </inferredMetricsTieBreakers>
 </document>
