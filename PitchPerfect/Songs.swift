@@ -52,9 +52,8 @@ class Songs
                 delegate!.songsTitlesCacheLoaded(self)
             }
         }
-        //self.getData()
         
-        //self.fetchData()
+        self.fetchData()
     }
     
     // MARK: Network methods
@@ -63,9 +62,6 @@ class Songs
         Alamofire.request(.GET, Constants.REMOTE_SONGS_URL).responseString() { response in
             switch response.result {
             case .Success:
-                //self.getData()
-                
-                
                 if let value = response.result.value {
                     
                     if let dataFromString = value.dataUsingEncoding(
@@ -75,7 +71,6 @@ class Songs
                         let json = JSON(data: dataFromString) //cast into SwiftyJSON
                         let songs = json.array
                         self.parseSongsJSON(songs!)
-                        //Store data
                     }
                     else
                     {
@@ -127,7 +122,7 @@ class Songs
         
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(filePath) {
-            print("File already exists")
+            // print("File already exists")
             return false
         } else {
             print("Writing " + title + " to file")
