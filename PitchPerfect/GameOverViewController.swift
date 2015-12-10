@@ -9,8 +9,7 @@
 import UIKit
 
 class GameOverViewController: UIViewController {
-    var songTitle : String = ""
-    var songScoreDictionary = [String : [Double]]()
+    var song : Song?
     
     @IBOutlet weak var songTitleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -22,11 +21,12 @@ class GameOverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.songTitleLabel.text = songTitle
+        self.songTitleLabel.text = song?.title
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setValue(songScoreDictionary, forKey: defaultKeys.localStorageKey) //storing the content
-        defaults.synchronize()
+//        let defaults = NSUserDefaults.standardUserDefaults()
+//        defaults.setValue(songScoreDictionary, forKey: defaultKeys.localStorageKey) //storing the content
+//        defaults.synchronize()
+        self.bestScoreLabel.text = String(song?.highScore)
         // Do any additional setup after loading the view.
     }
 

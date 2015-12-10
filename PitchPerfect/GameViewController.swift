@@ -180,7 +180,7 @@ class GameViewController: UIViewController, GameDelegate {
         // Pass the selected object to the new view controller.
         if segue.identifier == "GameOverSegue" {
             if let controller = segue.destinationViewController as? GameOverViewController {
-                controller.songTitle = song.title
+                controller.song = song
             }
         }
     }
