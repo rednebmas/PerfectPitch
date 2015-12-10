@@ -23,6 +23,8 @@ class GameViewController: UIViewController, GameDelegate {
     @IBOutlet weak var noteProgressView: UIProgressView!
     @IBOutlet weak var noteHigherLabel: UILabel!
     
+    @IBOutlet weak var pitchLowProgressView: UIProgressView!
+    @IBOutlet weak var pitchHighProgressView: UIProgressView!
     @IBOutlet weak var noteLowerLabel: UILabel!
     var song : Song = Song(title: "")
     lazy var game: Game = Game(song: Song(title: ""))
@@ -122,15 +124,26 @@ class GameViewController: UIViewController, GameDelegate {
                 self.noteButton.setTitle(note!.nameWithoutOctave, forState: .Normal)
                 self.noteProgressView.setProgress(Float((note?.percentCompleted)!), animated: true)
                 
+                // update progress bars
+                let diffInCents = note!.differenceInCentsToNote(self.game.song!.currentNote!)
+                if diffInCents > 0 {
+                    let progress = Float(diffInCents / 50.0)
+                    self.pitchLowProgressView.progress = 1.0
+                    self.pitchHighProgressView.progress = progress < 1 ? progress : 1
+                } else {
+                    let progress = Float(diffInCents / -50.0)
+                    self.pitchLowProgressView.progress = progress < 1 ? 1 - progress : 0
+                    self.pitchHighProgressView.progress = 0.0
+                }
                 
-                
-            } else {
+            } else { // note is nil
                 self.noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
                 self.noteButton.setTitle("--", forState: .Normal)
                 self.noteProgressView.setProgress(0.0, animated: false)
             }
             // self.currentButton.setTitle(self.game.song?.currentNote?.nameWithoutOctave, forState: .Normal)
             UIView.setAnimationsEnabled(true)
+            
         })
         
     }

@@ -155,6 +155,15 @@ class Note : NSObject, NSCoding {
         return frequency
     }
     
+    func differenceInCentsToNote(note: Note) -> Double {
+        let differenceInCentsToTrueNote = 1200 * log2( self.frequency / note.frequency )
+        if differenceInCentsToTrueNote.isNaN {
+            return Double(INT16_MAX)
+        } else {
+            return differenceInCentsToTrueNote
+        }
+    }
+    
     /**
      * Plays tone until stop is called
      */
