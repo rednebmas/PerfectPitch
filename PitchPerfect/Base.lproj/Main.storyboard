@@ -563,7 +563,7 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <segue destination="RmS-pA-OCQ" kind="show" id="bbI-Mp-TlZ"/>
+                                    <segue destination="RmS-pA-OCQ" kind="show" identifier="viewScoresForSongSegue" id="bbI-Mp-TlZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -589,21 +589,9 @@
                     <view key="view" contentMode="scaleToFill" id="a3s-Q2-5Mc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1P4-Lg-hFG">
-                                <rect key="frame" x="307" y="174" width="42" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="scoreTestLabel" destination="1P4-Lg-hFG" id="Aho-Cz-fiJ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3CT-pt-YLe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -645,7 +633,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="BbS-ZM-hRk"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="homeSegue" id="BbS-ZM-hRk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSZ-aW-ym4" customClass="DesignableButton" customModule="Spring">
@@ -672,7 +660,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="Gj2-g3-VIl" kind="show" id="DlK-JV-RvW"/>
+                                    <segue destination="Gj2-g3-VIl" kind="show" identifier="tryAgainSegue" id="DlK-JV-RvW"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Song Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfp-SP-8tg">
@@ -741,7 +729,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="3xr-6t-Hh2" kind="show" id="BEV-MH-6Cq"/>
+                                    <segue destination="3xr-6t-Hh2" kind="show" identifier="highScoreSegue" id="BEV-MH-6Cq"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -12,10 +12,11 @@ class SongScoreViewController: UIViewController {
     
     var song = Song(title: "tester")
     
-    @IBOutlet weak var scoreTestLabel: UILabel!
+    //@IBOutlet weak var scoreTestLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.scoreTestLabel.text = String(song.highScore)
+        //self.scoreTestLabel.text = String(song.highScore)
         // Do any additional setup after loading the view.
     }
 
