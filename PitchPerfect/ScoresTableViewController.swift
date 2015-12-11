@@ -153,7 +153,7 @@ class ScoresTableViewController: UITableViewController {
             let selectedSong = self.songList[cell.tag]
             
             if let controller = segue.destinationViewController as? GameViewController {
-                controller.song = selectedSong
+                controller.game.song  = selectedSong
             }
         }
     }

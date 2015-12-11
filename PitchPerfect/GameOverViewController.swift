@@ -26,7 +26,11 @@ class GameOverViewController: UIViewController {
 //        let defaults = NSUserDefaults.standardUserDefaults()
 //        defaults.setValue(songScoreDictionary, forKey: defaultKeys.localStorageKey) //storing the content
 //        defaults.synchronize()
-        self.bestScoreLabel.text = String(song?.highScore)
+        self.scoreLabel.text = String(self.song!.currentScore!)
+        song!.scores!.append(self.song!.currentScore!)
+        song!.highScore! = max(song!.highScore!, self.song!.currentScore!)
+        //Todo Add HighSchore
+        self.bestScoreLabel.text = String(song!.highScore!)
         // Do any additional setup after loading the view.
     }
 
@@ -48,7 +52,7 @@ class GameOverViewController: UIViewController {
             }
         } else if segue.identifier == "tryAgainSegue" {
             if let controller = segue.destinationViewController as? GameViewController {
-                controller.song = song!
+                controller.game.song = self.song!
             }
         } else { //segue.identifier == "homeSegue"
             if let controller = segue.destinationViewController as? ViewController {

@@ -89,7 +89,8 @@ class SongListTableViewController: UITableViewController, SongsDelegate {
             let selectedSong = self.songs.readSong(cell.tag)
             
             if let controller = segue.destinationViewController as? GameViewController {
-                controller.song = selectedSong!
+                controller.game.song = selectedSong!
+//                controller.song = selectedSong!
             }
             print("Completed Prepeare for segue")
         }

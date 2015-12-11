@@ -23,12 +23,11 @@ class GameViewController: UIViewController, GameDelegate {
     @IBOutlet weak var noteProgressView: UIProgressView!
     @IBOutlet weak var noteHigherLabel: UILabel!
     
+    @IBOutlet weak var score: UILabel!
     @IBOutlet weak var pitchLowProgressView: UIProgressView!
     @IBOutlet weak var pitchHighProgressView: UIProgressView!
     @IBOutlet weak var noteLowerLabel: UILabel!
-    var song : Song = Song(title: "")
     lazy var game: Game = Game(song: Song(title: ""))
-    
     // MARK: View controller lifecycle
     
     struct defaultKeys {
@@ -40,17 +39,20 @@ class GameViewController: UIViewController, GameDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.game = Game(song: song)
+//        self.game = Game(song: song)
         self.game.delegate = self
         
         noteButton.layer.borderWidth = 2
         noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
         
         game.start()
+        if self.game.song?.currentScore == nil {
+           self.game.song?.currentScore = 0
+        }
         
         self.noteButton.addTarget(self, action: "replay", forControlEvents: .TouchUpInside)
         
-        let songNotes = song.notes
+        let songNotes = self.game.song!.notes
         
         previousNoteLabel.text = ""
         currentNoteLabel.text = songNotes![0].nameWithoutOctave
@@ -98,8 +100,9 @@ class GameViewController: UIViewController, GameDelegate {
             UIView.setAnimationsEnabled(false)
             if note != nil {
                 if self.game.currentState == Game.State.Waiting {
-                    self.noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
-
+                    UIView.animateWithDuration(5, animations: {
+                        self.noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+                    })
                     //frequency will never be = when the game state is in waiting
                     if note!.frequency > self.game.song!.currentNote!.frequency {
                         self.noteHigherLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
@@ -114,7 +117,9 @@ class GameViewController: UIViewController, GameDelegate {
                     }
                     
                 } else if self.game.currentState == Game.State.Detecting {
-                    self.noteButton.layer.borderColor = UIColor.greenColor().CGColor
+                    UIView.animateWithDuration(5, animations: {
+                        self.noteButton.layer.borderColor = UIColor.greenColor().CGColor
+                    })
                     // self.noteHigherLabel.textColor = UIColor.whiteColor()
                     // self.noteLowerLabel.textColor = UIColor.whiteColor()
                     self.noteHigherLabel.hidden = true
@@ -137,7 +142,9 @@ class GameViewController: UIViewController, GameDelegate {
                 }
                 
             } else { // note is nil
-                self.noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+                UIView.animateWithDuration(5, animations: {
+                    self.noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+                })
                 self.noteButton.setTitle("--", forState: .Normal)
                 self.noteProgressView.setProgress(0.0, animated: false)
             }
@@ -155,6 +162,8 @@ class GameViewController: UIViewController, GameDelegate {
     func noteWasUpdated(note: Note?) {
         dispatch_async(dispatch_get_main_queue(), {
             
+            self.score.text = "Score: \(self.game.score)"
+            self.game.song?.currentScore = Int(self.game.score)
             UIView.setAnimationsEnabled(false)
             if self.game.song != nil {
 
@@ -178,7 +187,6 @@ class GameViewController: UIViewController, GameDelegate {
             self.nextNoteLabel.animate()
             
             self.currentNoteLabel.animation = "pop"
-//            self.currentNoteLabel.delay = 0
             self.currentNoteLabel.animateToNext({ () -> () in
                 self.currentNoteLabel.text = self.game.song!.currentNote?.nameWithoutOctave
             })
@@ -193,7 +201,7 @@ class GameViewController: UIViewController, GameDelegate {
         // Pass the selected object to the new view controller.
         if segue.identifier == "GameOverSegue" {
             if let controller = segue.destinationViewController as? GameOverViewController {
-                controller.song = song
+                controller.song = self.game.song
             }
         }
     }

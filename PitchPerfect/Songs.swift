@@ -121,7 +121,7 @@ class Songs
         let filePath = self.filePathForTitle(title)
         
         let fileManager = NSFileManager.defaultManager()
-        if false {
+        if fileManager.fileExistsAtPath(filePath) {
             // print("File already exists")
             return false
         } else {

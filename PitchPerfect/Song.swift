@@ -17,6 +17,7 @@ class Song : NSObject, NSCoding {
     
     var scores: [Int]?
     var highScore: Int?
+    var currentScore: Int?
     
     var notes: [Note]?
     var currentNoteIndex: Int = 0
@@ -35,9 +36,18 @@ class Song : NSObject, NSCoding {
     init(withNotes: [Note], title: String) {
         self.title = title
         self.notes = withNotes
-        super.init()
         self.scores = Array()
         self.highScore = 0
+        super.init()
+    }
+    
+    
+    init(withNotes: [Note], title: String, scores: [Int], highScore: Int) {
+        self.title = title
+        self.notes = withNotes
+        self.scores = scores
+        self.highScore = highScore
+        super.init()
     }
     
     /*
@@ -97,19 +107,29 @@ class Song : NSObject, NSCoding {
     }
     
     // MARK: NSCoding
-    
+    //
     required convenience init?(coder decoder: NSCoder) {
         let notes = decoder.decodeObjectForKey("notes") as? [Note]
         let title = decoder.decodeObjectForKey("title") as? String
+//        let scores = decoder.decodeObjectForKey("scores") as? [Int]
+//        let highScore = decoder.decodeObjectForKey("highScore") as? Int
+        
         
         if title == nil {
             return nil
         }
-        
-        self.init(
-            withNotes: notes!,
-            title: title!
-        )
+        self.init(withNotes: notes!, title: title!)
+//        if self.scores == nil || self.highScore == nil {
+//            self.init(withNotes: notes!, title: title!)
+//        } else {
+//        
+//            self.init(
+//                withNotes: notes!,
+//                title: title!,
+//                scores: scores!,
+//                highScore: highScore!
+//            )
+//        }
     }
     
     func encodeWithCoder(coder: NSCoder) {
