@@ -15,6 +15,9 @@ class Song : NSObject, NSCoding {
     internal private(set) var previousNote: Note?
     internal private(set) var nextNote: Note?
     
+    var scores: [Int]?
+    var highScore: Int?
+    
     var notes: [Note]?
     var currentNoteIndex: Int = 0
     private var shouldStop: Bool = false
@@ -25,12 +28,16 @@ class Song : NSObject, NSCoding {
         self.title = title
         self.notes = Array()
         super.init()
+        self.scores = Array()
+        self.highScore = 0
     }
     
     init(withNotes: [Note], title: String) {
         self.title = title
         self.notes = withNotes
         super.init()
+        self.scores = Array()
+        self.highScore = 0
     }
     
     /*

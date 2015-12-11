@@ -22,6 +22,7 @@
 		22E0730C1C09422C00D0682F /* c-major-scale.mid in Resources */ = {isa = PBXBuildFile; fileRef = 22E0730B1C09422C00D0682F /* c-major-scale.mid */; };
 		22E0730F1C099EAB00D0682F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E0730E1C099EAB00D0682F /* Constants.swift */; };
 		5779802C1C111B2300B50005 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5779802B1C111B2300B50005 /* Game.swift */; };
+		57CE4ACC1C195FAE000C0723 /* SongScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE4ACB1C195FAE000C0723 /* SongScoreViewController.swift */; };
 		57D0E69E1C0E92780059B89A /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D0E69D1C0E92780059B89A /* GameOverViewController.swift */; };
 		57D0E6A01C0E97EB0059B89A /* ScoresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D0E69F1C0E97EB0059B89A /* ScoresTableViewController.swift */; };
 		9D6E18981C056218002CA262 /* SongListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E18971C056218002CA262 /* SongListTableViewController.swift */; };
@@ -68,6 +69,7 @@
 		22E0730E1C099EAB00D0682F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4DC15F29CF86601C6565B152 /* Pods_PerfectPitch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PerfectPitch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5779802B1C111B2300B50005 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		57CE4ACB1C195FAE000C0723 /* SongScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongScoreViewController.swift; sourceTree = "<group>"; };
 		57D0E69D1C0E92780059B89A /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		57D0E69F1C0E97EB0059B89A /* ScoresTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoresTableViewController.swift; sourceTree = "<group>"; };
 		9D6E18971C056218002CA262 /* SongListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongListTableViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				228EFF1D1C03CC41006A6291 /* GameViewController.swift */,
 				57D0E69D1C0E92780059B89A /* GameOverViewController.swift */,
 				57D0E69F1C0E97EB0059B89A /* ScoresTableViewController.swift */,
+				57CE4ACB1C195FAE000C0723 /* SongScoreViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				227C63301C112633001C4327 /* PitchEstimator.m in Sources */,
 				9DAAD8651C1783410085E8DB /* SettingsViewController.swift in Sources */,
 				228EFF1A1C03CB57006A6291 /* Note.swift in Sources */,
+				57CE4ACC1C195FAE000C0723 /* SongScoreViewController.swift in Sources */,
 				57D0E6A01C0E97EB0059B89A /* ScoresTableViewController.swift in Sources */,
 				227C63351C113720001C4327 /* Songs.swift in Sources */,
 				227C63331C112656001C4327 /* SBMath.m in Sources */,

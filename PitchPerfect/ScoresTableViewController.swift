@@ -144,18 +144,18 @@ class ScoresTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
-//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//        if segue.identifier == "SongClickedSegue" {
-//            let cell: UITableViewCell = sender as! UITableViewCell
-//            let selectedSong = self.songList[cell.tag]
-//            
-//            if let controller = segue.destinationViewController as? GameViewController {
-//                controller.song = selectedSong
-//            }
-//        }
-//    }
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "viewScoresForSongSegue" {
+            let cell: UITableViewCell = sender as! UITableViewCell
+            let selectedSong = self.songList[cell.tag]
+            
+            if let controller = segue.destinationViewController as? GameViewController {
+                controller.song = selectedSong
+            }
+        }
+    }
     
 }

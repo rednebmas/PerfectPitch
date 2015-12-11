@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vsk-Rd-Sto">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vsk-Rd-Sto">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -590,6 +589,9 @@
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <segue destination="RmS-pA-OCQ" kind="show" identifier="viewScoresForSongSegue" id="bbI-Mp-TlZ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -602,6 +604,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17V-1d-2oO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1082" y="1888"/>
+        </scene>
+        <!--Song Score View Controller-->
+        <scene sceneID="SaI-zF-kr0">
+            <objects>
+                <viewController id="RmS-pA-OCQ" customClass="SongScoreViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gUa-fZ-hCP"/>
+                        <viewControllerLayoutGuide type="bottom" id="5qh-8a-5JC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a3s-Q2-5Mc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3CT-pt-YLe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1082" y="2829"/>
         </scene>
         <!--Game Over View Controller-->
         <scene sceneID="wuv-1j-kf2">
@@ -639,7 +660,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="BbS-ZM-hRk"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="homeSegue" id="BbS-ZM-hRk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSZ-aW-ym4" customClass="DesignableButton" customModule="Spring">
@@ -665,6 +686,9 @@
                                         <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Gj2-g3-VIl" kind="show" identifier="tryAgainSegue" id="DlK-JV-RvW"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Song Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfp-SP-8tg">
                                 <rect key="frame" x="229" y="107" width="142" height="53"/>
@@ -731,6 +755,9 @@
                                         <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="3xr-6t-Hh2" kind="show" identifier="highScoreSegue" id="BEV-MH-6Cq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -791,6 +818,8 @@
         <image name="Settings" width="36" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="DlK-JV-RvW"/>
+        <segue reference="BEV-MH-6Cq"/>
         <segue reference="BbS-ZM-hRk"/>
     </inferredMetricsTieBreakers>
 </document>
