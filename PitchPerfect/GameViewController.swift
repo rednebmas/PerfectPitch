@@ -182,7 +182,7 @@ class GameViewController: UIViewController, GameDelegate {
             self.currentNoteLabel.animateToNext({ () -> () in
                 self.currentNoteLabel.text = self.game.song!.currentNote?.nameWithoutOctave
             })
-            self.previousNoteLabel.animation = "fadeInLeft"
+            self.previousNoteLabel.animation = "fadeOut"
             self.previousNoteLabel.duration = 1.5
             self.previousNoteLabel.animate()
         })
