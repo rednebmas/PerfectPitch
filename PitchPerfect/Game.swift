@@ -156,7 +156,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         else {
             self.song?.stopPlaying()
             let playDuration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.gameStart!)
-            self.score = (self.song?.duration())! / playDuration
+            self.score = (self.song?.duration())! / playDuration * 100.0
             if self.delegate != nil {
                 delegate!.gameOver()
             }

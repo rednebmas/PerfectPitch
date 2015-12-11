@@ -121,11 +121,17 @@ class Song : NSObject, NSCoding {
     
     func restart() {
         self.currentNoteIndex == 0
+        self.previousNote = nil
+        
+        if self.notes?.count == 0 {
+            self.currentNote = nil
+            return
+        }
+        
         self.currentNote = self.notes![0]
         if hasNextNote() {
             self.nextNote = self.notes![1]
         }
-        self.previousNote = nil
     }
     
     /**
@@ -149,6 +155,11 @@ class Song : NSObject, NSCoding {
     }
     
     func playCurrentNote() {
+        if currentNote == nil {
+            print("Trying to play current note, but current note is nil")
+            return
+        }
+        
         self.currentNote!.playForDuration()
     }
     

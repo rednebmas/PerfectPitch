@@ -9,15 +9,24 @@
 #import "PitchEstimator.h"
 #import "SBMath.h"
 
+#define MIN_FREQ 90.0
+
+typedef struct FindFundamental5Result {
+    float hSum;
+    vDSP_Length index;
+} FindFundamental5Result;
+
 @interface PitchEstimator()
 {
     float previousFundamentalFrequencyBin;
 }
 
+@property (nonatomic, readwrite) float signalMean;
 @property (nonatomic, readwrite) float loudness;
 @property (nonatomic, readwrite) float fundamentalFrequency;
 @property (nonatomic, readwrite) vDSP_Length fundamentalFrequencyIndex;
 @property (nonatomic, readwrite) float binSize;
+@property (nonatomic, readwrite) vDSP_Length previousFundamentalIndex;
 
 @end
 
@@ -39,13 +48,16 @@
 - (void) processAudioBuffer:(float**)buffer ofSize:(UInt32)size
 {
     self.loudness = [PitchEstimator loudness:buffer ofSize:size];
+    self.signalMean = [SBMath meanOf:buffer[0] ofSize:size];
 }
 
 - (void) processFFT:(EZAudioFFTRolling*)fft withFFTData:(float*)fftData ofSize:(vDSP_Length)size
 {
     // estimate actual frequency from bin with max freq
-    // self.fundamentalFrequencyIndex = [self findFundamentalIndex:fft withBufferSize:size];
-    self.fundamentalFrequencyIndex = [self findFundamental:fft atIndex:[fft maxFrequencyIndex]];
+    self.previousFundamentalIndex = self.fundamentalFrequencyIndex;
+    self.fundamentalFrequencyIndex = [self findFundamental5:fft
+                               withPreviousFundamentalIndex:self.previousFundamentalIndex
+                                             withBufferSize:size];
     
     if (self.binInterpolationMethod == PitchEstimatorBinInterpolationMethodGaussian)
     {
@@ -61,6 +73,9 @@
     
     // set df
     self.binSize = [fft frequencyAtIndex:1] - [fft frequencyAtIndex:0];
+    
+    if (self.fundamentalFrequency < MIN_FREQ)
+        return;
 }
 
 #pragma mark - FFT
@@ -88,6 +103,130 @@
     
     return estimated;
 }
+
+#pragma mark - Fundamental finder 2
+
+- (vDSP_Length) findFundamental5:(EZAudioFFT*)fft
+    withPreviousFundamentalIndex:(vDSP_Length)previousFundamentalIndex
+                  withBufferSize:(UInt32)bufferSize
+{
+    FindFundamental5Result fromCurrentMaxFreqIndexResult = [self findFundamental5:fft
+                                                                          atIndex:[fft maxFrequencyIndex]
+                                                                   withBufferSize:bufferSize];
+    
+    if (fromCurrentMaxFreqIndexResult.index == previousFundamentalIndex)
+    {
+        return fromCurrentMaxFreqIndexResult.index;
+    }
+    else
+    {
+        FindFundamental5Result previousFundamentalIndexResult = [self findFundamental5:fft
+                                                                               atIndex:previousFundamentalIndex
+                                                                        withBufferSize:bufferSize];
+        // if current fundamental index is a harmonic
+        // necessary if third harmonic is largest
+        float currIndexFloat = fromCurrentMaxFreqIndexResult.index;
+        float prevIndexFloat = previousFundamentalIndex;
+        if (previousFundamentalIndex != 0)
+        {
+            float diffToIntegerValue = currIndexFloat / prevIndexFloat - floor(currIndexFloat / prevIndexFloat);
+            if (fabsf(diffToIntegerValue) < .05 &&
+                previousFundamentalIndexResult.hSum * 10 > fromCurrentMaxFreqIndexResult.hSum)
+            {
+                return previousFundamentalIndexResult.index;
+            }
+        }
+        
+        if (fromCurrentMaxFreqIndexResult.hSum >  previousFundamentalIndexResult.hSum)
+        {
+            // if it is a new value, try octave below, because this algorithm has a tendency to
+            // initially find higher frequencies first, then settle
+            
+            // make sure new index would not be illegal
+            float freq = [fft frequencyAtIndex:fromCurrentMaxFreqIndexResult.index/2];
+            if ([fft frequencyAtIndex:fromCurrentMaxFreqIndexResult.index/2] < MIN_FREQ)
+            {
+                return fromCurrentMaxFreqIndexResult.index;
+            }
+            
+            FindFundamental5Result lowerOctaveFundamentalIndexResult = [self findFundamental5:fft
+                                                                                      atIndex:fromCurrentMaxFreqIndexResult.index/2
+                                                                               withBufferSize:bufferSize];
+            
+            
+            if (lowerOctaveFundamentalIndexResult.hSum > fromCurrentMaxFreqIndexResult.hSum)
+            {
+                return lowerOctaveFundamentalIndexResult.index;
+            }
+            else
+            {
+                return fromCurrentMaxFreqIndexResult.index;
+            }
+        }
+        else
+        {
+            return previousFundamentalIndexResult.index;
+        }
+    }
+}
+
+/**
+ * Don't  call this method directly
+ */
+- (FindFundamental5Result) findFundamental5:(EZAudioFFT*)fft
+                                    atIndex:(vDSP_Length)index
+                             withBufferSize:(UInt32)bufferSize
+{
+    vDSP_Length index2x = index * 2;
+    NSInteger bestSplit = 1;
+    NSInteger j = 2;
+    float indexFreq = [fft frequencyAtIndex:index];
+    float bestHSum = [fft frequencyMagnitudeAtIndex:index] + [fft frequencyMagnitudeAtIndex:index2x];
+    float bestSplitMag = [fft frequencyMagnitudeAtIndex:index];
+    float avg = [SBMath meanOf:fft.fftData ofSize:bufferSize];
+    
+    while (indexFreq * 1/ j > MIN_FREQ)
+    {
+        // if fundamental does not exist, continue
+        vDSP_Length indexOfWouldBeFundamental = round((index2x-index)/j);
+        float magOfWouldBeFundamental = [fft frequencyMagnitudeAtIndex:indexOfWouldBeFundamental];
+        if (magOfWouldBeFundamental < bestSplitMag * .1)
+        {
+            // NSLog(@"base freq was not enough");
+            j++;
+            continue;
+        }
+        
+        float hSum = [fft frequencyMagnitudeAtIndex:index] + [fft frequencyMagnitudeAtIndex:index2x];
+        for (int k = 1; k < j; k++)
+        {
+            vDSP_Length harmonicKIndex = index + round((float)index * ((float)k / (float)j));
+            float power = [fft frequencyMagnitudeAtIndex:harmonicKIndex];
+            if (power > avg * 2)
+            {
+                hSum += power;
+            }
+        }
+        
+        if (hSum > bestHSum * 1.005) // better by .5 percent
+        {
+            bestHSum = hSum;
+            bestSplit = j;
+            
+            vDSP_Length indexOfWouldBeFundamental = round((index2x-index)/j);
+            bestSplitMag = [fft frequencyMagnitudeAtIndex:indexOfWouldBeFundamental];
+        }
+        
+        j++;
+    }
+    
+    FindFundamental5Result result;
+    result.index = round((index2x-index)/bestSplit);
+    result.hSum = bestHSum;
+    
+    return result;
+}
+#pragma mark - Other fundamental finders
 
 - (int) findFundamentalIndex:(EZAudioFFTRolling*)fft withBufferSize:(vDSP_Length)bufferSize
 {
@@ -139,21 +278,26 @@
 }
 
 // e.g. octave
-+ (BOOL) isFirstOvertonePresent:(EZAudioFFT*)fft atIndex:(UInt32)index
+- (BOOL) isFirstOvertonePresent:(EZAudioFFT*)fft atIndex:(UInt32)index
 {
     float freqPower = [fft frequencyMagnitudeAtIndex:index];
     float firstOvertonePower = [fft frequencyMagnitudeAtIndex:index*2];
     float ratio = firstOvertonePower / freqPower;
-    BOOL result = ratio > .1 && firstOvertonePower > .0001;
+    //    BOOL result = ratio > .05 && freqPower > .00020 * . 1;
+    BOOL result = firstOvertonePower > self.signalMean;
+    // NSLog(@"octave ratio: %f, power: %.10f, result: %@", ratio, firstOvertonePower, result ? @"t" : @"f");
     return result;
 }
 
-+ (BOOL) isSecondOvertonePresent:(EZAudioFFT*)fft atIndex:(UInt32)index
+- (BOOL) isSecondOvertonePresent:(EZAudioFFT*)fft atIndex:(UInt32)index
 {
     float freqPower = [fft frequencyMagnitudeAtIndex:index];
     float secondOvertonePower = [fft frequencyMagnitudeAtIndex:index*3];
     float ratio = secondOvertonePower / freqPower;
-    BOOL result = ratio > .1 && secondOvertonePower > .0001;
+    //    BOOL result = ratio > .01 && secondOvertonePower > 0.000021;
+    //    BOOL result = ratio > .05 && freqPower > .00010 * .1;
+    BOOL result = secondOvertonePower > self.signalMean || freqPower > .0001;
+    // NSLog(@"second overtone ratio: %f, power: %f, result: %@", ratio, secondOvertonePower, result ? @"t" : @"f");
     return result;
 }
 
@@ -161,20 +305,26 @@
 {
     UInt32 foundAt = index;
     
+    // self.oneIfHarmonicOtherwiseZero[foundAt] = 1;
+    
     // I need to look more into whether this should be index over two or not
-    BOOL secondOvertoneIsPresentAtIndexOverTwo = [PitchEstimator isSecondOvertonePresent:fft
-                                                                                 atIndex:index/2];
+    // NSLog(@"%f", [fft maxFrequencyMagnitude]);
+    float freq = [fft frequencyAtIndex:index];
+    float lowerOctaveFreq = [fft frequencyAtIndex:index];
+    BOOL secondOvertoneIsPresentAtIndexOverTwo = [self isSecondOvertonePresent:fft
+                                                                       atIndex:index/2];
+    float secondOvertonePower = [fft frequencyMagnitudeAtIndex:(index/2)*3];
     
+    BOOL firstOvertoneIsPresentAtFifthBelow = [self isFirstOvertonePresent:fft
+                                                                   atIndex:index*2/3];
+    float firstOvertonePower = [fft frequencyMagnitudeAtIndex:(index*4/3)];
     
-    BOOL firstOvertoneIsPresentAtFifthBelow = [PitchEstimator isFirstOvertonePresent:fft
-                                                                             atIndex:index*2/3];
-    
-    float cutoffFreq = 77.78;
-    if (secondOvertoneIsPresentAtIndexOverTwo)
+    if ((secondOvertoneIsPresentAtIndexOverTwo && secondOvertonePower > firstOvertonePower) ||
+        [fft frequencyMagnitudeAtIndex:index/2] / [fft frequencyMagnitudeAtIndex:index] > .75)
     {
         // cut out very low frequencies
         float freqAtLowerBin = [fft frequencyAtIndex:round(index/2)];
-        if (freqAtLowerBin < cutoffFreq)
+        if (freqAtLowerBin < MIN_FREQ)
         {
             foundAt = index;
         }
@@ -184,21 +334,25 @@
             foundAt = [self findFundamental:fft atIndex:round(index / 2)];
         }
     }
-    else if (firstOvertoneIsPresentAtFifthBelow)
+    else if (firstOvertoneIsPresentAtFifthBelow && firstOvertonePower > secondOvertonePower)
     {
         // cut out very low frequencies
-        float freqAtLowerBin = [fft frequencyAtIndex:round(index * 2 / 3)];
-        if (freqAtLowerBin < cutoffFreq)
+        float freqAtLowerBin = [fft frequencyAtIndex:round(index / 2)];
+        if (freqAtLowerBin < MIN_FREQ)
         {
-            printf("octave is present at fifth below -  cutoff\n");
+            // printf("octave is present at fifth below -  cutoff\n");
             foundAt = index;
         }
         else
         {
             // recursion!
-            NSLog(@"octave is present at fifth below - %f -  recursive\n", [fft frequencyAtIndex:index*2/3]);
+            // NSLog(@"octave is present at fifth below - %f -  recursive\n", [fft frequencyAtIndex:index*2/3]);
             foundAt = [self findFundamental:fft atIndex:round(index * 2 / 3)];
         }
+    }
+    
+    if (foundAt == 23) {
+        NSLog(@"second overtone: %.9f", [fft frequencyMagnitudeAtIndex:foundAt * 3]);
     }
     
     return foundAt;
