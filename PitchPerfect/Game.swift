@@ -154,7 +154,9 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
             print(self.song!.currentNote?.frequency)
             //ToDO!! Fix score
             let playDuration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.gameStart!)
-            self.score = (self.song?.duration())! / playDuration * 100.0
+            if !skipNote {
+                self.score += round((self.song?.duration())! / playDuration * 100.0)
+            }
         }
         else {
             self.song?.stopPlaying()
@@ -163,9 +165,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
                 delegate!.gameOver()
             }
         }
-        if !skipNote {
-//            self.score += self.
-        }
+        
 
     }
     

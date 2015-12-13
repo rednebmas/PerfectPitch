@@ -157,12 +157,13 @@ class GameViewController: UIViewController, GameDelegate {
     
     func gameOver() {
         print("Score \(self.game.score)")
+        self.performSegueWithIdentifier("GameOverSegue", sender: self)
     }
     
     func noteWasUpdated(note: Note?) {
         dispatch_async(dispatch_get_main_queue(), {
             
-            self.score.text = "Score: \(self.game.score)"
+            self.score.text = "Score: \(Int(self.game.score))"
             self.game.song?.currentScore = Int(self.game.score)
             UIView.setAnimationsEnabled(false)
             if self.game.song != nil {
