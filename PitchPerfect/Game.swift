@@ -147,12 +147,11 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         if self.song!.hasNextNote() {
             self.song!.moveToNextNote()
             if self.delegate != nil {
-                self.delegate?.noteWasUpdated(self.song!.currentNote)
+                self.delegate!.noteWasUpdated(self.song!.currentNote)
             }
             self.song!.playCurrentNote()
             self.currentState = Game.State.Waiting
             print(self.song!.currentNote?.frequency)
-            //ToDO!! Fix score
             let playDuration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.gameStart!)
             if !skipNote {
                 self.score += round((self.song?.duration())! / playDuration * 100.0)

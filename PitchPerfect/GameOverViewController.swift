@@ -52,7 +52,8 @@ class GameOverViewController: UIViewController {
             }
         } else if segue.identifier == "tryAgainSegue" {
             if let controller = segue.destinationViewController as? GameViewController {
-                controller.game.song = self.song!
+                controller.game.song! = self.song!
+                controller.game.song!.currentNoteIndex = 0
             }
         } else { //segue.identifier == "homeSegue"
             if let controller = segue.destinationViewController as? ViewController {
