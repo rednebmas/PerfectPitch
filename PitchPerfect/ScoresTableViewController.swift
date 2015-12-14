@@ -152,8 +152,8 @@ class ScoresTableViewController: UITableViewController {
             let cell: UITableViewCell = sender as! UITableViewCell
             let selectedSong = self.songList[cell.tag]
             
-            if let controller = segue.destinationViewController as? GameViewController {
-                controller.game.song  = selectedSong
+            if let controller = segue.destinationViewController as? SongScoreTableViewController {
+                controller.songTitle = selectedSong.title
             }
         }
     }

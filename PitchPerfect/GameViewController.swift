@@ -39,6 +39,8 @@ class GameViewController: UIViewController, GameDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
 //        self.game = Game(song: song)
         self.game.delegate = self
         
