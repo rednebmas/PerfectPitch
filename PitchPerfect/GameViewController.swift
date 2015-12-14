@@ -43,7 +43,7 @@ class GameViewController: UIViewController, GameDelegate {
         
 //        self.game = Game(song: song)
         self.game.delegate = self
-        
+        self.game.song!.restart()
         noteButton.layer.borderWidth = 2
         noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
         
@@ -94,7 +94,7 @@ class GameViewController: UIViewController, GameDelegate {
     }
     
     @IBAction func endGamePressed(sender: AnyObject) {
-    
+//        self.gameOver()
     }
     
     func pitchWasUpdated(note: Note?) {
@@ -166,9 +166,9 @@ class GameViewController: UIViewController, GameDelegate {
         dispatch_async(dispatch_get_main_queue(), {
             
             self.score.text = "Score: \(Int(self.game.score))"
-            self.game.song?.currentScore = Int(self.game.score)
-            UIView.setAnimationsEnabled(false)
+                        UIView.setAnimationsEnabled(false)
             if self.game.song != nil {
+                self.game.song!.currentScore = Int(self.game.score)
 
                 let updateNoteUI = {
                     (note: Note?, label: DesignableLabel) in
@@ -204,7 +204,7 @@ class GameViewController: UIViewController, GameDelegate {
         // Pass the selected object to the new view controller.
         if segue.identifier == "GameOverSegue" {
             if let controller = segue.destinationViewController as? GameOverViewController {
-                controller.song = self.game.song
+                controller.song = self.game.song!
             }
         }
     }
