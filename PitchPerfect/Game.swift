@@ -129,6 +129,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
                 // print(duration)
                 // print("Completed")
                 if duration >= note?.duration {
+                    note?.percentCompleted = 1
                     nextNote(false)
                 } else {
                     note?.percentCompleted = Double(duration) / (note?.duration)!
