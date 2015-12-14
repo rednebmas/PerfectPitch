@@ -44,8 +44,12 @@ class GameViewController: UIViewController, GameDelegate {
 //        self.game = Game(song: song)
         self.game.delegate = self
         self.game.song!.restart()
-        noteButton.layer.borderWidth = 2
-        noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+//        noteButton.layer.borderWidth = 2
+//        noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+        
+//        currentNoteLabel.layer.borderWidth = 2
+//        currentNoteLabel.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+
         
         game.start()
         if self.game.song?.currentScore == nil {
@@ -107,25 +111,27 @@ class GameViewController: UIViewController, GameDelegate {
                     })
                     //frequency will never be = when the game state is in waiting
                     if note!.frequency > self.game.song!.currentNote!.frequency {
-                        self.noteHigherLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
+                        self.noteHigherLabel.textColor = UIColor.grayColor()
                         self.noteLowerLabel.textColor = UIColor.whiteColor()
-                        self.noteLowerLabel.hidden = true
+                        //self.noteLowerLabel.hidden = true
                         self.noteHigherLabel.hidden = false
                     } else {
                         self.noteHigherLabel.textColor = UIColor.whiteColor()
-                        self.noteHigherLabel.hidden = true
+                        //self.noteHigherLabel.hidden = true
                         self.noteLowerLabel.hidden = false
-                        self.noteLowerLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
+                        //self.noteLowerLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
+                        self.noteLowerLabel.textColor = UIColor.grayColor()
+
                     }
                     
                 } else if self.game.currentState == Game.State.Detecting {
                     UIView.animateWithDuration(5, animations: {
                         self.noteButton.layer.borderColor = UIColor.greenColor().CGColor
                     })
-                    // self.noteHigherLabel.textColor = UIColor.whiteColor()
-                    // self.noteLowerLabel.textColor = UIColor.whiteColor()
-                    self.noteHigherLabel.hidden = true
-                    self.noteLowerLabel.hidden = true
+                     self.noteHigherLabel.textColor = UIColor.whiteColor()
+                     self.noteLowerLabel.textColor = UIColor.whiteColor()
+//                    self.noteHigherLabel.hidden = true
+//                    self.noteLowerLabel.hidden = true
                     
                 }
                 self.noteButton.setTitle(note!.nameWithoutOctave, forState: .Normal)
@@ -193,9 +199,9 @@ class GameViewController: UIViewController, GameDelegate {
             self.currentNoteLabel.animateToNext({ () -> () in
                 self.currentNoteLabel.text = self.game.song!.currentNote?.nameWithoutOctave
             })
-            self.previousNoteLabel.animation = "fadeOut"
-            self.previousNoteLabel.duration = 1.5
-            self.previousNoteLabel.animate()
+//            self.previousNoteLabel.animation = "fadeOut"
+//            self.previousNoteLabel.duration = 1.5
+//            self.previousNoteLabel.animate()
         })
     }
     
