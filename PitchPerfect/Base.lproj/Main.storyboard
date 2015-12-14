@@ -393,24 +393,33 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFP-UE-EHa" customClass="DesignableLabel" customModule="Spring">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFP-UE-EHa" customClass="DesignableLabel" customModule="Spring">
                                 <rect key="frame" x="205" y="124" width="190" height="190"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="190" id="6Ye-7P-1SX"/>
+                                    <constraint firstAttribute="height" constant="190" id="AVo-sw-Njw"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="116"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="P" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bu5-Fi-ww6" customClass="DesignableLabel" customModule="Spring">
-                                <rect key="frame" x="106" y="180" width="66" height="78"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bu5-Fi-ww6" customClass="DesignableLabel" customModule="Spring">
+                                <rect key="frame" x="130" y="189" width="30" height="60"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggt-4m-NLV" customClass="DesignableLabel" customModule="Spring">
-                                <rect key="frame" x="440" y="175" width="77" height="88"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggt-4m-NLV" customClass="DesignableLabel" customModule="Spring">
+                                <rect key="frame" x="440" y="189" width="36" height="60"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -471,7 +480,7 @@
                                 </connections>
                             </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bxn-nk-WNc">
-                                <rect key="frame" x="66" y="533" width="130" height="5"/>
+                                <rect key="frame" x="170" y="463" width="130" height="5"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="Mzt-lH-aH0"/>
@@ -480,8 +489,16 @@
                                 <color key="progressTintColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="trackTintColor" red="0.98652517799999995" green="0.12463666499999999" blue="0.24934384230000001" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T60-AP-Eco">
+                                <rect key="frame" x="217" y="447" width="166" height="2"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="166" id="C1S-cj-PLL"/>
+                                </constraints>
+                                <color key="progressTintColor" red="0.88926405682318299" green="1" blue="0.99815486418867216" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YtH-ii-dej">
-                                <rect key="frame" x="455" y="525" width="130" height="5"/>
+                                <rect key="frame" x="299" y="463" width="130" height="5"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="5" id="tNC-kH-M9n"/>
@@ -489,29 +506,21 @@
                                 </constraints>
                                 <color key="progressTintColor" red="0.20537272095680237" green="0.92881792783737183" blue="0.30231964588165283" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T60-AP-Eco">
-                                <rect key="frame" x="217" y="461" width="166" height="2"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="130" id="C1S-cj-PLL"/>
-                                </constraints>
-                                <color key="progressTintColor" red="0.88926405682318299" green="1" blue="0.99815486418867216" alpha="1" colorSpace="calibratedRGB"/>
-                            </progressView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.24313725489999999" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="xtI-vg-WE9" firstAttribute="top" secondItem="2Aw-AA-63P" secondAttribute="bottom" constant="18" id="01p-Md-06x"/>
-                            <constraint firstItem="T60-AP-Eco" firstAttribute="top" secondItem="bxn-nk-WNc" secondAttribute="bottom" constant="-79" id="3Uw-3A-Qs4"/>
+                            <constraint firstItem="T60-AP-Eco" firstAttribute="top" secondItem="bxn-nk-WNc" secondAttribute="bottom" constant="-21" id="3Uw-3A-Qs4"/>
                             <constraint firstItem="T60-AP-Eco" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="4f5-e9-j2n"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerY" secondItem="bu5-Fi-ww6" secondAttribute="centerY" id="5AC-Wn-AO9"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="Aft-BS-fl7"/>
                             <constraint firstItem="T60-AP-Eco" firstAttribute="top" secondItem="Ggt-4m-NLV" secondAttribute="bottom" constant="38.5" id="BMe-Sj-rnw"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="top" secondItem="foW-jK-ZKJ" secondAttribute="bottom" constant="-289" id="Dlz-fv-Krk"/>
                             <constraint firstItem="xUt-iX-O4J" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="J2e-zN-len"/>
-                            <constraint firstItem="bxn-nk-WNc" firstAttribute="top" secondItem="Ggt-4m-NLV" secondAttribute="bottom" constant="270" id="Mxj-Fa-Ea1"/>
-                            <constraint firstItem="OFP-UE-EHa" firstAttribute="leading" secondItem="bu5-Fi-ww6" secondAttribute="trailing" constant="33" id="ODh-mB-sbX"/>
-                            <constraint firstItem="YtH-ii-dej" firstAttribute="leading" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" constant="155" id="OKa-C1-MR2"/>
+                            <constraint firstItem="bxn-nk-WNc" firstAttribute="top" secondItem="Ggt-4m-NLV" secondAttribute="bottom" constant="214" id="Mxj-Fa-Ea1"/>
+                            <constraint firstItem="OFP-UE-EHa" firstAttribute="leading" secondItem="bu5-Fi-ww6" secondAttribute="trailing" constant="45" id="ODh-mB-sbX"/>
+                            <constraint firstItem="YtH-ii-dej" firstAttribute="leading" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" constant="-1" id="OKa-C1-MR2"/>
                             <constraint firstItem="T60-AP-Eco" firstAttribute="top" secondItem="Umq-Hg-Lqq" secondAttribute="topMargin" constant="200" id="PQh-6U-uUH"/>
                             <constraint firstItem="Ggt-4m-NLV" firstAttribute="leading" secondItem="OFP-UE-EHa" secondAttribute="trailing" constant="45" id="PUh-JJ-Ofv"/>
                             <constraint firstItem="OZE-5G-r9q" firstAttribute="leading" secondItem="foW-jK-ZKJ" secondAttribute="trailing" constant="15" id="QIQ-7y-zVr"/>
@@ -523,7 +532,7 @@
                             <constraint firstItem="foW-jK-ZKJ" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="fzI-ou-QhI"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" id="idt-YZ-ypx"/>
                             <constraint firstItem="OZE-5G-r9q" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" constant="13" id="jMe-6A-m4w"/>
-                            <constraint firstItem="YtH-ii-dej" firstAttribute="top" secondItem="Ggt-4m-NLV" secondAttribute="bottom" constant="262" id="kN2-hD-uEf"/>
+                            <constraint firstItem="YtH-ii-dej" firstAttribute="top" secondItem="Ggt-4m-NLV" secondAttribute="bottom" constant="214" id="kN2-hD-uEf"/>
                             <constraint firstItem="Ggt-4m-NLV" firstAttribute="centerY" secondItem="OFP-UE-EHa" secondAttribute="centerY" id="kPL-2y-KmO"/>
                             <constraint firstItem="ei5-7S-djW" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" constant="13" id="nkD-9Y-Jwy"/>
                             <constraint firstItem="LkR-kU-3rl" firstAttribute="leading" secondItem="Umq-Hg-Lqq" secondAttribute="leading" constant="20" id="pB1-O0-nVI"/>
@@ -533,7 +542,7 @@
                             <constraint firstItem="xtI-vg-WE9" firstAttribute="trailing" secondItem="Umq-Hg-Lqq" secondAttribute="trailingMargin" constant="-10" id="w62-Q0-wik"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="leading" secondItem="foW-jK-ZKJ" secondAttribute="leading" id="xKQ-Ar-N1M"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="leading" secondItem="bu5-Fi-ww6" secondAttribute="trailing" constant="25" id="yvN-yq-6nB"/>
-                            <constraint firstItem="bxn-nk-WNc" firstAttribute="trailing" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" constant="-104" id="z9n-jQ-OC5"/>
+                            <constraint firstItem="bxn-nk-WNc" firstAttribute="trailing" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="z9n-jQ-OC5"/>
                             <constraint firstItem="foW-jK-ZKJ" firstAttribute="leading" secondItem="ei5-7S-djW" secondAttribute="trailing" constant="1" id="zZ4-F0-7eb"/>
                         </constraints>
                         <variation key="default">

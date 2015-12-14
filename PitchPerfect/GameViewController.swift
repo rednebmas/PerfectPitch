@@ -47,8 +47,6 @@ class GameViewController: UIViewController, GameDelegate {
 //        noteButton.layer.borderWidth = 2
 //        noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
         
-//        currentNoteLabel.layer.borderWidth = 2
-//        currentNoteLabel.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
 
         
         game.start()
