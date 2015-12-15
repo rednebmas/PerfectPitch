@@ -11,9 +11,8 @@ import UIKit
 class SongScoreTableViewController: UITableViewController {
     
     
-    let scores = [121,12,15,19]
-    
-    var songTitle : String = ""
+//    let scores = [121,12,15,19]
+    var scores : [Int] = []
     
     var song = Song(title: "tester")
     
@@ -21,7 +20,7 @@ class SongScoreTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = songTitle
+        self.scores = song.scores!
         //self.scoreTestLabel.text = String(song.highScore)
         // Do any additional setup after loading the view.
     }
@@ -56,6 +55,7 @@ class SongScoreTableViewController: UITableViewController {
               
         
         let score = Int(sortedScores[indexPath.row])
+
         cell.textLabel!.text = String(score)
         //cell.tag = indexPath.row
         return cell

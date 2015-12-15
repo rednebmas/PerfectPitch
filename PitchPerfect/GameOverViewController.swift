@@ -28,6 +28,8 @@ class GameOverViewController: UIViewController {
         self.scoreLabel.text = String(self.song!.currentScore!)
         song!.scores!.append(self.song!.currentScore!)
         song!.highScore! = max(song!.highScore!, self.song!.currentScore!)
+        let songs = Songs.shardInstance
+        songs.saveSong(song!)
         //Todo Add HighSchore
         self.bestScoreLabel.text = String(song!.highScore!)
         // Do any additional setup after loading the view.

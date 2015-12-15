@@ -15,6 +15,7 @@ class Song : NSObject, NSCoding {
     internal private(set) var previousNote: Note?
     internal private(set) var nextNote: Note?
     
+    
     var scores: [Int]?
     var highScore: Int?
     var currentScore: Int?
@@ -22,23 +23,25 @@ class Song : NSObject, NSCoding {
     var notes: [Note]?
     var currentNoteIndex: Int = 0
     private var shouldStop: Bool = false
-    
     // MARK: Init methods
     
     init(title: String) {
         self.title = title
         self.notes = Array()
-        super.init()
         self.scores = Array()
         self.highScore = 0
+        super.init()
+//        self.init(withNotes: Array(), title: title, scores: Array(), highScore: 0)
     }
     
     init(withNotes: [Note], title: String) {
+        
         self.title = title
         self.notes = withNotes
         self.scores = Array()
         self.highScore = 0
         super.init()
+//        self.init(withNotes: Array(), title: title, scores: Array(), highScore: 0)
     }
     
     
@@ -111,14 +114,19 @@ class Song : NSObject, NSCoding {
     required convenience init?(coder decoder: NSCoder) {
         let notes = decoder.decodeObjectForKey("notes") as? [Note]
         let title = decoder.decodeObjectForKey("title") as? String
-//        let scores = decoder.decodeObjectForKey("scores") as? [Int]
-//        let highScore = decoder.decodeObjectForKey("highScore") as? Int
+        let scores = decoder.decodeObjectForKey("scores") as? [Int]
+        let highScore = decoder.decodeObjectForKey("highScore") as? Int
         
         
         if title == nil {
             return nil
         }
-        self.init(withNotes: notes!, title: title!)
+        if scores != nil && highScore != nil {
+            print("Loaded Highscore from data")
+            self.init(withNotes: notes!, title: title!, scores: scores!, highScore: highScore!)
+        } else {
+            self.init(withNotes: notes!, title: title!)
+        }
 //        if self.scores == nil || self.highScore == nil {
 //            self.init(withNotes: notes!, title: title!)
 //        } else {
@@ -135,6 +143,8 @@ class Song : NSObject, NSCoding {
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(self.notes, forKey: "notes")
         coder.encodeObject(self.title, forKey: "title")
+        coder.encodeObject(self.scores, forKey: "scores")
+        coder.encodeObject(self.highScore, forKey: "highScore")
     }
     
     // MARK: Playing notes
@@ -334,4 +344,6 @@ class Song : NSObject, NSCoding {
             MusicEventIteratorHasCurrentEvent(iterator, hasNext);
         }       
     }
+    
+
 }

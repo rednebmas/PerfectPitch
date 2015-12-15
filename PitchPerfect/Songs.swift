@@ -105,6 +105,7 @@ class Songs
             print ("Failed writing song titles to file.")
         }
     }
+    //Saving & Loading Song data
     
     // MARK: Filesystem methods
     
@@ -122,7 +123,7 @@ class Songs
         
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(filePath) {
-            // print("File already exists")
+            print("File already exists")
             return false
         } else {
             print("Writing " + title + " to file")
@@ -133,7 +134,16 @@ class Songs
                 return false
             }
         }
-        
+        return true
+    }
+    
+    func saveSong(song: Song) -> Bool{
+        let filePath = self.filePathForTitle(song.title)
+        let success = NSKeyedArchiver.archiveRootObject(song, toFile: filePath)
+        if !success {
+            print ("Failed writing " + song.title  + " to file.")
+            return false
+        }
         return true
     }
     
@@ -146,5 +156,7 @@ class Songs
         let filePath = self.filePathForTitle(self.list[atIndex].title)
         return NSKeyedUnarchiver.unarchiveObjectWithFile(filePath) as? Song
     }
+    
+
     
 }
