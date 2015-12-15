@@ -15,7 +15,6 @@ class Song : NSObject, NSCoding {
     internal private(set) var previousNote: Note?
     internal private(set) var nextNote: Note?
     
-    
     var scores: [Int]?
     var highScore: Int?
     var currentScore: Int?
@@ -25,23 +24,12 @@ class Song : NSObject, NSCoding {
     private var shouldStop: Bool = false
     // MARK: Init methods
     
-    init(title: String) {
-        self.title = title
-        self.notes = Array()
-        self.scores = Array()
-        self.highScore = 0
-        super.init()
-//        self.init(withNotes: Array(), title: title, scores: Array(), highScore: 0)
+    convenience init(title: String) {
+        self.init(withNotes: Array(), title: title, scores: Array(), highScore: 0)
     }
     
-    init(withNotes: [Note], title: String) {
-        
-        self.title = title
-        self.notes = withNotes
-        self.scores = Array()
-        self.highScore = 0
-        super.init()
-//        self.init(withNotes: Array(), title: title, scores: Array(), highScore: 0)
+    convenience init(withNotes: [Note], title: String) {
+        self.init(withNotes: withNotes, title: title, scores: Array(), highScore: 0)
     }
     
     
@@ -127,17 +115,6 @@ class Song : NSObject, NSCoding {
         } else {
             self.init(withNotes: notes!, title: title!)
         }
-//        if self.scores == nil || self.highScore == nil {
-//            self.init(withNotes: notes!, title: title!)
-//        } else {
-//        
-//            self.init(
-//                withNotes: notes!,
-//                title: title!,
-//                scores: scores!,
-//                highScore: highScore!
-//            )
-//        }
     }
     
     func encodeWithCoder(coder: NSCoder) {
@@ -184,37 +161,38 @@ class Song : NSObject, NSCoding {
         }
     }
     
-    func playCurrentNote() {
+    func playCurrentNote() -> Double{
         if currentNote == nil {
             print("Trying to play current note, but current note is nil")
-            return
+            return 0
         }
         
         self.currentNote!.playForDuration()
+        return self.currentNote!.duration
     }
     
-    func play() {
-        self.shouldStop = false
-        self.playByNoteAtIndex(0)
-    }
-    
+//    func play() {
+//        self.shouldStop = false
+//        self.playByNoteAtIndex(0)
+//    }
+//    
     func stopPlaying() {
         self.shouldStop = true
     }
     
-    private func playByNoteAtIndex(index: Int) {
-        if index == self.notes!.count || self.shouldStop {
-            return
-        }
-        
-        let note = self.notes![index]
-        note.playForDuration()
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(note.duration * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
-            note.stop()
-            self.playByNoteAtIndex(index+1)
-        }
-    }
+//    private func playByNoteAtIndex(index: Int) {
+//        if index == self.notes!.count || self.shouldStop {
+//            return
+//        }
+//        
+//        let note = self.notes![index]
+//        note.playForDuration()
+//        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(note.duration * Double(NSEC_PER_SEC)))
+//        dispatch_after(delayTime, dispatch_get_main_queue()) {
+//            note.stop()
+//            self.playByNoteAtIndex(index+1)
+//        }
+//    }
     
     func duration() -> Double {
         var duration: Double = 0.0

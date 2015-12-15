@@ -44,6 +44,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
             Constants.LAST_GAME_MODE = self.mode
         }
     }
+    var shouldStop = false
     var delegate : GameDelegate?
     var microphone: EZMicrophone!
     var fft: EZAudioFFTRolling!
@@ -162,19 +163,16 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
             if note!.nameWithoutOctave == self.song!.currentNote?.nameWithoutOctave {
                 let samplesPerSecond = self.microphone.audioStreamBasicDescription().mSampleRate
                 self.correctDuration += 1.0 / samplesPerSecond * Double(bufferSize)
-                self.score = self.correctDuration / self.songDuration * 100.0
-                
-                
-                
+                self.score += self.correctDuration / self.songDuration * 100.0
                 print("Correct for \( 1.0 / samplesPerSecond * Double(bufferSize))")
             }
             
-            let duration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.gameStart!)
-            if duration >= self.songDuration {
-                if delegate != nil {
-                    delegate?.gameOver()
-                }
-            }
+//            let duration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.gameStart!)
+//            if duration >= self.songDuration {
+//                if delegate != nil {
+//                    delegate?.gameOver()
+//                }
+//            }
         }
         
         if delegate != nil {
@@ -184,18 +182,34 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         }
     }
     
+    func continiousPlay(duration: Double) {
+        if self.shouldStop {
+            return
+        }
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.song!.currentNote!.stop()
+            self.nextNote(false)
+        }
+    }
+    
     func nextNote(skipNote: Bool) {
         if self.song!.hasNextNote() {
             self.song!.moveToNextNote()
             if self.delegate != nil {
                 self.delegate!.noteWasUpdated(self.song!.currentNote)
             }
-            self.song!.playCurrentNote()
+            if !self.shouldStop {
+                let duration = self.song!.playCurrentNote()
+                if self.mode == Game.Mode.Continous {
+                    continiousPlay(duration)
+                }
+            }
             self.currentState = Game.State.Waiting
             print(self.song!.currentNote?.frequency)
             let playDuration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.gameStart!)
             print(playDuration)
-            if !skipNote {
+            if !skipNote && self.mode != Game.Mode.Continous {
                 // self.score += round((self.song?.duration())! / playDuration * 100.0)
                 soFarDuration += self.song!.currentNote!.duration
                 self.score += round(soFarDuration / playDuration * 100)
@@ -210,26 +224,32 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
                 delegate!.gameOver()
             }
         }
-        
-
     }
     
     func start() {
         self.song!.restart()
-        if self.mode == Game.Mode.NoteByNote {
-            self.song!.playCurrentNote()
-        } else {
-            self.song!.play()
+        let duration = self.song!.playCurrentNote()
+        if self.mode == Game.Mode.Continous {
+            self.continiousPlay(duration)
         }
+//        if self.mode == Game.Mode.NoteByNote {
+//            self.song!.playCurrentNote()
+//        } else {
+//            
+//            self.song!.play()
+//        }
+        self.song!.playCurrentNote()
         self.currentState = Game.State.Waiting
         self.soFarDuration += song!.currentNote!.duration
         self.gameStart = NSDate()
     }
     
     func stop() {
+        self.shouldStop = true
         if self.mode == Game.Mode.NoteByNote {
             self.song?.currentNote?.stop()
         } else {
+            self.song?.currentNote?.stop()
             self.song?.stopPlaying()
         }
         self.currentState = Game.State.NotPlaying

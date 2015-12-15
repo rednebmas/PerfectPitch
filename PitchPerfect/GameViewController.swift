@@ -66,7 +66,7 @@ class GameViewController: UIViewController, GameDelegate {
         // Continuous gameplay mode start
         
         if !noteByNote {
-            game.song?.play()
+//            game.song?.play()
         }
         
         
@@ -202,7 +202,6 @@ class GameViewController: UIViewController, GameDelegate {
                     label.duration = 1.0
                 }
                 updateNoteUI(self.game.song!.previousNote, self.previousNoteLabel)
-//                updateNoteUI(self.game.song!.currentNote, self.currentNoteLabel)
                 updateNoteUI(self.game.song!.nextNote, self.nextNoteLabel)
             }
             UIView.setAnimationsEnabled(true)
@@ -210,12 +209,9 @@ class GameViewController: UIViewController, GameDelegate {
             self.nextNoteLabel.animate()
             
             self.currentNoteLabel.animation = "pop"
-            self.currentNoteLabel.animateToNext({ () -> () in
-                self.currentNoteLabel.text = self.game.song!.currentNote?.nameWithoutOctave
-            })
-//            self.previousNoteLabel.animation = "fadeOut"
-//            self.previousNoteLabel.duration = 1.5
-//            self.previousNoteLabel.animate()
+            self.currentNoteLabel.duration = 0.6
+            self.currentNoteLabel.animate()
+            self.currentNoteLabel.text = self.game.song!.currentNote?.nameWithoutOctave
         })
     }
     
