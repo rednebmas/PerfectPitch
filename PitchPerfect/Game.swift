@@ -37,12 +37,14 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     var gameStart : NSDate?
     var songDuration : NSTimeInterval = 0
     var currentState: State = Game.State.NotPlaying
+    var mode: Game.Mode = Game.Mode.Continous
     var delegate : GameDelegate?
     var microphone: EZMicrophone!
     var fft: EZAudioFFTRolling!
     var song : Song?
     var currentNote : Note?
     var previousWrongCount: Int = 0
+    
     
     init(song: Song) {
         super.init()

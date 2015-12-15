@@ -9,12 +9,25 @@
 #import "PitchEstimator.h"
 #import "SBMath.h"
 
+
+// #define MIN_FREQ 77.78
 #define MIN_FREQ 90.0
 
 typedef struct FindFundamental5Result {
     float hSum;
     vDSP_Length index;
+    vDSP_Length inputIndex;
+    NSInteger split;
+    int name;
 } FindFundamental5Result;
+
+NSString * const StructNameField_toString[] = {
+    @"Max",
+    @"Lower Fifth",
+    @"Lower Octave",
+    @"Previous"
+    
+};
 
 @interface PitchEstimator()
 {
@@ -53,11 +66,11 @@ typedef struct FindFundamental5Result {
 
 - (void) processFFT:(EZAudioFFTRolling*)fft withFFTData:(float*)fftData ofSize:(vDSP_Length)size
 {
-    // estimate actual frequency from bin with max freq
     self.previousFundamentalIndex = self.fundamentalFrequencyIndex;
-    self.fundamentalFrequencyIndex = [self findFundamental5:fft
-                               withPreviousFundamentalIndex:self.previousFundamentalIndex
-                                             withBufferSize:size];
+    FindFundamental5Result result = [self findFundamental5:fft
+                              withPreviousFundamentalIndex:self.previousFundamentalIndex
+                                            withBufferSize:size];
+    self.fundamentalFrequencyIndex = result.index;
     
     if (self.binInterpolationMethod == PitchEstimatorBinInterpolationMethodGaussian)
     {
@@ -73,9 +86,6 @@ typedef struct FindFundamental5Result {
     
     // set df
     self.binSize = [fft frequencyAtIndex:1] - [fft frequencyAtIndex:0];
-    
-    if (self.fundamentalFrequency < MIN_FREQ)
-        return;
 }
 
 #pragma mark - FFT
@@ -106,36 +116,43 @@ typedef struct FindFundamental5Result {
 
 #pragma mark - Fundamental finder 2
 
-- (vDSP_Length) findFundamental5:(EZAudioFFT*)fft
-    withPreviousFundamentalIndex:(vDSP_Length)previousFundamentalIndex
-                  withBufferSize:(UInt32)bufferSize
+- (FindFundamental5Result) findFundamental5:(EZAudioFFT*)fft
+               withPreviousFundamentalIndex:(vDSP_Length)previousFundamentalIndex
+                             withBufferSize:(UInt32)bufferSize
 {
     FindFundamental5Result fromCurrentMaxFreqIndexResult = [self findFundamental5:fft
                                                                           atIndex:[fft maxFrequencyIndex]
                                                                    withBufferSize:bufferSize];
+    fromCurrentMaxFreqIndexResult.name = 0;
     
     if (fromCurrentMaxFreqIndexResult.index == previousFundamentalIndex)
     {
-        return fromCurrentMaxFreqIndexResult.index;
+        return fromCurrentMaxFreqIndexResult;
     }
     else
     {
         FindFundamental5Result previousFundamentalIndexResult = [self findFundamental5:fft
                                                                                atIndex:previousFundamentalIndex
                                                                         withBufferSize:bufferSize];
+        previousFundamentalIndexResult.name = 3;
+        
+        if (fromCurrentMaxFreqIndexResult.index == 82)
+        {
+            NSLog(@"@#");
+        }
         // if current fundamental index is a harmonic
         // necessary if third harmonic is largest
-        float currIndexFloat = fromCurrentMaxFreqIndexResult.index;
-        float prevIndexFloat = previousFundamentalIndex;
-        if (previousFundamentalIndex != 0)
-        {
-            float diffToIntegerValue = currIndexFloat / prevIndexFloat - floor(currIndexFloat / prevIndexFloat);
-            if (fabsf(diffToIntegerValue) < .05 &&
-                previousFundamentalIndexResult.hSum * 10 > fromCurrentMaxFreqIndexResult.hSum)
-            {
-                return previousFundamentalIndexResult.index;
-            }
-        }
+        /* float currIndexFloat = fromCurrentMaxFreqIndexResult.index;
+         float prevIndexFloat = previousFundamentalIndex;
+         if (previousFundamentalIndex != 0)
+         {
+         float diffToIntegerValue = currIndexFloat / prevIndexFloat - floor(currIndexFloat / prevIndexFloat);
+         if (fabsf(diffToIntegerValue) < .05 &&
+         previousFundamentalIndexResult.hSum * 10 > fromCurrentMaxFreqIndexResult.hSum)
+         {
+         return previousFundamentalIndexResult;
+         }
+         } */
         
         if (fromCurrentMaxFreqIndexResult.hSum >  previousFundamentalIndexResult.hSum)
         {
@@ -146,26 +163,39 @@ typedef struct FindFundamental5Result {
             float freq = [fft frequencyAtIndex:fromCurrentMaxFreqIndexResult.index/2];
             if ([fft frequencyAtIndex:fromCurrentMaxFreqIndexResult.index/2] < MIN_FREQ)
             {
-                return fromCurrentMaxFreqIndexResult.index;
+                return fromCurrentMaxFreqIndexResult;
             }
             
             FindFundamental5Result lowerOctaveFundamentalIndexResult = [self findFundamental5:fft
                                                                                       atIndex:fromCurrentMaxFreqIndexResult.index/2
                                                                                withBufferSize:bufferSize];
+            lowerOctaveFundamentalIndexResult.name = 2;
+            
+            FindFundamental5Result lowerFifthFundamentalIndexResult = [self findFundamental5:fft
+                                                                                     atIndex:fromCurrentMaxFreqIndexResult.index*2/3
+                                                                              withBufferSize:bufferSize];
+            
+            lowerFifthFundamentalIndexResult.name = 1;
             
             
-            if (lowerOctaveFundamentalIndexResult.hSum > fromCurrentMaxFreqIndexResult.hSum)
+            if (lowerOctaveFundamentalIndexResult.hSum > fromCurrentMaxFreqIndexResult.hSum &&
+                lowerOctaveFundamentalIndexResult.hSum > lowerFifthFundamentalIndexResult.hSum)
             {
-                return lowerOctaveFundamentalIndexResult.index;
+                return lowerOctaveFundamentalIndexResult;
+            }
+            else if (lowerFifthFundamentalIndexResult.hSum > fromCurrentMaxFreqIndexResult.hSum &&
+                     lowerFifthFundamentalIndexResult.hSum > lowerOctaveFundamentalIndexResult.hSum)
+            {
+                return lowerFifthFundamentalIndexResult;
             }
             else
             {
-                return fromCurrentMaxFreqIndexResult.index;
+                return fromCurrentMaxFreqIndexResult;
             }
         }
         else
         {
-            return previousFundamentalIndexResult.index;
+            return previousFundamentalIndexResult;
         }
     }
 }
@@ -190,7 +220,7 @@ typedef struct FindFundamental5Result {
         // if fundamental does not exist, continue
         vDSP_Length indexOfWouldBeFundamental = round((index2x-index)/j);
         float magOfWouldBeFundamental = [fft frequencyMagnitudeAtIndex:indexOfWouldBeFundamental];
-        if (magOfWouldBeFundamental < bestSplitMag * .1)
+        if (magOfWouldBeFundamental < bestSplitMag * .01)
         {
             // NSLog(@"base freq was not enough");
             j++;
@@ -220,9 +250,24 @@ typedef struct FindFundamental5Result {
         j++;
     }
     
+    // add next harmonics if they are within reasonable range of our max value so the octave checker above favors
+    // a best split of 1
+    if (bestSplit == 1 && [fft frequencyMagnitudeAtIndex:index] > avg * 10.0) {
+        float thirdHarmonicMagnitude = [fft frequencyMagnitudeAtIndex:index*3];
+        float fourthHarmonicMagnitude = [fft frequencyMagnitudeAtIndex:index*4];
+        if (thirdHarmonicMagnitude > [fft frequencyMagnitudeAtIndex:index] * .25) {
+            bestHSum += thirdHarmonicMagnitude;
+        }
+        if (fourthHarmonicMagnitude > [fft frequencyMagnitudeAtIndex:index] * .25) {
+            bestHSum += fourthHarmonicMagnitude;
+        }
+    }
+    
     FindFundamental5Result result;
     result.index = round((index2x-index)/bestSplit);
     result.hSum = bestHSum;
+    result.inputIndex = index;
+    result.split = bestSplit;
     
     return result;
 }
