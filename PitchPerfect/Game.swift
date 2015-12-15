@@ -36,6 +36,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     var noteDetectedStart : NSDate?
     var gameStart : NSDate?
     var songDuration : NSTimeInterval = 0
+    var soFarDuration: NSTimeInterval = 0
     var correctDuration : NSTimeInterval = 0
     var currentState: State = Game.State.NotPlaying
     var mode: Game.Mode = Game.Mode.Continous
@@ -172,8 +173,12 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
             self.currentState = Game.State.Waiting
             print(self.song!.currentNote?.frequency)
             let playDuration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.gameStart!)
+            print(playDuration)
             if !skipNote {
-                self.score += round((self.song?.duration())! / playDuration * 100.0)
+                // self.score += round((self.song?.duration())! / playDuration * 100.0)
+                soFarDuration += self.song!.currentNote!.duration
+                self.score += round(soFarDuration / playDuration * 100)
+                print("\(soFarDuration) / \(playDuration)")
             }
         }
         else {
@@ -196,11 +201,16 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
             self.song!.play()
         }
         self.currentState = Game.State.Waiting
+        self.soFarDuration += song!.currentNote!.duration
         self.gameStart = NSDate()
     }
     
     func stop() {
-        self.song?.currentNote?.stop()
+        if self.mode == Game.Mode.NoteByNote {
+            self.song?.currentNote?.stop()
+        } else {
+            self.song?.stopPlaying()
+        }
         self.currentState = Game.State.NotPlaying
     }
 }

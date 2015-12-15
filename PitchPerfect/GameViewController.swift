@@ -224,11 +224,14 @@ class GameViewController: UIViewController, GameDelegate {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        game.song?.stopPlaying()
+       game.stop()
         
         if segue.identifier == "GameOverSegue" {
-            if let controller = segue.destinationViewController as? GameOverViewController {
-                controller.song = self.game.song!
+            
+            let navController = segue.destinationViewController as? UINavigationController
+            let controller = navController?.topViewController as? GameOverViewController
+            if controller != nil {
+                controller!.song = self.game.song!
             }
         }
     }
