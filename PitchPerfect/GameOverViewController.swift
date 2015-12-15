@@ -25,6 +25,11 @@ class GameOverViewController: UIViewController {
 //        let defaults = NSUserDefaults.standardUserDefaults()
 //        defaults.setValue(songScoreDictionary, forKey: defaultKeys.localStorageKey) //storing the content
 //        defaults.synchronize()
+        if song == nil {
+            print("Song was nil")
+            return
+        }
+        
         self.scoreLabel.text = String(self.song!.currentScore!)
         song!.scores!.append(self.song!.currentScore!)
         song!.highScore! = max(song!.highScore!, self.song!.currentScore!)
@@ -33,6 +38,16 @@ class GameOverViewController: UIViewController {
         //Todo Add HighSchore
         self.bestScoreLabel.text = String(song!.highScore!)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     override func didReceiveMemoryWarning() {

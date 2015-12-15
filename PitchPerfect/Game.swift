@@ -24,6 +24,11 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         case Completed
     }
     
+    enum Mode {
+        case NoteByNote
+        case Continous
+    }
+    
     let FFT_WINDOW_SIZE: vDSP_Length = 4096 * 2 * 2
     let pitchEstimator : PitchEstimator = PitchEstimator()
     
@@ -160,6 +165,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         }
         else {
             self.song?.stopPlaying()
+            self.currentState = Game.State.NotPlaying
             
             if self.delegate != nil {
                 delegate!.gameOver()

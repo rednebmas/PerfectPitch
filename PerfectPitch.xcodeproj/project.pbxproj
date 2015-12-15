@@ -21,7 +21,7 @@
 		228EFF1E1C03CC41006A6291 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EFF1D1C03CC41006A6291 /* GameViewController.swift */; };
 		22E0730C1C09422C00D0682F /* c-major-scale.mid in Resources */ = {isa = PBXBuildFile; fileRef = 22E0730B1C09422C00D0682F /* c-major-scale.mid */; };
 		22E0730F1C099EAB00D0682F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E0730E1C099EAB00D0682F /* Constants.swift */; };
-		3C42089D1C1F8DF600AF8251 /* GameModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C42089C1C1F8DF600AF8251 /* GameModeViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		3C42089D1C1F8DF600AF8251 /* GameModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C42089C1C1F8DF600AF8251 /* GameModeViewController.swift */; };
 		5779802C1C111B2300B50005 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5779802B1C111B2300B50005 /* Game.swift */; };
 		57CE4ACC1C195FAE000C0723 /* SongScoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE4ACB1C195FAE000C0723 /* SongScoreTableViewController.swift */; };
 		57D0E69E1C0E92780059B89A /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D0E69D1C0E92780059B89A /* GameOverViewController.swift */; };
@@ -236,7 +236,7 @@
 				TargetAttributes = {
 					228EFEE51C03BB45006A6291 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = LXFYZUA6B2;
+						DevelopmentTeam = 98D5PKHV7Y;
 					};
 				};
 			};
@@ -462,7 +462,7 @@
 				INFOPLIST_FILE = PitchPerfect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.torin.PitchPerfect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sambender.PitchPerfect;
 				PRODUCT_NAME = PerfectPitch;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PitchPerfect/PitchPerfect-Bridging-Header.h";
@@ -481,7 +481,7 @@
 				INFOPLIST_FILE = PitchPerfect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.torin.PitchPerfect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sambender.PitchPerfect;
 				PRODUCT_NAME = PerfectPitch;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PitchPerfect/PitchPerfect-Bridging-Header.h";

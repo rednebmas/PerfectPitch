@@ -14,7 +14,7 @@ class GameViewController: UIViewController, GameDelegate {
     // MARK: Properties
     
     @IBAction func endGameButton(sender: AnyObject) {
-        performSegueWithIdentifier("GameOverSegue", sender: sender)
+        performSegueWithIdentifier("GameOverSegue", sender: self)
     }
     @IBOutlet weak var noteButton: UIButton!
     @IBOutlet weak var nextNoteLabel: DesignableLabel!
@@ -114,10 +114,6 @@ class GameViewController: UIViewController, GameDelegate {
         self.game.nextNote(true)
     }
     
-    @IBAction func endGamePressed(sender: AnyObject) {
-//        self.gameOver()
-    }
-    
     func pitchWasUpdated(note: Note?) {
         dispatch_async(dispatch_get_main_queue(), {
             UIView.setAnimationsEnabled(false)
@@ -182,7 +178,8 @@ class GameViewController: UIViewController, GameDelegate {
     
     func gameOver() {
         print("Score \(self.game.score)")
-        self.performSegueWithIdentifier("GameOverSegue", sender: self)
+        performSegueWithIdentifier("GameOverSegue", sender: self)
+        print("Hello")
     }
     
     func noteWasUpdated(note: Note?) {
