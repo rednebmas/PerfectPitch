@@ -225,6 +225,9 @@ class GameViewController: UIViewController, GameDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        game.song?.stopPlaying()
+        
         if segue.identifier == "GameOverSegue" {
             if let controller = segue.destinationViewController as? GameOverViewController {
                 controller.song = self.game.song!
