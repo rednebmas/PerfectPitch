@@ -39,11 +39,21 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     var soFarDuration: NSTimeInterval = 0
     var correctDuration : NSTimeInterval = 0
     var currentState: State = Game.State.NotPlaying
-    var mode: Game.Mode = Game.Mode.Continous
+    var mode: Game.Mode = Game.Mode.Continous {
+        didSet {
+            Constants.LAST_GAME_MODE = self.mode
+        }
+    }
     var delegate : GameDelegate?
     var microphone: EZMicrophone!
     var fft: EZAudioFFTRolling!
-    var song : Song?
+    var song : Song? {
+        didSet {
+            if self.song != nil {
+                self.songDuration = self.song!.duration()
+            }
+        }
+    }
     var currentNote : Note?
     var previousWrongCount: Int = 0
     
@@ -51,6 +61,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     init(song: Song) {
         super.init()
         self.song = song
+        self.mode = Constants.LAST_GAME_MODE
         setupAudio()
     }
 
@@ -152,7 +163,17 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
                 let samplesPerSecond = self.microphone.audioStreamBasicDescription().mSampleRate
                 self.correctDuration += 1.0 / samplesPerSecond * Double(bufferSize)
                 self.score = self.correctDuration / self.songDuration * 100.0
+                
+                
+                
                 print("Correct for \( 1.0 / samplesPerSecond * Double(bufferSize))")
+            }
+            
+            let duration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.gameStart!)
+            if duration >= self.songDuration {
+                if delegate != nil {
+                    delegate?.gameOver()
+                }
             }
         }
         

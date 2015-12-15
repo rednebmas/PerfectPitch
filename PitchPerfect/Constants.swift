@@ -19,6 +19,8 @@ extension UIColor {
 
 class Constants {
     
+    static var LAST_GAME_MODE = Game.Mode.NoteByNote
+    
     static let REMOTE_SONGS_URL = "https://dl.dropboxusercontent.com/u/5301042/songs.json"
     static let PITCH_PERFECT_COLOR = UIColor(hex: 0x3e9ec1)
     

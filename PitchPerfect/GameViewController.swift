@@ -226,7 +226,11 @@ class GameViewController: UIViewController, GameDelegate {
        game.stop()
         
         if segue.identifier == "GameOverSegue" {
-            self.game.song?.currentScore = Int(game.score)
+            if self.game.score.isNormal {
+                self.game.song?.currentScore = Int(game.score)
+            } else {
+                self.game.song?.currentScore = 0
+            }
             
             let navController = segue.destinationViewController as? UINavigationController
             let controller = navController?.topViewController as? GameOverViewController
