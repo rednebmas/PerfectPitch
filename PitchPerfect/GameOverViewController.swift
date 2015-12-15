@@ -30,6 +30,7 @@ class GameOverViewController: UIViewController {
             return
         }
         
+        print("song.currentscore = " + (song?.currentScore!.description)!)
         self.scoreLabel.text = String(self.song!.currentScore!)
         song!.scores!.append(self.song!.currentScore!)
         song!.highScore! = max(song!.highScore!, self.song!.currentScore!)
@@ -77,6 +78,11 @@ class GameOverViewController: UIViewController {
         }
     }
 
+    @IBAction func shareScore(sender: AnyObject) {
+        let items = ["I just played \(self.song!.title) and got the score \(self.song!.currentScore!)/100."]
+        let activityView = UIActivityViewController.init(activityItems: items, applicationActivities: nil)
+        self.presentViewController(activityView, animated: true, completion: nil)
+    }
     
     func storingScores() {
         

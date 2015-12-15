@@ -180,7 +180,6 @@ class GameViewController: UIViewController, GameDelegate {
     func gameOver() {
         print("Score \(self.game.score)")
         performSegueWithIdentifier("GameOverSegue", sender: self)
-        print("Hello")
     }
     
     func noteWasUpdated(note: Note?) {
@@ -227,6 +226,7 @@ class GameViewController: UIViewController, GameDelegate {
        game.stop()
         
         if segue.identifier == "GameOverSegue" {
+            self.game.song?.currentScore = Int(game.score)
             
             let navController = segue.destinationViewController as? UINavigationController
             let controller = navController?.topViewController as? GameOverViewController
