@@ -29,13 +29,14 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         case Continous
     }
     
-    let FFT_WINDOW_SIZE: vDSP_Length = 4096 * 2 * 2
+    let FFT_WINDOW_SIZE: vDSP_Length = 4096 * 2
     let pitchEstimator : PitchEstimator = PitchEstimator()
     
     var score: Double = 0
     var noteDetectedStart : NSDate?
     var gameStart : NSDate?
     var songDuration : NSTimeInterval = 0
+    var correctDuration : NSTimeInterval = 0
     var currentState: State = Game.State.NotPlaying
     var mode: Game.Mode = Game.Mode.Continous
     var delegate : GameDelegate?
@@ -105,42 +106,52 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         let fundamentalFrequency = self.pitchEstimator.fundamentalFrequency
         var note: Note? = Note(frequency: Double(fundamentalFrequency))
         
-        if self.pitchEstimator.loudness < -80 {
-            if self.currentState != Game.State.Waiting {
-                // print("Not loud enough \(self.pitchEstimator.loudness)")
-                self.currentState = Game.State.Waiting
-            }
-            note = nil
-        }
-        else if self.currentState == Game.State.Waiting {
-            if note!.nameWithoutOctave == self.song!.currentNote?.nameWithoutOctave {
-                self.currentState = Game.State.Detecting
-                self.noteDetectedStart = NSDate()
-                self.previousWrongCount = 0
-                print("Started detecting")
-            }
-        }
-        else if self.currentState == Game.State.Detecting {
-            if note!.nameWithoutOctave != self.song!.currentNote?.nameWithoutOctave {
-                self.previousWrongCount++
-                print("Wrong, but continuing")
-                
-                if self.previousWrongCount > 2 {
-                    print("Stopped detecting for \(note)")
+        if self.mode == Game.Mode.NoteByNote {
+            if self.pitchEstimator.loudness < -80 {
+                if self.currentState != Game.State.Waiting {
+                    // print("Not loud enough \(self.pitchEstimator.loudness)")
                     self.currentState = Game.State.Waiting
                 }
+                note = nil
             }
-            else {
-                self.previousWrongCount = 0
-                let duration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.noteDetectedStart!)
-                // print(duration)
-                // print("Completed")
-                if duration >= note?.duration {
-                    note?.percentCompleted = 1
-                    nextNote(false)
-                } else {
-                    note?.percentCompleted = Double(duration) / (note?.duration)!
+            else if self.currentState == Game.State.Waiting {
+                if note!.nameWithoutOctave == self.song!.currentNote?.nameWithoutOctave {
+                    self.currentState = Game.State.Detecting
+                    self.noteDetectedStart = NSDate()
+                    self.previousWrongCount = 0
+                    print("Started detecting")
                 }
+            }
+            else if self.currentState == Game.State.Detecting {
+                if note!.nameWithoutOctave != self.song!.currentNote?.nameWithoutOctave {
+                    self.previousWrongCount++
+                    print("Wrong, but continuing")
+                    
+                    if self.previousWrongCount > 2 {
+                        print("Stopped detecting for \(note)")
+                        self.currentState = Game.State.Waiting
+                    }
+                }
+                else {
+                    self.previousWrongCount = 0
+                    let duration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.noteDetectedStart!)
+                    // print(duration)
+                    // print("Completed")
+                    if duration >= note?.duration {
+                        note?.percentCompleted = 1
+                        nextNote(false)
+                    } else {
+                        note?.percentCompleted = Double(duration) / (note?.duration)!
+                    }
+                }
+            }
+        }
+        else if self.mode == Game.Mode.Continous {
+            if note!.nameWithoutOctave == self.song!.currentNote?.nameWithoutOctave {
+                let samplesPerSecond = self.microphone.audioStreamBasicDescription().mSampleRate
+                self.correctDuration += 1.0 / samplesPerSecond * Double(bufferSize)
+                self.score = self.correctDuration / self.songDuration * 100.0
+                print("Correct for \( 1.0 / samplesPerSecond * Double(bufferSize))")
             }
         }
         
@@ -179,7 +190,11 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     
     func start() {
         self.song!.restart()
-        self.song!.playCurrentNote()
+        if self.mode == Game.Mode.NoteByNote {
+            self.song!.playCurrentNote()
+        } else {
+            self.song!.play()
+        }
         self.currentState = Game.State.Waiting
         self.gameStart = NSDate()
     }

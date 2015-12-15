@@ -33,6 +33,7 @@ class GameModeViewController: UIViewController {
             
             if let controller = segue.destinationViewController as? GameViewController {
                 controller.game.song = game.song
+                controller.game.mode = Game.Mode.NoteByNote
             }
         }
         
@@ -40,6 +41,7 @@ class GameModeViewController: UIViewController {
             
             if let controller = segue.destinationViewController as? GameViewController {
                 controller.game.song = game.song
+                controller.game.mode = Game.Mode.Continous
                 controller.noteByNote = false
             }
         }

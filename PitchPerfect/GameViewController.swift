@@ -56,6 +56,7 @@ class GameViewController: UIViewController, GameDelegate {
         currentNoteLabel.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
 
         
+        print("game.mode = \(game.mode)")
         game.start()
         
         // For continous playback, the successful song note duration is longer than the 
