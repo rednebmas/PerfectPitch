@@ -11,7 +11,7 @@ import Spring
 
 class GameViewController: UIViewController, GameDelegate {
     
-    // MARK: Properties 
+    // MARK: Properties
     
     @IBAction func endGameButton(sender: AnyObject) {
         performSegueWithIdentifier("GameOverSegue", sender: sender)
@@ -30,24 +30,45 @@ class GameViewController: UIViewController, GameDelegate {
     lazy var game: Game = Game(song: Song(title: ""))
     // MARK: View controller lifecycle
     
+    @IBOutlet weak var skipNoteButton: DesignableButton!
     struct defaultKeys {
         static let localStorageKey = "LocalStorageKey"
     }
     
     var songArray : [String] = []
+    var noteByNote = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if !noteByNote {
+            skipNoteButton.hidden = true
+        }
         
         
 //        self.game = Game(song: song)
         self.game.delegate = self
         self.game.song!.restart()
-        noteButton.layer.borderWidth = 2
-        noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+//        noteButton.layer.borderWidth = 2
+//        noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+        
+        currentNoteLabel.layer.borderWidth = 2
+        currentNoteLabel.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
+
         
         game.start()
+        
+        // For continous playback, the successful song note duration is longer than the 
+        // autoplay length per note, so the "continous" gameplay isn't working right now
+        // as you don't have time to "hit" the note before it moves on to the next note
+        
+        // Continuous gameplay mode start
+        
+        if !noteByNote {
+            game.song?.play()
+        }
+        
+        
         if self.game.song?.currentScore == nil {
            self.game.song?.currentScore = 0
         }
@@ -107,25 +128,27 @@ class GameViewController: UIViewController, GameDelegate {
                     })
                     //frequency will never be = when the game state is in waiting
                     if note!.frequency > self.game.song!.currentNote!.frequency {
-                        self.noteHigherLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
+                        self.noteHigherLabel.textColor = UIColor.grayColor()
                         self.noteLowerLabel.textColor = UIColor.whiteColor()
-                        self.noteLowerLabel.hidden = true
+                        //self.noteLowerLabel.hidden = true
                         self.noteHigherLabel.hidden = false
                     } else {
                         self.noteHigherLabel.textColor = UIColor.whiteColor()
-                        self.noteHigherLabel.hidden = true
+                        //self.noteHigherLabel.hidden = true
                         self.noteLowerLabel.hidden = false
-                        self.noteLowerLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
+                        //self.noteLowerLabel.textColor = UIColor(red: 0.17647059, green: 1, blue: 1, alpha: 1)
+                        self.noteLowerLabel.textColor = UIColor.grayColor()
+
                     }
                     
                 } else if self.game.currentState == Game.State.Detecting {
                     UIView.animateWithDuration(5, animations: {
                         self.noteButton.layer.borderColor = UIColor.greenColor().CGColor
                     })
-                    // self.noteHigherLabel.textColor = UIColor.whiteColor()
-                    // self.noteLowerLabel.textColor = UIColor.whiteColor()
-                    self.noteHigherLabel.hidden = true
-                    self.noteLowerLabel.hidden = true
+                     self.noteHigherLabel.textColor = UIColor.whiteColor()
+                     self.noteLowerLabel.textColor = UIColor.whiteColor()
+//                    self.noteHigherLabel.hidden = true
+//                    self.noteLowerLabel.hidden = true
                     
                 }
                 self.noteButton.setTitle(note!.nameWithoutOctave, forState: .Normal)
@@ -193,9 +216,9 @@ class GameViewController: UIViewController, GameDelegate {
             self.currentNoteLabel.animateToNext({ () -> () in
                 self.currentNoteLabel.text = self.game.song!.currentNote?.nameWithoutOctave
             })
-            self.previousNoteLabel.animation = "fadeOut"
-            self.previousNoteLabel.duration = 1.5
-            self.previousNoteLabel.animate()
+//            self.previousNoteLabel.animation = "fadeOut"
+//            self.previousNoteLabel.duration = 1.5
+//            self.previousNoteLabel.animate()
         })
     }
     
