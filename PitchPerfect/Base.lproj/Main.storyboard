@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vsk-Rd-Sto">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vsk-Rd-Sto">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Pacifico.ttf">
+            <string>Pacifico</string>
             <string>Pacifico</string>
             <string>Pacifico</string>
         </mutableArray>
@@ -333,7 +334,7 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <segue destination="Gj2-g3-VIl" kind="show" identifier="SongClickedSegue" id="301-Me-Bha"/>
+                                    <segue destination="dCv-9m-t5c" kind="show" identifier="gameModeSegue" id="byL-1v-doT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -347,7 +348,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VrK-28-tHm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1884" y="1022"/>
+            <point key="canvasLocation" x="1786" y="1022"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="CGt-fg-4RJ">
@@ -447,14 +448,14 @@
                                     <action selector="skipNotePressed:" destination="Gj2-g3-VIl" eventType="touchUpInside" id="5H2-SA-oxy"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtI-vg-WE9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Score: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtI-vg-WE9">
                                 <rect key="frame" x="481" y="38" width="89" height="29"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkR-kU-3rl" customClass="DesignableButton" customModule="Spring">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkR-kU-3rl" customClass="DesignableButton" customModule="Spring">
                                 <rect key="frame" x="20" y="38" width="100" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -572,12 +573,13 @@
                         <outlet property="pitchLowProgressView" destination="bxn-nk-WNc" id="8sj-MM-cyu"/>
                         <outlet property="previousNoteLabel" destination="bu5-Fi-ww6" id="A3T-PB-rhZ"/>
                         <outlet property="score" destination="xtI-vg-WE9" id="420-Ko-XP7"/>
+                        <outlet property="skipNoteButton" destination="xUt-iX-O4J" id="94C-UM-bIT"/>
                         <segue destination="b1z-zB-4Ly" kind="show" identifier="GameOverSegue" id="JYf-n4-3JL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oBo-ME-DOx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2602" y="1022"/>
+            <point key="canvasLocation" x="3120" y="1083"/>
         </scene>
         <!--Scores Table View Controller-->
         <scene sceneID="xk5-sn-OwQ">
@@ -614,10 +616,10 @@
             </objects>
             <point key="canvasLocation" x="1082" y="1888"/>
         </scene>
-        <!--View Controller-->
+        <!--Game Mode View Controller-->
         <scene sceneID="9ps-NJ-bru">
             <objects>
-                <viewController id="dCv-9m-t5c" sceneMemberID="viewController">
+                <viewController id="dCv-9m-t5c" customClass="GameModeViewController" customModule="PerfectPitch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GQF-30-2dw"/>
                         <viewControllerLayoutGuide type="bottom" id="Rt6-wz-vMa"/>
@@ -626,11 +628,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-RO-szc" customClass="DesignableButton" customModule="Spring">
-                                <rect key="frame" x="155" y="104" width="264" height="114"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-RO-szc" customClass="DesignableButton" customModule="Spring">
+                                <rect key="frame" x="150" y="179" width="300" height="100"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Note By Note"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="hv4-5h-ty7"/>
+                                    <constraint firstAttribute="width" constant="300" id="oPN-6J-qeb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                <state key="normal" title="Note By Note">
+                                    <color key="titleColor" red="0.16470588235294117" green="0.47450980392156861" blue="0.63921568627450975" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -642,12 +651,25 @@
                                         <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Gj2-g3-VIl" kind="show" identifier="noteGameViewSegue" id="Mrr-s4-qcN"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGd-bT-N0y" customClass="DesignableButton" customModule="Spring">
-                                <rect key="frame" x="155" y="259" width="264" height="117"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select Game Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plZ-Fk-Md6">
+                                <rect key="frame" x="145" y="47" width="310" height="75"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Pacifico" family="Pacifico" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGd-bT-N0y" customClass="DesignableButton" customModule="Spring">
+                                <rect key="frame" x="150" y="320" width="300" height="100"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Continuous"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                <state key="normal" title="Continuous">
+                                    <color key="titleColor" red="0.1647058824" green="0.47450980390000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="2"/>
@@ -659,15 +681,28 @@
                                         <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Gj2-g3-VIl" kind="show" identifier="contGameViewSegue" id="aRN-cB-URJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.54901960780000003" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="LGd-bT-N0y" firstAttribute="height" secondItem="X2r-RO-szc" secondAttribute="height" id="H0K-5z-s9o"/>
+                            <constraint firstItem="plZ-Fk-Md6" firstAttribute="top" secondItem="GQF-30-2dw" secondAttribute="bottom" constant="27" id="TY1-gz-jS1"/>
+                            <constraint firstItem="LGd-bT-N0y" firstAttribute="width" secondItem="X2r-RO-szc" secondAttribute="width" id="UHg-Wc-wdd"/>
+                            <constraint firstItem="plZ-Fk-Md6" firstAttribute="centerX" secondItem="GPa-cH-nAh" secondAttribute="centerX" id="b5b-af-vWa"/>
+                            <constraint firstItem="LGd-bT-N0y" firstAttribute="top" secondItem="X2r-RO-szc" secondAttribute="bottom" constant="41" id="hcF-gG-aFC"/>
+                            <constraint firstItem="X2r-RO-szc" firstAttribute="centerX" secondItem="GPa-cH-nAh" secondAttribute="centerX" id="y2E-43-Wgc"/>
+                            <constraint firstItem="X2r-RO-szc" firstAttribute="top" secondItem="plZ-Fk-Md6" secondAttribute="bottom" constant="57" id="y4G-c6-5nf"/>
+                            <constraint firstItem="LGd-bT-N0y" firstAttribute="centerX" secondItem="GPa-cH-nAh" secondAttribute="centerX" id="zME-dK-JV0"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ice-dq-kdN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="378" y="2663"/>
+            <point key="canvasLocation" x="2472" y="1083"/>
         </scene>
         <!--Song Score Table View Controller-->
         <scene sceneID="G0G-ui-ap3">
@@ -766,28 +801,28 @@
                                     <segue destination="Gj2-g3-VIl" kind="show" identifier="tryAgainSegue" id="DlK-JV-RvW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfp-SP-8tg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Song Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfp-SP-8tg">
                                 <rect key="frame" x="127" y="96" width="122" height="34"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vb5-cl-OrC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Game Over!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vb5-cl-OrC">
                                 <rect key="frame" x="85" y="20" width="205" height="75"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="Pacifico" family="Pacifico" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-lC-3wb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-lC-3wb">
                                 <rect key="frame" x="100" y="176" width="43" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(score)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7a-q0-h7a">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(score)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7a-q0-h7a">
                                 <rect key="frame" x="228" y="176" width="49" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
@@ -821,14 +856,14 @@
                                     <segue destination="3xr-6t-Hh2" kind="show" identifier="highScoreSegue" id="BEV-MH-6Cq"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4p-aI-Exa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="High Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4p-aI-Exa">
                                 <rect key="frame" x="80" y="237" width="82" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(high)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLj-zf-GyH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(high)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLj-zf-GyH">
                                 <rect key="frame" x="233" y="237" width="40" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
@@ -895,8 +930,8 @@
         <image name="Settings" width="36" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="smV-CS-rvH"/>
         <segue reference="BbS-ZM-hRk"/>
-        <segue reference="301-Me-Bha"/>
+        <segue reference="aRN-cB-URJ"/>
+        <segue reference="smV-CS-rvH"/>
     </inferredMetricsTieBreakers>
 </document>

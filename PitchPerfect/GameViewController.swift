@@ -11,7 +11,7 @@ import Spring
 
 class GameViewController: UIViewController, GameDelegate {
     
-    // MARK: Properties 
+    // MARK: Properties
     
     @IBAction func endGameButton(sender: AnyObject) {
         performSegueWithIdentifier("GameOverSegue", sender: sender)
@@ -30,15 +30,20 @@ class GameViewController: UIViewController, GameDelegate {
     lazy var game: Game = Game(song: Song(title: ""))
     // MARK: View controller lifecycle
     
+    @IBOutlet weak var skipNoteButton: DesignableButton!
     struct defaultKeys {
         static let localStorageKey = "LocalStorageKey"
     }
     
     var songArray : [String] = []
+    var noteByNote = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if !noteByNote {
+            skipNoteButton.hidden = true
+        }
         
         
 //        self.game = Game(song: song)
@@ -47,6 +52,8 @@ class GameViewController: UIViewController, GameDelegate {
 //        noteButton.layer.borderWidth = 2
 //        noteButton.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
         
+        currentNoteLabel.layer.borderWidth = 2
+        currentNoteLabel.layer.borderColor = UIColor(white: 1.0, alpha: 100).CGColor
 
         
         game.start()

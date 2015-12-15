@@ -83,16 +83,16 @@ class SongListTableViewController: UITableViewController, SongsDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
          // Get the new view controller using segue.destinationViewController.
          // Pass the selected object to the new view controller.
-        if segue.identifier == "SongClickedSegue" {
+        if segue.identifier == "gameModeSegue" {
             print("Song CLicked Segue")
             let cell: UITableViewCell = sender as! UITableViewCell
             let selectedSong = self.songs.readSong(cell.tag)
             
-            if let controller = segue.destinationViewController as? GameViewController {
+            if let controller = segue.destinationViewController as? GameModeViewController {
                 controller.game.song = selectedSong!
 //                controller.song = selectedSong!
             }
-            print("Completed Prepeare for segue")
+            print("Completed Prepare for segue")
         }
     }
     
