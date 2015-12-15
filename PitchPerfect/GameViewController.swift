@@ -57,6 +57,18 @@ class GameViewController: UIViewController, GameDelegate {
 
         
         game.start()
+        
+        // For continous playback, the successful song note duration is longer than the 
+        // autoplay length per note, so the "continous" gameplay isn't working right now
+        // as you don't have time to "hit" the note before it moves on to the next note
+        
+        // Continuous gameplay mode start
+        
+        if !noteByNote {
+            game.song?.play()
+        }
+        
+        
         if self.game.song?.currentScore == nil {
            self.game.song?.currentScore = 0
         }
