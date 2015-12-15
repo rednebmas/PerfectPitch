@@ -488,7 +488,7 @@
                                     <constraint firstAttribute="height" constant="5" id="NLF-KU-711"/>
                                 </constraints>
                                 <color key="progressTintColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="trackTintColor" red="0.98652517799999995" green="0.12463666499999999" blue="0.24934384230000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T60-AP-Eco">
                                 <rect key="frame" x="217" y="447" width="166" height="2"/>
@@ -505,14 +505,13 @@
                                     <constraint firstAttribute="height" constant="5" id="tNC-kH-M9n"/>
                                     <constraint firstAttribute="width" constant="130" id="zjz-Rr-xjx"/>
                                 </constraints>
-                                <color key="progressTintColor" red="0.20537272095680237" green="0.92881792783737183" blue="0.30231964588165283" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="progressTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </progressView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.24313725489999999" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="xtI-vg-WE9" firstAttribute="top" secondItem="2Aw-AA-63P" secondAttribute="bottom" constant="18" id="01p-Md-06x"/>
-                            <constraint firstItem="T60-AP-Eco" firstAttribute="top" secondItem="bxn-nk-WNc" secondAttribute="bottom" constant="-21" id="3Uw-3A-Qs4"/>
                             <constraint firstItem="T60-AP-Eco" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="4f5-e9-j2n"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerY" secondItem="bu5-Fi-ww6" secondAttribute="centerY" id="5AC-Wn-AO9"/>
                             <constraint firstItem="OFP-UE-EHa" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="Aft-BS-fl7"/>
@@ -535,6 +534,7 @@
                             <constraint firstItem="OZE-5G-r9q" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" constant="13" id="jMe-6A-m4w"/>
                             <constraint firstItem="YtH-ii-dej" firstAttribute="top" secondItem="Ggt-4m-NLV" secondAttribute="bottom" constant="214" id="kN2-hD-uEf"/>
                             <constraint firstItem="Ggt-4m-NLV" firstAttribute="centerY" secondItem="OFP-UE-EHa" secondAttribute="centerY" id="kPL-2y-KmO"/>
+                            <constraint firstItem="bxn-nk-WNc" firstAttribute="top" secondItem="T60-AP-Eco" secondAttribute="bottom" constant="14" id="lvj-W7-Esw"/>
                             <constraint firstItem="ei5-7S-djW" firstAttribute="centerY" secondItem="foW-jK-ZKJ" secondAttribute="centerY" constant="13" id="nkD-9Y-Jwy"/>
                             <constraint firstItem="LkR-kU-3rl" firstAttribute="leading" secondItem="Umq-Hg-Lqq" secondAttribute="leading" constant="20" id="pB1-O0-nVI"/>
                             <constraint firstItem="5iG-4D-5s9" firstAttribute="top" secondItem="xUt-iX-O4J" secondAttribute="bottom" constant="70" id="qrZ-6F-vEO"/>
@@ -629,7 +629,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-RO-szc" customClass="DesignableButton" customModule="Spring">
-                                <rect key="frame" x="150" y="179" width="300" height="100"/>
+                                <rect key="frame" x="150" y="245" width="300" height="100"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -663,7 +663,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGd-bT-N0y" customClass="DesignableButton" customModule="Spring">
-                                <rect key="frame" x="150" y="320" width="300" height="100"/>
+                                <rect key="frame" x="150" y="395" width="300" height="100"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
@@ -690,12 +690,12 @@
                         <color key="backgroundColor" red="0.20000000000000001" green="0.54901960780000003" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="LGd-bT-N0y" firstAttribute="height" secondItem="X2r-RO-szc" secondAttribute="height" id="H0K-5z-s9o"/>
-                            <constraint firstItem="plZ-Fk-Md6" firstAttribute="top" secondItem="GQF-30-2dw" secondAttribute="bottom" constant="27" id="TY1-gz-jS1"/>
+                            <constraint firstItem="plZ-Fk-Md6" firstAttribute="top" secondItem="GQF-30-2dw" secondAttribute="bottom" constant="75" id="TY1-gz-jS1"/>
                             <constraint firstItem="LGd-bT-N0y" firstAttribute="width" secondItem="X2r-RO-szc" secondAttribute="width" id="UHg-Wc-wdd"/>
                             <constraint firstItem="plZ-Fk-Md6" firstAttribute="centerX" secondItem="GPa-cH-nAh" secondAttribute="centerX" id="b5b-af-vWa"/>
-                            <constraint firstItem="LGd-bT-N0y" firstAttribute="top" secondItem="X2r-RO-szc" secondAttribute="bottom" constant="41" id="hcF-gG-aFC"/>
+                            <constraint firstItem="LGd-bT-N0y" firstAttribute="top" secondItem="X2r-RO-szc" secondAttribute="bottom" constant="50" id="hcF-gG-aFC"/>
                             <constraint firstItem="X2r-RO-szc" firstAttribute="centerX" secondItem="GPa-cH-nAh" secondAttribute="centerX" id="y2E-43-Wgc"/>
-                            <constraint firstItem="X2r-RO-szc" firstAttribute="top" secondItem="plZ-Fk-Md6" secondAttribute="bottom" constant="57" id="y4G-c6-5nf"/>
+                            <constraint firstItem="X2r-RO-szc" firstAttribute="top" secondItem="plZ-Fk-Md6" secondAttribute="bottom" constant="75" id="y4G-c6-5nf"/>
                             <constraint firstItem="LGd-bT-N0y" firstAttribute="centerX" secondItem="GPa-cH-nAh" secondAttribute="centerX" id="zME-dK-JV0"/>
                         </constraints>
                     </view>
