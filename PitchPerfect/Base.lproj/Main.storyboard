@@ -473,7 +473,7 @@
                                 <color key="progressTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </progressView>
                         </subviews>
-                        <color key="backgroundColor" red="0.24313725489999999" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.5490196078431373" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="xtI-vg-WE9" firstAttribute="top" secondItem="2Aw-AA-63P" secondAttribute="bottom" constant="18" id="01p-Md-06x"/>
                             <constraint firstItem="T60-AP-Eco" firstAttribute="centerX" secondItem="Umq-Hg-Lqq" secondAttribute="centerX" id="4f5-e9-j2n"/>
@@ -923,8 +923,8 @@
         <image name="Settings" width="36" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DlK-JV-RvW"/>
-        <segue reference="BEV-MH-6Cq"/>
+        <segue reference="aRN-cB-URJ"/>
         <segue reference="BbS-ZM-hRk"/>
+        <segue reference="BEV-MH-6Cq"/>
     </inferredMetricsTieBreakers>
 </document>
