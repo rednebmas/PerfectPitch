@@ -39,6 +39,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     var soFarDuration: NSTimeInterval = 0
     var correctDuration : NSTimeInterval = 0
     var currentState: State = Game.State.NotPlaying
+    var micBufferSize: Int = 0
     var mode: Game.Mode = Game.Mode.Continous {
         didSet {
             Constants.LAST_GAME_MODE = self.mode
@@ -100,6 +101,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
     {
         // applies window function and determines volume
         self.pitchEstimator.processAudioBuffer(buffer, ofSize: bufferSize)
+        self.micBufferSize = Int(bufferSize)
         
         // calculate fft
         self.fft.computeFFTWithBuffer(buffer[0], withBufferSize: bufferSize)
@@ -162,9 +164,11 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
         else if self.mode == Game.Mode.Continous {
             if note!.nameWithoutOctave == self.song!.currentNote?.nameWithoutOctave {
                 let samplesPerSecond = self.microphone.audioStreamBasicDescription().mSampleRate
-                self.correctDuration += 1.0 / samplesPerSecond * Double(bufferSize)
-                self.score += self.correctDuration / self.songDuration * 10.0
-                print("Correct for \( 1.0 / samplesPerSecond * Double(bufferSize))")
+                self.correctDuration += 1.0 / samplesPerSecond * Double(self.micBufferSize)
+                self.score = self.correctDuration / self.songDuration * 100.0
+                // print("Correct for \( 1.0 / samplesPerSecond * Double(bufferSize))")
+                // print("Song duration: \(self.songDuration)")
+                // print("Correct duraiton: \(self.correctDuration)")
             }
             
 //            let duration: NSTimeInterval = NSDate().timeIntervalSinceDate(self.gameStart!)
