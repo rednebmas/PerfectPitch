@@ -163,7 +163,7 @@ class Game : NSObject, EZMicrophoneDelegate, EZAudioFFTDelegate {
             if note!.nameWithoutOctave == self.song!.currentNote?.nameWithoutOctave {
                 let samplesPerSecond = self.microphone.audioStreamBasicDescription().mSampleRate
                 self.correctDuration += 1.0 / samplesPerSecond * Double(bufferSize)
-                self.score += self.correctDuration / self.songDuration * 100.0
+                self.score += self.correctDuration / self.songDuration * 10.0
                 print("Correct for \( 1.0 / samplesPerSecond * Double(bufferSize))")
             }
             
