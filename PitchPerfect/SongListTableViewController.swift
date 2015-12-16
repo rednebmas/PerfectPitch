@@ -19,7 +19,7 @@ class SongListTableViewController: UITableViewController, SongsDelegate {
         
         // hides empty cells
         self.tableView.tableFooterView = UIView();
-        
+        self.tableView.backgroundColor = UIColor.whiteColor()
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }

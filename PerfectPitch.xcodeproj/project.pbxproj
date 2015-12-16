@@ -236,7 +236,7 @@
 				TargetAttributes = {
 					228EFEE51C03BB45006A6291 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 98D5PKHV7Y;
+						DevelopmentTeam = LXFYZUA6B2;
 					};
 				};
 			};
@@ -462,7 +462,7 @@
 				INFOPLIST_FILE = PitchPerfect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sambender.PitchPerfect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.torin.PitchPerfect;
 				PRODUCT_NAME = PerfectPitch;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PitchPerfect/PitchPerfect-Bridging-Header.h";
@@ -481,7 +481,7 @@
 				INFOPLIST_FILE = PitchPerfect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sambender.PitchPerfect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.torin.PitchPerfect;
 				PRODUCT_NAME = PerfectPitch;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PitchPerfect/PitchPerfect-Bridging-Header.h";
